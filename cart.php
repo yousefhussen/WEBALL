@@ -4,8 +4,8 @@
     <?php session_start();?>
     <meta charset="utf-8">
     <title>courses</title>
-    <link rel="stylesheet" href="courseStyle.css">
-    <link rel="stylesheet" href="search.css">
+    <link rel="stylesheet" href="CSS/courseStyle.css">
+    <link rel="stylesheet" href="CSS/search.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
@@ -47,6 +47,7 @@ if(isset($_POST["add_to_cart"]))
         {
             if($cart_data[$keys]["item_id"] == $_POST["hidden_id"])
             {
+                echo "Joex";
                 echo "it is already in the cart";
                 header("location:/GroupSY/webProject/courses.php?failed=1");
                 //fe moshkela hna //ask samira

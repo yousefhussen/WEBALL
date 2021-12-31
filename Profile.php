@@ -62,7 +62,7 @@ button:hover {
     </style>
 
     <?php
- 
+   
    // echo $_SESSION["Type"];
    // $ID1 = $_GET["userid"];
     $ID1 = $_SESSION["userid"];
@@ -77,15 +77,15 @@ button:hover {
 
     // echo $target_dir;
 
-        if($_FILES['fileToUpload']['size']>1000000)
-            echo "the file is too large";
+        // if($_FILES['fileToUpload']['size']>1000000)
+            // echo "the file is too large";
 
-    echo "<br> the file type ".$_FILES['fileToUpload']['type']."<br>";
+    // echo "<br> the file type ".$_FILES['fileToUpload']['type']."<br>";
 
-    if($_FILES['fileToUpload']['type']== "image/jpeg")
-        echo "the file is accepted";
-    else
-        echo "File has to be a jpeg image";
+    // if($_FILES['fileToUpload']['type']== "image/jpeg")
+    //     // echo "the file is accepted";
+    // else
+        // echo "File has to be a jpeg image";
 
 
     $tmp_name = $_FILES['fileToUpload']['tmp_name'];
@@ -94,6 +94,7 @@ button:hover {
     $_SESSION["image"]=$target_file;
 
 }
+
 
     $servername = "localhost";
         $username ="root";
@@ -120,18 +121,18 @@ button:hover {
            
             }
 
-  $src;
-     if($_SESSION['image']=="uploads/"){
-        if($_SESSION["gender"]=="male")
-        {$GLOBALS['src'] = "https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg";}
-       else{
-        $GLOBALS['src'] ="Images/femaleAvatar.png";
-       }
+   $src=$_SESSION['image'];
+  //    if($_SESSION['image']=="uploads/"){
+  //       if($_SESSION["gender"]=="male")
+  //       {$GLOBALS['src'] = "https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg";}
+  //      else{
+  //       $GLOBALS['src'] ="Images/femaleAvatar.png";
+  //      }
        
-     }
-     else{
-       $GLOBALS['src'] =$_SESSION["image"];
-     }
+  //    }
+  //    else{
+  //      $GLOBALS['src'] =$_SESSION["image"];
+  //    }
      //echo"$src";
   ?>
 
