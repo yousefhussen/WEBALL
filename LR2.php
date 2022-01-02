@@ -126,7 +126,7 @@
             $_SESSION["unique_id"]=$row[8];
               ?>
 
-            <script>window.location.replace("http://localhost/WEBALL/index.php");</script>
+            <script>window.location.replace("index.php");</script>
              <?php
              //remeber to tsheel id mn elink 3lsah nelzft speeddddd
 
@@ -209,7 +209,7 @@
             $_SESSION["image"]=$row[6];
             $_SESSION["unique_id"]=$row[8];
               ?>
-            <script>window.location.replace("http://localhost/WEBALL/index.php");</script>
+            <script>window.location.replace("index.php");</script>
              <?php
             exit();
             }

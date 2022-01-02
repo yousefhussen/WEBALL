@@ -196,7 +196,7 @@ function back_icon() {
 
 </script>
 
-<script src = "JS/users-list.js"></script>
+<script src = "users-list.js"></script>
 <!-- <script src = "chat.js"></script>
  -->
 
