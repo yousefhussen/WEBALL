@@ -49,7 +49,7 @@ if(isset($_POST["add_to_cart"]))
             {
                 echo "Joex";
                 echo "it is already in the cart";
-                header("location:/GroupSY/webProject/courses.php?failed=1");
+                header("location:/WEBALL/courses.php?failed=1");
                 //fe moshkela hna //ask samira
             }
         }
@@ -70,7 +70,7 @@ if(isset($_POST["add_to_cart"]))
     
     $item_data = json_encode($cart_data);
     setcookie('shopping_cart', $item_data, time() + (86400 * 30));
-    header("location:/GroupSY/webProject/courses.php?success=1");
+    header("location:/WEBALL/courses.php?success=1");
  }
 
 
@@ -89,14 +89,14 @@ if(isset($_GET["action"]))
                 unset($cart_data[$keys]);
                 $item_data = json_encode($cart_data);
                 setcookie("shopping_cart", $item_data, time() + (86400 * 30));
-                header("location:/GroupSY/webProject/cart.php?remove=1");
+                header("location:/WEBALL/cart.php?remove=1");
             }
         }
     }
     if($_GET["action"] == "clear")
     {
         setcookie("shopping_cart", "", time() - 3600);
-        header("location:/GroupSY/webProject/cart.php?clearall=1");
+        header("location:/WEBALL/cart.php?clearall=1");
     }
 }
 
@@ -172,7 +172,7 @@ if(isset($_GET["failed"]))
                 <tr>
                     <td><?php echo $values["item_name"]; ?></td>
                     <td colspan="1">$ <?php echo $values["item_price"]; ?></td>
-                    <td><a href="/GroupSY/webProject/cart.php?action=delete&id=<?php echo $values["item_id"]; ?>"><span class="text-danger">Remove</span></a></td>
+                    <td><a href="/WEBALL/cart.php?action=delete&id=<?php echo $values["item_id"]; ?>"><span class="text-danger">Remove</span></a></td>
                 </tr>
             <?php   
                     $total = $total + $values["item_price"];
@@ -199,15 +199,17 @@ if(isset($_GET["failed"]))
             ?>
             </table>
            <div align="left">
-  <a href="/GroupSY/webProject/cart.php?action=clear"><b>Clear Cart</b></a>
+  <a href="/WEBALL/cart.php?action=clear"><b>Clear Cart</b></a>
 </div>
 <div align="right">
-    <a href="/GroupSY/webProject/courses.php"><b>Back to Course</b></a>
+    <a href="/WEBALL/courses.php"><b>Back to Course</b></a>
 </div>
      </div>
    <?php
    if(isset($_POST['BuyNow'])){
-        header("location:/GroupSY/webProject/cart.php?action=clear");
+    if(!empty($_SESSION['username'])){
+        header("location:/WEBALL/cart.php?action=clear");
+   
     if(empty($_SESSION['username'])){
          ?>
 
@@ -234,6 +236,10 @@ if(isset($_GET["failed"]))
            $message1 = "Thank you for your purchase.";
            echo "<script type='text/javascript'>alert('$message1');</script>";
     }
+  }
+  else{
+    echo "<h3>You need to log in in order to buy a course<h3>";
+  }
    }
    ?>  
 
