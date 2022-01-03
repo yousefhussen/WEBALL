@@ -19,8 +19,21 @@
         }
         ($row['status'] == "Offline now") ? $offline = "offline" : $offline = "";
         ($outgoing_id == $row['unique_id']) ? $hid_me = "hide" : $hid_me = "";
+            if(mysqli_num_rows($query2) == 0)
+                {
+                          $output .= '<a onclick="msgChat( '.$row['unique_id'].' )"  >
+                    <div id = "speedo" class="content">
+                    <img   src="'. $row['image'] .'" alt="">
+                    <div class="details">
+                        <span>'.  $row['username'] .'</span>
+                        <p style="">'. $you . $msg .'</p>
+                    </div>
+                    </div>
+                    <div class="status-dot '. $offline .'"><i class="fas fa-circle"></i></div>
+                </a>';
+                } 
 
-        if ($row2['seen']==0) {
+        else if ($row2['seen']==0) {
             if ($outgoing_id == $row2['outgoing_msg_id']) {
 
                    $output .= '<a onclick="msgChat( '.$row['unique_id'].' )"  >
