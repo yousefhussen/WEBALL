@@ -214,7 +214,11 @@ else{
   </div>
    <p>Made by <i class="fa fa-heart-o"></i> Salah and Yonus </p>
 </section>
-<?php include_once "sideBarChat.php"; ?>
+<?php if (!empty($_SESSION['username'])) {
+  
+        include_once "sideBarChat.php";
+    
+} ?>
 </body>
 
 </html>

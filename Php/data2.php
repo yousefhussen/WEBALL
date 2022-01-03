@@ -15,12 +15,14 @@
           if(mysqli_num_rows($sql2) > 0){
             $row2 = mysqli_fetch_assoc($sql2);
           }
-        
+
+         $sql3 = "UPDATE `messages` SET `seen`='1' WHERE  `outgoing_msg_id` = ".$userid ;
+        $query3 = mysqli_query($conn, $sql3);
         
         $output .= '<header>
        
         <!-- back iconaaaaa -->
-        <a  class="back-icon" onclick= "back_icon()" ><i class="fas fa-arrow-left"></i></a>
+        <a  class="back-icon" onclick= "back_icon('.$_GET['userid'].')" ><i class="fas fa-arrow-left"></i></a>
         <img src="'. $row2['image'] .'" alt="">
         <div class="details">
           <span>'. $row2['username'] .'</span>

@@ -18,6 +18,7 @@
                                 </div>
                                 </div>';
                 }else{
+                    
                     $output .= '<div class="chat incoming">
                                 <img src="'.$row['image'].'" alt="">
                                 <div class="details">

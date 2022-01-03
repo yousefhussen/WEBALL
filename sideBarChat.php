@@ -1,8 +1,6 @@
 <?php 
   include_once "php/DBConnection.php";
-  if(!isset($_SESSION['unique_id'])){
-    header("location: LR2.php");
-  }
+  
 ?>
 <!DOCTYPE html>
 <html>
@@ -75,8 +73,12 @@ function closeNav() {
 }
 
 function msgChat( incomingid) {
+                     
+         //making seen
+                  
+                     
 
-  console.log("out");
+ // console.log("out");
     document.getElementById("UL").style.width = "0";
     document.getElementById("UL").style.visibility = "hidden";
     document.getElementById("chatting").style.width = "700px";
@@ -103,7 +105,7 @@ const chatIcon = document.getElementById("chatIcon");
 
  
    
-console.log("outtttttttttttttttttttttttttttt");
+//console.log("outtttttttttttttttttttttttttttt");
 form.onsubmit = (e)=>{
     e.preventDefault();
 }
@@ -118,7 +120,7 @@ inputField.onkeyup = ()=>{
 }
 
 sendBtn.onclick = ()=>{
-     console.log("out2");
+    // console.log("out2");
     let xhr = new XMLHttpRequest();
     xhr.open("POST", "php/insert-chat.php", true);
     xhr.onload = ()=>{
@@ -162,7 +164,7 @@ function scrollToBottom(){
     chatBox.scrollTop = chatBox.scrollHeight;
   }
 
-console.log(incoming_id);
+//console.log(incoming_id);
     
             
           }
@@ -176,10 +178,23 @@ console.log(incoming_id);
   
 }
 
-function back_icon() {
-  console.log("out");
+function back_icon(incomingid) {
+ // console.log("out");
     
-    
+    let xhr = new XMLHttpRequest();
+    xhr.open("GET", "Php/SeenInside.php?userid="+incomingid, true);
+    xhr.onload = ()=>{
+      if(xhr.readyState === XMLHttpRequest.DONE){
+          if(xhr.status === 200){
+            console.log(incomingid);
+            
+            
+          }
+      }
+    }
+   
+    xhr.send();
+
     document.getElementById("UL").style.width = "450px";
     document.getElementById("UL").style.visibility = "visible";
     document.getElementById("chatting").style.width = "0px";
