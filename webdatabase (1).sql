@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 31, 2021 at 08:04 PM
--- Server version: 10.4.21-MariaDB
--- PHP Version: 8.0.11
+-- Generation Time: Jan 03, 2022 at 07:34 PM
+-- Server version: 10.4.18-MariaDB
+-- PHP Version: 7.3.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -50,8 +50,7 @@ INSERT INTO `course` (`courseId`, `courseName`, `coursePrice`, `enrolledSid`, `d
 (5, 'Deep Learning', '56.00', '65465', 'very hard fsh5', 'Dolphine', 'uploads/mariam-soliman-Ht5XmeuLyDg-unsplash.jpg', 1),
 (6, 'Algoritm and Data Structure', '20.10', '12500', 'me only', 'Mark', 'uploads/mariam-soliman-Ht5XmeuLyDg-unsplash.jpg', 1),
 (8, 'Computer Graphics', '555', '55556', 'it was bad for speed team', 'Youmna', 'uploads/Image6.jpg', 1),
-(9, 'Simpana', '1.00', '5', 'Yaasser', 'Yasser', 'uploads/Image4.jpg\"', 1),
-(12, 'Speed', '1', '5', '10 sa3at mn sppeed wa hwa bykool y3nyy ehh!', 'Speed', 'uploads/artworks-000557600433-dvmtmy-t500x500.jpg', 1);
+(9, 'Simpana', '1.00', '5', 'Yaasser', 'Yasser', 'uploads/Image4.jpg\"', 1);
 
 -- --------------------------------------------------------
 
@@ -63,19 +62,64 @@ CREATE TABLE `messages` (
   `msg_id` int(11) NOT NULL,
   `incoming_msg_id` int(255) NOT NULL,
   `outgoing_msg_id` int(255) NOT NULL,
-  `msg` varchar(1000) NOT NULL
+  `msg` varchar(1000) NOT NULL,
+  `seen` int(16) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `messages`
 --
 
-INSERT INTO `messages` (`msg_id`, `incoming_msg_id`, `outgoing_msg_id`, `msg`) VALUES
-(2, 344391712, 511301026, 'hi'),
-(3, 344391712, 511301026, 'i love you'),
-(4, 511301026, 344391712, 'i love you too'),
-(5, 344391712, 511301026, 'Fukc speed ?'),
-(6, 511301026, 344391712, 'Fuck speed');
+INSERT INTO `messages` (`msg_id`, `incoming_msg_id`, `outgoing_msg_id`, `msg`, `seen`) VALUES
+(2, 344391712, 511301026, 'hi', 1),
+(3, 344391712, 511301026, 'i love you', 1),
+(4, 511301026, 344391712, 'i love you too', 1),
+(5, 344391712, 511301026, 'Fukc speed ?', 1),
+(6, 511301026, 344391712, 'Fuck speed', 1),
+(7, 273594041, 344391712, 'sss', 1),
+(8, 511301026, 344391712, 'dsaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 1),
+(9, 344391712, 511301026, 's', 1),
+(10, 344391712, 511301026, 'dssd', 1),
+(11, 511301026, 344391712, 'dssdsd', 1),
+(12, 511301026, 344391712, 'oilo', 1),
+(13, 344391712, 511301026, 'sdsd', 1),
+(14, 511301026, 344391712, 'sdsdsd', 1),
+(15, 511301026, 344391712, 'sdsdsd', 1),
+(16, 511301026, 344391712, 'dssdsdsd', 1),
+(17, 511301026, 344391712, 'dssdsdds', 1),
+(18, 511301026, 344391712, 'dssdawdddddddddddddddddd', 1),
+(19, 344391712, 511301026, 'dssssssssss', 1),
+(20, 511301026, 344391712, 'aaaaaaaaaaaaaaaaaaaaaa', 1),
+(21, 511301026, 344391712, 'wdaawdawd', 1),
+(22, 511301026, 344391712, 'dwwddaw', 1),
+(23, 344391712, 511301026, 'sdsdsd', 1),
+(24, 511301026, 344391712, 'sdssd', 1),
+(25, 511301026, 344391712, 'salah', 1),
+(26, 511301026, 344391712, 'sdsdsdd', 1),
+(27, 511301026, 344391712, 'sdsdsdds', 1),
+(28, 511301026, 344391712, 'feesfesf', 1),
+(29, 511301026, 344391712, 'dwaawddwa', 1),
+(30, 511301026, 344391712, 'sdsdsd', 1),
+(31, 511301026, 344391712, 'dwawdadw', 1),
+(32, 511301026, 344391712, 'dwawda', 1),
+(33, 511301026, 344391712, '322222222', 1),
+(34, 511301026, 344391712, 'kjjk', 1),
+(35, 511301026, 344391712, 'gffgfg', 1),
+(36, 344391712, 511301026, 'fesefsefs', 1),
+(37, 511301026, 344391712, 'efsfesef', 1),
+(38, 511301026, 344391712, 'dssdsdsdds', 1),
+(39, 511301026, 344391712, 'yla b2a', 1),
+(40, 344391712, 511301026, 'dwwdadwawad', 1),
+(41, 511301026, 344391712, 'sdsdsd', 1),
+(42, 344391712, 511301026, 'dssdsd', 1),
+(43, 511301026, 344391712, 'koko', 1),
+(44, 511301026, 344391712, 's', 1),
+(45, 511301026, 344391712, 's', 1),
+(46, 344391712, 511301026, 'dssdsd', 1),
+(47, 511301026, 344391712, 'sdsdsd', 1),
+(48, 511301026, 344391712, 'sss', 1),
+(49, 344391712, 511301026, 'wawa', 1),
+(50, 511301026, 344391712, 'sddssd', 1);
 
 -- --------------------------------------------------------
 
@@ -107,8 +151,7 @@ INSERT INTO `ratings` (`courseid`, `star1`, `star2`, `star3`, `star4`, `star5`) 
 (6, 500, 400, 300, 200, 101),
 (7, 1000, 700, 500, 250, 10),
 (8, 2000, 1000, 500, 250, 15),
-(9, 12, 20, 33, 40, 2200),
-(12, 1, 1, 0, 0, 1);
+(9, 12, 20, 33, 40, 2200);
 
 -- --------------------------------------------------------
 
@@ -243,7 +286,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`type`, `userid`, `email`, `password`, `username`, `gender`, `image`, `status`, `unique_id`) VALUES
-('Adminstrator', 1, 'Salah@gmail.com', 'Salah', 'Salah', 'male', 'uploads/salah.jpg', 'Offline now', 344391712),
+('Adminstrator', 1, 'Salah@gmail.com', 'Salah', 'Salah', 'male', 'uploads/salah.jpg', 'Active now', 344391712),
 ('Student', 6, 'Joex@gmail.com', 'Joex', 'Joex', '', 'uploads/salah.jpg', 'Offline now', 273594041),
 ('Student', 7, 'hady@gmail.com', 'hady', 'hady', '', 'uploads/salah.jpg', 'Offline now', 1122595347),
 ('Student', 8, 'Bassem@gmail.com', 'Bassem', 'Bassem', 'male', 'uploads/salah.jpg', 'Offline now', 425433210),
@@ -337,7 +380,7 @@ ALTER TABLE `course`
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `msg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `msg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
 
 --
 -- AUTO_INCREMENT for table `ratings`
