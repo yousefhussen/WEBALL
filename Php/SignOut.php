@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 if(isset($_SESSION['unique_id'])){
     include_once "DBConnection.php";
    // $logout_id = mysqli_real_escape_string($conn, $_GET['logout_id']);
@@ -15,5 +14,6 @@ if(isset($_SESSION['unique_id'])){
             header("location: ../index.php");
         }
     }
+
 }
 ?>

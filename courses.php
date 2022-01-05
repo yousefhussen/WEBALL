@@ -22,6 +22,7 @@
 
 </head>
 <body>
+
     <?php
     $counter=0;
 if (empty($_SESSION['username'])) {
@@ -173,10 +174,11 @@ else{
                   <input type="hidden" name="hidden_name" value="<?php echo $row["courseName"]; ?>" />
                   <input type="hidden" name="hidden_price" value="<?php echo $row["coursePrice"]; ?>" />
                   <input type="hidden" name="hidden_id" value="<?php echo $row["courseId"]; ?>" />
-                  <input type="submit" name="add_to_cart" style="margin-top:5px;" class="btn btn-success" value="Add to Cart" />
+                  <input type="submit" id="DpS" name="add_to_cart" style="margin-top:5px;" class="btn btn-success" value="Add to Cart" />
                   </form>
                  <a href="index2.php?id=<?php echo $row['courseId'];?>"> <div class="star">
                   <?php 
+
                   $sql3= "SELECT * FROM ratings Where courseid = '".$row['courseId']."'";
                   $result3=mysqli_query($conn,$sql3);
                    if($row3=mysqli_fetch_array($result3)){
@@ -469,15 +471,27 @@ $conn = new mysqli("localhost" , "root" , "" , "webdatabase");
 {
 
     $message = '
-    <div class="alert alert-success alert-dismissible">
-        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        Item Added into Cart
-    </div>
+    <div class="text-center fixed-top">  
+                <button class="btn btn-success" id="Db" style="width:30%"><i class="fa fa-cart-plus" aria-hidden="true"></i> Course is Added to your cart</button>
+              </div>
     ';
 
 } 
 echo $message;
 
   ?>
+
+
+  <script>
+  var myTimeout = setTimeout(timeout, 5000);
+  function timeout(){ $("#Db").fadeOut("slow");}; 
+  $(document).ready(function(){
+  $("button").click(function (){
+    // $("#Db").fadeOut();
+    $("#Db").fadeOut("slow");
+    // $("#Db").fadeOut(3000);
+  });
+ });
+  </script>
 </body>
 </html>

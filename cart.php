@@ -13,8 +13,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-
-
 </head>
 
 <body>
@@ -142,10 +140,8 @@ if(isset($_GET["failed"]))
 ?>
 
 
-
-
-
- <div class="cart">
+<div class="container text-center"  style="width:70%">  
+ <div class="cart2">
     <?php echo $message; ?>
             <div style="clear:both"></div>
             <br />
@@ -209,14 +205,7 @@ if(isset($_GET["failed"]))
    if(isset($_POST['BuyNow'])){
     if(!empty($_SESSION['username'])){
         header("location:/WEBALL/cart.php?action=clear");
-   
-    if(empty($_SESSION['username'])){
-         ?>
-
-            <script>window.location.replace("LR2.php");</script>
-             <?php 
-    }
-    else{
+    
         // connecting dp by speed
         $servername = "localhost";
         $username ="root";
@@ -235,15 +224,18 @@ if(isset($_GET["failed"]))
               //moshkela hna  
            $message1 = "Thank you for your purchase.";
            echo "<script type='text/javascript'>alert('$message1');</script>";
-    }
+    
   }
   else{
-    echo "<h3>You need to log in in order to buy a course<h3>";
+    ?>
+     <script>window.location.replace("LR2.php?cart=no");</script>
+     <?php
   }
    }
    ?>  
 
  
+
 
 
 </div>

@@ -5,12 +5,15 @@
 	<?php session_start();?>
 	<title>LR</title>
 	<link rel="stylesheet" href="CSS/LR2.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
  <div class="container">
- 	<div class="card">
- 		<div class="inner-box" id="card">
- 			<div class="card-front">
+ 	<div class="cardd">
+ 		<div class="inner-box" id="cardd">
+ 			<div class="cardd-front">
  				<h2>Login</h2>
  		<form action="LR2.php" method="post">
          
@@ -20,14 +23,14 @@
         <!-- <label for="Lpsw">Password</label> -->
         <input type="password" class="input-box" placeholder="Password" name="Lpsw" required>
           
-        <button type="submit" class="submit-btn">Log In</button>
+        <button type="submit" class="mt-5 mb-5" class="submitt-btnn">Log In</button>
         <input type="checkbox" name="checkbox"><span>Rememeber Me</span>
         
         
      </form>
-     <button type="button" class="btn" onclick="openRegister()">I'm New Here</button>
+     <button type="button" class="btnn" onclick="openRegister()">I'm New Here</button>
  		  </div>
- 			<div class="card-back">
+ 			<div class="cardd-back">
  		<form action="LR2.php" method="post" enctype="multipart/form-data">
 
       <h2>Register</h2> 
@@ -55,15 +58,29 @@
         <!-- <input type="submit" value="Upload Image" name="submit"> -->
     
     </div>   
-      <button class="submit-btn" type="submit">Register</button>
+      <button class="submitt-btnn" type="submit">Register</button>
      
     </form>
-    <button type="button" class="btn" onclick="openLogin()">I've an account</button>
+    <button type="button" class="btnn" onclick="openLogin()">I've an account</button>
  			</div>
  		</div>
  	</div>
  </div>
   <?php
+////////////////////////////////////////////////////////////////////
+if(isset($_GET['cart'])){
+  ?>
+  <div class="text-center fixed-top ">  
+                <button class="btn btn-info" id="Db" style="width:30%;height:70px"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> You need to be logged, in order to buy</button>
+              </div>
+              <?php
+}
+
+
+
+
+
+
 ///////////////////////////////////////////////////////////////////////
   $sora="images.png";
  if(!empty($_FILES['fileToUpload']['name'])){
@@ -134,12 +151,14 @@
             }
             else
             {
-              //check1();
-             $message = "Username and/or Password incorrect.\\nTry again.";
-              echo "<script type='text/javascript'>alert('$message');</script>";
-              
-              
-            exit();
+              ?>
+            
+              <div class="text-center fixed-top ">  
+                <button class="btn btn-danger" id="Db" style="width:30%;height:70px"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> You entered incorrect username or password</button>
+              </div>
+        
+             
+              <?php
             }
   }
   if(isset($_POST['unameR'])){
@@ -155,13 +174,23 @@
         $DB = "webdatabase";
         $ran_id = rand(time(), 100000000);
         $conn = mysqli_connect($servername,$username,$password,$DB);
-        $sql= "SELECT * FROM users WHERE username='".$Data1."' AND email='".$Data3."'";
+        $sql= "SELECT * FROM users WHERE username='".$Data1."' OR email='".$Data3."'";
         $result=mysqli_query($conn,$sql);
         if($row=mysqli_fetch_array($result)){
-         $message = "Yasta mynf3sh.\\nTry again.";
-              echo "<script type='text/javascript'>alert('$message');</script>";
-         die();
-         //sHOULD I CLOSE THE CONNECTIOJN ??$conn->close();
+          if($row['username']==$Data1){
+          ?>
+           <div class="text-center fixed-top">  
+                <button class="btn btn-warning" id="Db" style="width:30%"><i class="fa fa-exclamation" aria-hidden="true"></i> Username is Already taken</button>
+              </div>
+          <?php
+          }
+          else if($row['email']==$Data3){
+            ?>
+               <div class="text-center fixed-top">  
+                <button class="btn btn-warning" id="Db" style="width:30%"><i class="fa fa-exclamation" aria-hidden="true"></i> Email is Already taken</button>
+              </div>
+              <?php
+          }
         }
         else
         {
@@ -180,9 +209,11 @@
 
        }
        else{
-       	echo "mynf3sh ya sa7by";
-        $message1 = "email is invalid incorrect.\\nTry again.";
-              echo "<script type='text/javascript'>alert('$message1');</script>";
+        ?>
+        <div class="text-center fixed-top">  
+                <button class="btn btn-danger" id="Db" style="width:30%"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Email is invalid</button>
+              </div>
+              <?php
        }
       }
       function Sql2($Data1,$Data2){
@@ -230,13 +261,24 @@ Sql2($name,$password);
 
       ?>
  <script>
- 	var card = document.getElementById('card');
+  var myTimeout = setTimeout(timeout, 5000);
+  function timeout(){ $("#Db").fadeOut("slow");}; 
+  $(document).ready(function(){
+  $("button").click(function (){
+    // $("#Db").fadeOut();
+    $("#Db").fadeOut("slow");
+    // $("#Db").fadeOut(3000);
+  });
+ });
+  
+ 	var card = document.getElementById('cardd');
  	function openRegister(){
  		card.style.transform="rotateY(-180deg)";
  	}
  	function openLogin(){
  		card.style.transform="rotateY(0deg)";
  	}
+ 
  </script>
 
 
