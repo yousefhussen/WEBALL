@@ -23,7 +23,7 @@
         <!-- <label for="Lpsw">Password</label> -->
         <input type="password" class="input-box" placeholder="Password" name="Lpsw" required>
           
-        <button type="submit" class="mt-5 mb-5" class="submitt-btnn">Log In</button>
+        <button type="submit" class="submitt-btnn mt-5 mb-5">Log In</button>
         <input type="checkbox" name="checkbox"><span>Rememeber Me</span>
         
         
@@ -70,18 +70,13 @@
 ////////////////////////////////////////////////////////////////////
 if(isset($_GET['cart'])){
   ?>
-  <div class="text-center fixed-top ">  
+  <div class="text-center fixed-top" style="margin-top:30px;">  
                 <button class="btn btn-info" id="Db" style="width:30%;height:70px"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> You need to be logged, in order to buy</button>
               </div>
               <?php
 }
-
-
-
-
-
-
 ///////////////////////////////////////////////////////////////////////
+//small proplem here 
   $sora="images.png";
  if(!empty($_FILES['fileToUpload']['name'])){
     $target_dir = "uploads/";
@@ -90,8 +85,14 @@ if(isset($_GET['cart'])){
     echo $target_dir;
 
    
-        if($_FILES['fileToUpload']['size']>1000000)
-            echo "the file is too large";
+        if($_FILES['fileToUpload']['size']>500)
+        {
+          ?>
+             <div class="text-center fixed-top"  style="margin-top:30px;">  
+                <button class="btn btn-danger" id="Db" style="width:30%;height:70px"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> The image is too large</button>
+              </div>
+              <?php
+        }
 
     echo "<br> the file type ".$_FILES['fileToUpload']['type']."<br>";
 
@@ -153,7 +154,7 @@ if(isset($_GET['cart'])){
             {
               ?>
             
-              <div class="text-center fixed-top ">  
+              <div class="text-center fixed-top"  style="margin-top:30px;">  
                 <button class="btn btn-danger" id="Db" style="width:30%;height:70px"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> You entered incorrect username or password</button>
               </div>
         
@@ -179,14 +180,14 @@ if(isset($_GET['cart'])){
         if($row=mysqli_fetch_array($result)){
           if($row['username']==$Data1){
           ?>
-           <div class="text-center fixed-top">  
+           <div class="text-center fixed-top"  style="margin-top:30px;">  
                 <button class="btn btn-warning" id="Db" style="width:30%"><i class="fa fa-exclamation" aria-hidden="true"></i> Username is Already taken</button>
               </div>
           <?php
           }
           else if($row['email']==$Data3){
             ?>
-               <div class="text-center fixed-top">  
+               <div class="text-center fixed-top"  style="margin-top:30px;">  
                 <button class="btn btn-warning" id="Db" style="width:30%"><i class="fa fa-exclamation" aria-hidden="true"></i> Email is Already taken</button>
               </div>
               <?php
@@ -205,12 +206,11 @@ if(isset($_GET['cart'])){
         }
         $conn->close();
         }
-        //$conn->close();
 
        }
        else{
         ?>
-        <div class="text-center fixed-top">  
+        <div class="text-center fixed-top" style="margin-top:30px;">  
                 <button class="btn btn-danger" id="Db" style="width:30%"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Email is invalid</button>
               </div>
               <?php

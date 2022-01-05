@@ -102,6 +102,7 @@ button{
 }
 .submitt-btnn{
 	position: relative;
+	border-radius: 20px;
 }
 .submitt-btnn::after{
 	content: '\27a4';
@@ -122,6 +123,7 @@ span{
 }
 .btnn{
 	margin-top: 70px;
+	border-radius: 20px;
 }
 .gender{
 	position: relative;
