@@ -121,7 +121,7 @@
                             <a class="close" href="#">&times;</a>
                             <div class="content">
                                 <div>    
-                                    <form action="Php/insertSurvey.php" method="post" id="changing" enctype="multipart/form-data">
+                                    <form action="" method="post" id="changing" enctype="multipart/form-data">
 
                                       <h2>Please Fill the following Survey For (<?php echo $row4['courseName']; ?>)</h2> 
 
@@ -144,7 +144,7 @@
                                      
                                       Suggestions:<br><textarea rows="4" cols="50" name="description" form="changing"></textarea><br><br>
                                       
-                                      <input type="submit" name = "subedit" >
+                                      <input type="submit" name = "subserv" >
 
                                     </form>
                                     
@@ -161,9 +161,58 @@
         }
         $conn->close();
         
+        if (isset($_POST['subserv'])) {
+            include "Php/DBConnection.php";
+           
+            $courseId=$_POST['courseId']; 
+            $userName=$_SESSION['username'];
+            $Insrate=$_POST['type'];
+            $Description=$_POST['description'];
+             $sessid = $_SESSION['userid'];
+
+          
+
+            
+
+
+            $sql= " INSERT INTO `surveys`(`courseid`, `userid`, `name`, `suggestion`, `instructorRate`) VALUES 
+            ('$courseId','$sessid','$userName' ,'$Description','$Insrate')";
+           
+             $result=mysqli_query($conn,$sql) ;
+                if (!$result) {
+                    echo '<div class="text-center fixed-top" style="margin-top:30px;">  
+                <button class="btn btn-danger" id="Db" style="width:30%"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Already survied this course</button>
+              </div>'; 
+                }
+            
+           
+           
+            
+        }
     
 
      ?>
+
+ <script>
+  var myTimeout = setTimeout(timeout, 5000);
+  function timeout(){ $("#Db").fadeOut("slow");}; 
+  $(document).ready(function(){
+  $("button").click(function (){
+    // $("#Db").fadeOut();
+    $("#Db").fadeOut("slow");
+    // $("#Db").fadeOut(3000);
+  });
+ });
+  
+    var card = document.getElementById('cardd');
+    function openRegister(){
+        card.style.transform="rotateY(-180deg)";
+    }
+    function openLogin(){
+        card.style.transform="rotateY(0deg)";
+    }
+ 
+ </script>
  </div>
 
 </section>
