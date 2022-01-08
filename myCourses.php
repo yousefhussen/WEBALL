@@ -54,11 +54,7 @@
 
     <div class="row">
     <?php
-     $servername = "localhost";
-        $username ="root";
-        $password = "";
-        $DB = "webdatabase";
-        $conn = mysqli_connect($servername,$username,$password,$DB);
+   include "Php/DBConnection.php";
             $sql= "SELECT courseId FROM userCourse WHERE userid = '".$_SESSION['userid'].
             "'";
             $result=mysqli_query($conn,$sql);
@@ -72,6 +68,7 @@
                
                  <div class="Course-col">
                   <img src="<?php echo $row2['image']; ?>" height="250px" width="400px">
+                  <a class="bellIcon" href ="myCourses.php?id=<?php echo $row['courseId']; ?>#popup5"><i class='fas fa-bell'></i></a>
                   <?php //echo $row['courseId'] ?>
                   <span class="coursename"><?php echo $row2['courseName']; ?></span><br>
                   <span class="instName"> <?php echo $row2['instructorName']; ?></span><br>
@@ -109,9 +106,55 @@
                  </div></a>
                   <br>
               </div>
-            </a>
-              <?php
 
+            </a>
+   <?php 
+                 if (isset($_GET['id'])) {
+                    $id = $_GET['id'];
+                    $query1 = "select * from course where courseId=$id";
+                    $result1 = $conn->query($query1);
+                    while ($row4 = mysqli_fetch_array($result1)) {
+                ?>
+
+<div id="popup5" class="overlay">
+                        <div class="popup">
+                            <a class="close" href="#">&times;</a>
+                            <div class="content">
+                                <div>    
+                                    <form action="Php/insertSurvey.php" method="post" id="changing" enctype="multipart/form-data">
+
+                                      <h2>Please Fill the following Survey For (<?php echo $row4['courseName']; ?>)</h2> 
+
+                                      <br>
+                                       <input  type="hidden" name = "courseId" value= "<?php echo $row4['courseId']; ?>">
+                                       Your Name: <input type="text" name = "userName" value= "<?php echo $_SESSION['username'];  ?>"><br><br>
+                                
+                                      
+                                      Rate the instructor from 1 to 5:<br>
+                                    <input type="radio" id="e1" name="type" value="1" checked='checked'>
+                                    <label for="e1">1</label>
+                                    <input type="radio" id="e2" name="type" value="2" >
+                                    <label for="e1">2</label>
+                                    <input type="radio" id="e1" name="type" value="3">
+                                    <label for="e1">3</label>
+                                    <input type="radio" id="e2" name="type" value="4" >
+                                    <label for="e1">4</label>
+                                    <input type="radio" id="e2" name="type" value="5" >
+                                    <label for="e1">5</label><br><br>
+                                     
+                                      Suggestions:<br><textarea rows="4" cols="50" name="description" form="changing"></textarea><br><br>
+                                      
+                                      <input type="submit" name = "subedit" >
+
+                                    </form>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+              <?php
+          }
+      }
                
                
             }
@@ -122,4 +165,6 @@
 
      ?>
  </div>
+
 </section>
+
