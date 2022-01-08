@@ -59,10 +59,9 @@ else{
 							<li><a id="chatIcon" class = "chatIcon" href =index.php><i class='fas fa-comment' onclick="openNav()"></i></li></a>
                         
                      <?php }
-						if($_SESSION['Type']=="Auditor"){
+						if($_SESSION['Type']=="Adminstrator"){
 							?>
 							 <li><a href="orders.php">Orders</a></li>
-							<li><a id="chatIcon" class = "chatIcon" href =index.php><i class='fas fa-comment' onclick="openNav()"></i></li></a>
 							<?php
 						}
 
@@ -71,7 +70,6 @@ else{
 						 if($_SESSION['Type']=="Student"){
                         ?>
 							
-								<li><a class="bellIcon" href =index.php?id=9#popup5><i class='fas fa-bell'></i></li></a>
 								<li><a id="chatIcon" class = "chatIcon" href =index.php><i class='fas fa-comment' onclick="openNav()"></i></li></a>
                         	
                      <?php }

@@ -202,6 +202,7 @@ if(isset($_GET["failed"]))
 </div>
      </div>
    <?php
+   $date=date("Y-m-d H:i:s");
    if(isset($_POST['BuyNow'])){
     if(!empty($_SESSION['username'])){
         header("location:/WEBALL/cart.php?action=clear");
@@ -216,7 +217,7 @@ if(isset($_GET["failed"]))
         $cart_data = json_decode($cookie_data, true);
         foreach($cart_data as $keys => $values)
                 {
-                    $sql= "INSERT INTO `usercourse`(`userid`, `username`, `courseName`, `courseId`) VALUES ('".$_SESSION['userid']."','".$_SESSION['username']."','".$values["item_name"]."','".$values["item_id"]."')";
+                    $sql= "INSERT INTO `usercourse`(`userid`, `username`, `courseName`, `courseId`,`price`,`date`) VALUES ('".$_SESSION['userid']."','".$_SESSION['username']."','".$values["item_name"]."','".$values["item_id"]."','".$values["item_price"]."','".$date."')";
                      $result=mysqli_query($conn,$sql);
                       $sql2 = "UPDATE course set enrolledSid=enrolledSid+1 WHERE courseid ='".$values["item_id"]."'";
                       $result2=mysqli_query($conn,$sql2);
