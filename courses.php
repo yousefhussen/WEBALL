@@ -169,6 +169,19 @@ else{
                  <span class="price"><?php echo "$".$row['coursePrice']; ?></span><br>
 
                   <br>
+                  <?php 
+                  if(!empty($_SESSION['username'])){
+
+
+               $sql2= "SELECT * FROM usercourse WHERE courseid='".$row["courseId"]."' AND userId='".$_SESSION['userid']."'";
+               $result2=mysqli_query($conn,$sql2);
+               $row2 = mysqli_fetch_assoc($result2);
+                if(isset($row2['courseId'])&&isset($row2['userid'])){
+                    echo "<h4>You already have this course</h4>";
+                }else{
+
+
+                  ?>
                   <form method="post" action="cart.php">
                   <!-- <input type="text" name="quantity" value="1" class="form-control" /> -->
                   <input type="hidden" name="hidden_name" value="<?php echo $row["courseName"]; ?>" />
@@ -176,6 +189,24 @@ else{
                   <input type="hidden" name="hidden_id" value="<?php echo $row["courseId"]; ?>" />
                   <input type="submit" id="DpS" name="add_to_cart" style="margin-top:5px;" class="btn btn-success" value="Add to Cart" />
                   </form>
+                  <?php 
+                   }
+
+                }
+                else{
+                    ?>
+                    <form method="post" action="">
+                     <input type="submit" id="DpS" name="add_to_cart" style="margin-top:5px;" class="btn btn-success" value="Add to Cart" />
+                      </form>
+                      <?php
+                      if(isset($_POST['add_to_cart'])){
+                        ?>
+                        <script>window.location.replace("LR2.php?cart=no");</script>
+                        <?php
+                      }
+
+                }
+                   ?>
                  <a href="index2.php?id=<?php echo $row['courseId'];?>"> <div class="star">
                   <?php 
 

@@ -59,7 +59,12 @@ else{
 							<li><a id="chatIcon" class = "chatIcon" href =index.php><i class='fas fa-comment' onclick="openNav()"></i></li></a>
                         
                      <?php }
-						
+						if($_SESSION['Type']=="Auditor"){
+							?>
+							 <li><a href="orders.php">Orders</a></li>
+							<li><a id="chatIcon" class = "chatIcon" href =index.php><i class='fas fa-comment' onclick="openNav()"></i></li></a>
+							<?php
+						}
 
                         ?>
 						<?php
