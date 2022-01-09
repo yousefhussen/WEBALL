@@ -93,10 +93,10 @@
 	        	</h4>
 	        	<div class="form-group">
 
-	        	<input type="text" name="user_name" id="user_name" class="form-control" value="<?php echo  $_SESSION["username"] ?>" placeholder="Enter Your Name" />
+	        	<input type="text" name="user_name" id="user_name" class="form-control" value="<?php echo  $_SESSION["username"] ?>" disabled="disabled"/>
 	        	</div>
 	        	<div class="form-group">
-	        		<textarea name="user_review" id="user_review" class="form-control" placeholder="Type Review Here"></textarea>
+	           <textarea name="user_review" id="user_review" class="form-control" onkeyup="lettersandnumbers(this)" placeholder="Type Review Here"></textarea>
 	        	</div>
 	        	<div class="form-group text-center mt-4">
 	        		<button type="button" class="btn btn-primary" id="save_review">Submit</button>
@@ -126,7 +126,11 @@
 </style>
 <script>
 var course_id = document.getElementById("get").value;
-// console.log(id);
+
+function lettersandnumbers(input){
+  var regex=/[^a-z A-Z 0-9]/gi;
+  input.value=input.value.replace(regex,"");
+}
 
 //submit 3lshan yshoof elcommentat zy elkbleeh
 $(document).ready(function(){
@@ -260,5 +264,6 @@ $(document).ready(function(){
    }
 
 });
+
 
 </script>

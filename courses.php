@@ -258,18 +258,17 @@ else{
 
                                       <br>
                                        <input  type="hidden" name = "courseId" value= "<?php echo $row1['courseId']; ?>">
-                                      Course Name: <input type="text" id= "cn"name = "courseName" value= "<?php echo $row1['courseName']; ?>"><br><br>
-                                      Instructor Name: <input type="text" name = "instructorName" value= "<?php echo $row1['instructorName'];  ?>"><br><br>
-                                      Course Price: <input type="text" name = "coursePrice" value= "<?php echo $row1['coursePrice']; ?>"><br><br>
-                                      Enrolled Student: <input type="text" name = "enrolledSid" value= "<?php echo $row1['enrolledSid']; ?>"><br><br>
-                                      Description:<br><textarea rows="4" cols="50" name="description" form="changing"></textarea><br><br>
+                                      Course Name: <input type="text" id= "cn"name = "courseName" value= "<?php echo $row1['courseName']; ?>"  required onkeyup="letters(this)"><br><br>
+                                      Instructor Name: <input type="text" name = "instructorName" value= "<?php echo $row1['instructorName'];  ?>" required onkeyup="letters(this)"><br><br>
+                                      Course Price: <input type="text" name = "coursePrice" value= "<?php echo $row1['coursePrice']; ?>" required onkeyup="numbers(this)"><br><br>
+                                      Description:<br><textarea rows="4" cols="50" name="description" form="changing" required onkeyup="lettersandnumbers(this)"></textarea><br><br>
                                        <div class="center">
                                           <div class="form-input">
                                             <div class="preview">
                                               <img id="file-ip-1-preview">
                                             </div>
                                             <label for="file-ip-1">Upload Image</label>
-                                            <input type="file" id="file-ip-1"  name="fileup" onchange="showPreview(event);">
+                                            <input type="file" id="file-ip-1"  name="fileup" onchange="return fileValidation()">
                                             
                                           </div>
                                         </div> 
@@ -379,18 +378,17 @@ else{
                                         ?>
                                        <input  type="hidden" name = "approved" value = "<?php echo $approve;?>">
 
-                                      Course Name: <input type="text" id= "cn"name = "courseName"><br><br>
-                                      Instructor Name: <input type="text" name = "instructorName" ><br><br>
-                                      Course Price: <input type="text" name = "coursePrice" ><br><br>
-                                      Enrolled Student: <input type="text" name = "enrolledSid" ><br><br>
-                                      Description: <br><textarea rows="4" cols="50" name="description" form="changing"></textarea><br><br>
+                                      Course Name: <input type="text" id= "cn"name = "courseName"  required onkeyup="letters(this)"><br><br>
+                                      Instructor Name: <input type="text" name = "instructorName" required onkeyup="letters(this)"><br><br>
+                                      Course Price: <input type="text" name = "coursePrice" required onkeyup="numbers(this)" ><br><br>
+                                      Description: <br><textarea rows="4" cols="50" name="description" form="changing" required onkeyup="lettersandnumbers(this)"></textarea><br><br>
                                        <div class="center">
                                           <div class="form-input">
                                             <div class="preview">
                                               <img id="file-ip-1-preview">
                                             </div>
                                             <label for="file-ip-1">Upload Image</label>
-                                            <input type="file" id="file-ip-1"  name="fileup" onchange="showPreview(event);">
+                                            <input type="file" id="file-ip-1"  name="fileup" onchange="return fileValidation()">
                                             
                                           </div>
                                         </div> 
@@ -514,6 +512,18 @@ echo $message;
 
 
   <script>
+ function numbers(input){
+  var regex=/[^0-9.]/gi;
+  input.value=input.value.replace(regex,"");
+}
+ function letters(input){
+  var regex=/[^a-z A-Z]/gi;
+  input.value=input.value.replace(regex,"");
+}
+function lettersandnumbers(input){
+  var regex=/[^a-z A-Z 0-9]/gi;
+  input.value=input.value.replace(regex,"");
+}
   var myTimeout = setTimeout(timeout, 5000);
   function timeout(){ $("#Db").fadeOut("slow");}; 
   $(document).ready(function(){
@@ -523,6 +533,52 @@ echo $message;
     // $("#Db").fadeOut(3000);
   });
  });
+ // onchange="showPreview(event);"
+// function showPreview(event){
+//   if(event.target.files.length > 0){
+//     var src = URL.createObjectURL(event.target.files[0]);
+//     var preview = document.getElementById("file-ip-1-preview");
+//     preview.src = src;
+//     preview.style.display = "block";
+//   }
+// }
+  function fileValidation() {
+            var fileInput = 
+                document.getElementById('file-ip-1');
+              
+            var filePath = fileInput.value;
+          
+            // Allowing file type
+            var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+              
+            if (!allowedExtensions.exec(filePath)) {
+              var data="<div class='text-center fixed-top' style='margin-top:30px;'>  <button class='btn btn-warning' id='Db' style='width:30%'><i class='fa fa-exclamation-circle' aria-hidden='true'></i> Invalid file type!</button></div>"
+  document.getElementById("speed2").innerHTML=data;
+                fileInput.value = '';
+                return false;
+            }
+
+             const fi = document.getElementById('fileToUpload');
+        // Check if any file is selected.
+        if (fi.files.length > 0) {
+            for (const i = 0; i <= fi.files.length - 1; i++) {
+  
+                const fsize = fi.files.item(i).size;
+                const file = Math.round((fsize / 1024));
+                // The size of the file.
+                if (file >= 4096) {
+
+                   var data="<div class='text-center fixed-top' style='margin-top:30px;'>  <button class='btn btn-warning' id='Db' style='width:30%'><i class='fa fa-exclamation-circle' aria-hidden='true'></i> File too Big, please select a file less than 4mb!</button></div>"
+                  document.getElementById("speed2").innerHTML=data;    
+                } 
+                // else if (file < 2048) {
+                //     alert(
+                //       "File too small, please select a file greater than 2mb");
+                // }
+            }
+         }
+      } 
+ 
   </script>
 </body>
 </html>

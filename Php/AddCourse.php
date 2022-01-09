@@ -37,9 +37,12 @@
             $CourseName=$_POST['courseName'];
             $InsName=$_POST['instructorName'];
             $CoursePrice=$_POST['coursePrice'];
-            $EnrolledStudent=$_POST['enrolledSid'];
             $Description=$_POST['description'];
-
+            $CourseName = filter_var($CourseName, FILTER_SANITIZE_STRING);  
+            $InsName = filter_var($InsName, FILTER_SANITIZE_STRING);
+            $Description = filter_var($Description, FILTER_SANITIZE_STRING);  
+            $CoursePrice = filter_var($CoursePrice, FILTER_SANITIZE_STRING);   
+            
 
 
 

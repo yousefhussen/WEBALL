@@ -127,7 +127,7 @@
 
                                       <br>
                                        <input  type="hidden" name = "courseId" value= "<?php echo $row4['courseId']; ?>">
-                                       Your Name: <input type="text" name = "userName" value= "<?php echo $_SESSION['username'];  ?>"><br><br>
+                                       Your Name: <input type="text" name = "userName" value= "<?php echo $_SESSION['username'];  ?>" disabled="disabled"><br><br>
                                 
                                       
                                       Rate the instructor from 1 to 5:<br>
@@ -142,7 +142,7 @@
                                     <input type="radio" id="e2" name="type" value="5" >
                                     <label for="e1">5</label><br><br>
                                      
-                                      Suggestions:<br><textarea rows="4" cols="50" name="description" form="changing"></textarea><br><br>
+                                      Suggestions:<br><textarea rows="4" cols="50" name="description" form="changing" onkeyup="lettersandnumbers(this)"></textarea><br><br>
                                       
                                       <input type="submit" name = "subserv" >
 
@@ -168,10 +168,10 @@
             $userName=$_SESSION['username'];
             $Insrate=$_POST['type'];
             $Description=$_POST['description'];
-             $sessid = $_SESSION['userid'];
+            $sessid = $_SESSION['userid'];
 
           
-
+            // $Description = filter_var($Description, FILTER_SANITIZE_STRING); 
             
 
 
@@ -194,6 +194,10 @@
      ?>
 
  <script>
+    function lettersandnumbers(input){
+  var regex=/[^a-z A-Z 0-9]/gi;
+  input.value=input.value.replace(regex,"");
+}
   var myTimeout = setTimeout(timeout, 5000);
   function timeout(){ $("#Db").fadeOut("slow");}; 
   $(document).ready(function(){

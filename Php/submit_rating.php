@@ -3,7 +3,6 @@ session_start();
 //submit_rating.php
 
 $connect = new PDO("mysql:host=localhost;dbname=webdatabase", "root", "");
-
 if(isset($_POST["rating_data"]))
 {
 
@@ -41,6 +40,7 @@ if(isset($_POST["rating_data"]))
                     
                
     /////////////////////////////////////////////////////////////
+    $data[':user_review'] = filter_var($data[':user_review'], FILTER_SANITIZE_STRING);            
 	$query = "
 	INSERT INTO review 
 	(userId,courseId, user_review, datetime,user_Name,user_rating,image) 
