@@ -59,7 +59,7 @@
       <!-- <input id="image" type="file" name="profile_photo" placeholder="Photo"  capture> -->
       <!-- <form action = "upload.php" method = "post" > -->
         Select an image to upload: 
-        <input type="file" name="fileToUpload" id="fileToUpload">
+        <input type="file" name="fileToUpload" id="fileToUpload" onchange="return fileValidation()">
         <!-- <input type="submit" value="Upload Image" name="submit"> -->
     
     </div>   
@@ -80,46 +80,7 @@ if(isset($_GET['cart'])){
               </div>
               <?php
 }
-///////////////////////////////////////////////////////////////////////
-//small proplem here 
-  $sora="images.png";
- if(!empty($_FILES['fileToUpload']['name'])){
-    $target_dir = "uploads/";
-    $target_file = $target_dir.basename($_FILES['fileToUpload']['name']);
 
-    echo $target_dir;
-
-   
-        if($_FILES['fileToUpload']['size']>500)
-        {
-          ?>
-             <div class="text-center fixed-top"  style="margin-top:30px;">  
-                <button class="btn btn-danger" id="Db" style="width:30%;height:70px"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> The image is too large</button>
-              </div>
-              <?php
-        }
-
-    echo "<br> the file type ".$_FILES['fileToUpload']['type']."<br>";
-
-    if($_FILES['fileToUpload']['type']== "image/jpeg")
-        echo "the file is accepted";
-    else
-        echo "File has to be a jpeg image";
-
-
-    $tmp_name = $_FILES['fileToUpload']['tmp_name'];
-    $name = basename($_FILES['fileToUpload']['name']);
-    move_uploaded_file($tmp_name, "$target_dir/$name");
-    
-
-}else{
-
-     $target_dir = "uploads/";
-     $target_file = $target_dir.$sora;
- }
-
-
-  /////////////////////////////////////////////////////////////////////////
  $x=true;
   if (isset($_POST['Lname'])) {
         $servername = "localhost";
@@ -173,9 +134,28 @@ if(isset($_GET['cart'])){
   }
   if(isset($_POST['unameR'])){
 
-     function sql1($Data1,$Data2,$Data3,$Data4,$Data5,$Data6)
+     function sql1($Data1,$Data2,$Data3,$Data5,$Data6)
       {
        
+  
+
+  $sora="images.png";
+  $target_file="";
+ if(!empty($_FILES['fileToUpload']['name'])){
+    $target_dir = "uploads/";
+    $target_file = $target_dir.basename($_FILES['fileToUpload']['name']);
+    $tmp_name = $_FILES['fileToUpload']['tmp_name'];
+    $name = basename($_FILES['fileToUpload']['name']);
+    move_uploaded_file($tmp_name, "$target_dir/$name");
+  
+}else{
+
+     $target_dir = "uploads/";
+     $target_file = $target_dir.$sora;
+ }
+
+
+
         if(!filter_var($Data3 , FILTER_VALIDATE_EMAIL)=== false)
         {
         $servername = "localhost";
@@ -204,7 +184,7 @@ if(isset($_GET['cart'])){
         }
         else
         {
-           $sql= "INSERT INTO users (username, password, email,image,type,gender,unique_id) VALUES ('$Data1', '$Data2', '$Data3','$Data4','$Data5','$Data6','$ran_id')";
+           $sql= "INSERT INTO users (username, password, email,image,type,gender,unique_id) VALUES ('$Data1', '$Data2', '$Data3','$target_file','$Data5','$Data6','$ran_id')";
 
         if($conn->query($sql)=== TRUE){
          echo "Yeaaaah";
@@ -263,11 +243,11 @@ $password=mysqli_real_escape_string($conn,$_POST['pswR']);
 $password = md5($password);
 
 $Email=$_POST['EM'];
-$image=$target_file;
+// $image=$target_file;
 $gender=$_POST['gender'];
 $type="Student";
  
-sql1($name,$password,$Email,$image,$type,$gender);
+sql1($name,$password,$Email,$type,$gender);
 Sql2($name,$password);
 
   }
@@ -310,6 +290,42 @@ return false;
  }  
 }  
 
+function fileValidation() {
+            var fileInput = 
+                document.getElementById('fileToUpload');
+              
+            var filePath = fileInput.value;
+          
+            // Allowing file type
+            var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+              
+            if (!allowedExtensions.exec(filePath)) {
+              var data="<div class='text-center fixed-top' style='margin-top:30px;'>  <button class='btn btn-warning' id='Db' style='width:30%'><i class='fa fa-exclamation-circle' aria-hidden='true'></i> Invalid file type!</button></div>"
+  document.getElementById("speed2").innerHTML=data;
+                fileInput.value = '';
+                return false;
+            }
+
+             const fi = document.getElementById('fileToUpload');
+        // Check if any file is selected.
+        if (fi.files.length > 0) {
+            for (const i = 0; i <= fi.files.length - 1; i++) {
+  
+                const fsize = fi.files.item(i).size;
+                const file = Math.round((fsize / 1024));
+                // The size of the file.
+                if (file >= 4096) {
+
+                   var data="<div class='text-center fixed-top' style='margin-top:30px;'>  <button class='btn btn-warning' id='Db' style='width:30%'><i class='fa fa-exclamation-circle' aria-hidden='true'></i> File too Big, please select a file less than 4mb!</button></div>"
+                  document.getElementById("speed2").innerHTML=data;    
+                } 
+                // else if (file < 2048) {
+                //     alert(
+                //       "File too small, please select a file greater than 2mb");
+                // }
+            }
+         }
+      } 
  
  </script>
 
