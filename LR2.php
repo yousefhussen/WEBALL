@@ -2,7 +2,10 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<?php session_start();?>
+	<?php session_start();
+    include_once "php/DBConnection.php";
+  ?>
+
 	<title>LR</title>
 	<link rel="stylesheet" href="CSS/LR2.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -10,6 +13,7 @@
    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
+  <div id="speed2"></div>
  <div class="container">
  	<div class="cardd">
  		<div class="inner-box" id="cardd">
@@ -31,7 +35,7 @@
      <button type="button" class="btnn" onclick="openRegister()">I'm New Here</button>
  		  </div>
  			<div class="cardd-back">
- 		<form action="LR2.php" method="post" enctype="multipart/form-data">
+ 		<form name="f1" action="LR2.php" method="post" onsubmit="return matchpass()" enctype="multipart/form-data">
 
       <h2>Register</h2> 
 
@@ -41,9 +45,10 @@
       <!-- <label for="psw"><b>Password</b></label> -->
       <input type="password" class="input-box" placeholder="Enter Password" name="pswR" minlength="10"
        maxlength="20" size="20" required>
-
+       <input type="password" class="input-box" placeholder="ReEnter Password" name="pswR2" minlength="10"
+       maxlength="20" size="20" required>
       <!-- <label for="EM"><b>Email</b></label> -->
-      <input type="text" class="input-box" placeholder="Enter Your Email" name="EM" required>
+      <input type="email" class="input-box" placeholder="Enter Your Email" name="EM" required>
       <div class="gender">
           <input type="radio" name="gender" value="male" required> Male
           <input type="radio" name="gender" value="female" required> Female
@@ -124,9 +129,13 @@ if(isset($_GET['cart'])){
         $conn = mysqli_connect($servername,$username,$password,$DB);
 
         
-            $name=$_POST['Lname'];
-            $password=$_POST['Lpsw'];
-            $sql= "SELECT * FROM users WHERE username='".$name."' AND password='".$password."'";
+            // $name=$_POST['Lname'];
+            // $password=$_POST['Lpsw'];
+            $name=mysqli_real_escape_string($conn,$_POST['Lname']);
+            $password=mysqli_real_escape_string($conn,$_POST['Lpsw']);
+            $password = md5($password);
+
+            $sql= "SELECT * FROM users WHERE username='".$name."' AND password='$password'";
             $result=mysqli_query($conn,$sql);
            // $row = $result-> fetch_array(MYSQLI_ASSOC);
             //mysqli_num_rows($result)==1
@@ -247,8 +256,12 @@ if(isset($_GET['cart'])){
       }
  
 
-$name=$_POST['unameR'];
-$password=$_POST['pswR'];
+// $name=$_POST['unameR'];
+// $password=$_POST['pswR'];
+$name=mysqli_real_escape_string($conn,$_POST['unameR']);
+$password=mysqli_real_escape_string($conn,$_POST['pswR']);
+$password = md5($password);
+
 $Email=$_POST['EM'];
 $image=$target_file;
 $gender=$_POST['gender'];
@@ -260,7 +273,8 @@ Sql2($name,$password);
   }
 
       ?>
- <script>
+ <script type="text/javascript">
+  
   var myTimeout = setTimeout(timeout, 5000);
   function timeout(){ $("#Db").fadeOut("slow");}; 
   $(document).ready(function(){
@@ -278,6 +292,24 @@ Sql2($name,$password);
  	function openLogin(){
  		card.style.transform="rotateY(0deg)";
  	}
+ 
+
+function matchpass(){  
+var firstpassword=document.f1.pswR.value;  
+var secondpassword=document.f1.pswR2.value;  
+  
+if(firstpassword==secondpassword){  
+return true;  
+}  
+else{  
+var data="<div class='text-center fixed-top' style='margin-top:30px;'>  <button class='btn btn-info' id='Db' style='width:30%'><i class='fa fa-exclamation-circle' aria-hidden='true'></i> password must be same!</button></div>"
+  document.getElementById("speed2").innerHTML=data
+  
+ // alert("password must be same!");  
+return false;  
+ }  
+}  
+
  
  </script>
 

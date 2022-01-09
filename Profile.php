@@ -167,7 +167,7 @@ button:hover {
                     <div class="col-md-6"><label class="labels">Name</label><input type="text" name = "Ename" class="form-control"  value="<?php echo  $_SESSION["username"] ?>"></div>
                 </div>
                 <div class="row mt-3">
-                    <div class="col-md-12"><label class="labels">Password</label><input type="password" name = "Epassword" class="form-control"  value="<?php echo $_SESSION["Password"] ?>"></div>
+                    <div class="col-md-12"><label class="labels">Password</label><input type="text" name = "Epassword" class="form-control"  value="<?php echo $_SESSION["Password"] ?>"></div>
                     <div class="col-md-12"><label class="labels">Email ID</label><input type="text" name = "Eemail" class="form-control" value="<?php echo $_SESSION["email"] ?>"></div>
                     <div class="col-md-12"><label class="labels">Gender:</label>
                     <br><?php echo $_SESSION["gender"] ?></div>
