@@ -41,7 +41,7 @@
 
       <!-- <label for="uname"><b>Username</b></label> -->
       <input type="text" class="input-box" placeholder="Enter Username" name="unameR" minlength="7"
-       maxlength="20" size="20" required>
+       maxlength="20" size="20" required onkeyup="lettersandnumbers(this)">
       <!-- <label for="psw"><b>Password</b></label> -->
       <input type="password" class="input-box" placeholder="Enter Password" name="pswR" minlength="10"
        maxlength="20" size="20" required>
@@ -184,6 +184,7 @@ if(isset($_GET['cart'])){
         }
         else
         {
+          $Data1 = filter_var($Data1, FILTER_SANITIZE_STRING);  
            $sql= "INSERT INTO users (username, password, email,image,type,gender,unique_id) VALUES ('$Data1', '$Data2', '$Data3','$target_file','$Data5','$Data6','$ran_id')";
 
         if($conn->query($sql)=== TRUE){
@@ -273,7 +274,10 @@ Sql2($name,$password);
  		card.style.transform="rotateY(0deg)";
  	}
  
-
+function lettersandnumbers(input){
+  var regex=/[^a-z A-Z 0-9]/gi;
+  input.value=input.value.replace(regex,"");
+}
 function matchpass(){  
 var firstpassword=document.f1.pswR.value;  
 var secondpassword=document.f1.pswR2.value;  

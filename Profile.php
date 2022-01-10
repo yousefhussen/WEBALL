@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php session_start();?>
+<?php session_start();
+require_once "Php/DBConnection.php";
+?>
+
 <head>
     <style>
 button {
@@ -67,7 +70,7 @@ button:hover {
    // $ID1 = $_GET["userid"];
     $ID1 = $_SESSION["userid"];
     $target_file="";
-   
+    // $image=$_SESSION["image"];
   if (isset($_POST['Ename'])) {
 
 
@@ -91,7 +94,9 @@ button:hover {
     $tmp_name = $_FILES['fileToUpload']['tmp_name'];
     $name = basename($_FILES['fileToUpload']['name']);
     move_uploaded_file($tmp_name, "$target_dir/$name");
-    $_SESSION["image"]=$target_file;
+    // $_SESSION["image"]=$target_file;
+    $_SESSION["image"] = $target_file;
+    
 
 }
 
@@ -105,23 +110,24 @@ button:hover {
 
             
             $name=$_POST['Ename'];
-            $password=$_POST['Epassword'];
             $email=$_POST['Eemail'];
-            $image=$target_file;
+            // $image=$target_file;
            // $gender=$_POST['gender'];
 
             
-            $sql= "UPDATE users SET email='$email',password='$password',username='$name',image='$image' WHERE userid =".$ID1;
+            $sql= "UPDATE users SET email='$email',username='$name',image='".$_SESSION["image"]."' WHERE userid =".$ID1;
             $result=mysqli_query($conn,$sql);
-           
+            if($result){
             
             $_SESSION["email"]=$_POST['Eemail'];
-            $_SESSION["Password"]=$_POST['Epassword'];
             $_SESSION["username"]=$_POST['Ename'];
-           
-            }
+            // $_SESSION["image"]=$target_file;
+            
+        }
+        $src=$_SESSION['image'];
+    }
 
-   $src=$_SESSION['image'];
+  
   //    if($_SESSION['image']=="uploads/"){
   //       if($_SESSION["gender"]=="male")
   //       {$GLOBALS['src'] = "https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg";}
@@ -152,7 +158,7 @@ button:hover {
  <!-- dont take a copy from the img name -->
     <div class="row">
         <div class="col-md-3 border-right">
-            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="<?php echo $src?>"><span class="font-weight-bold"><?php echo  $_SESSION["username"] ?></span><span class="text-black-50"><?php echo $_SESSION["email"] ?></span><span>Select an image to upload: 
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="<?php echo $_SESSION['image']?>"><span class="font-weight-bold"><?php echo  $_SESSION["username"] ?></span><span class="text-black-50"><?php echo $_SESSION["email"] ?></span><span>Select an image to upload: 
         <input type="file" name="fileToUpload" id="fileToUpload"> </span>
 
 
@@ -167,7 +173,6 @@ button:hover {
                     <div class="col-md-6"><label class="labels">Name</label><input type="text" name = "Ename" class="form-control"  value="<?php echo  $_SESSION["username"] ?>"></div>
                 </div>
                 <div class="row mt-3">
-                    <div class="col-md-12"><label class="labels">Password</label><input type="text" name = "Epassword" class="form-control"  value="<?php echo $_SESSION["Password"] ?>"></div>
                     <div class="col-md-12"><label class="labels">Email ID</label><input type="text" name = "Eemail" class="form-control" value="<?php echo $_SESSION["email"] ?>"></div>
                     <div class="col-md-12"><label class="labels">Gender:</label>
                     <br><?php echo $_SESSION["gender"] ?></div>
@@ -191,8 +196,83 @@ button:hover {
 
 </form>
 
+<form action="" method="post" enctype="multipart/form-data">
+<div class="container rounded bg-white mt-5 mb-5">
+        <div class="col-md-5 border-right ">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="text-right">Change Password</h4>
+                </div>
+               
+                <div class="row mt-3">
+                    <div class="col-md-12"><label class="labels">Old Password</label><input type="password" name = "Epassword1" class="form-control" required></div>
+                  <div class="col-md-12"><label class="labels">New Password</label><input type="password" name = "Epassword2" class="form-control" required></div>
+
+                </div>
+                <div class="mt-5 text-center"><button style="background-color: purple ;" class="btn btn-primary profile-button" type="submit">Update Password</button></div>
+            </div>
+            
+        </div>
+        
+        
+    </div>
+
+</form>
+<?php 
+ if(isset($_POST['Epassword1'])){
+
+$password=mysqli_real_escape_string($conn,$_POST['Epassword1']);
+$password = md5($password);
+ $ID2 = $_SESSION["userid"];
 
 
+
+            $sql= "SELECT * FROM users WHERE username='".$_SESSION["username"]."' AND password='$password'";
+            $result=mysqli_query($conn,$sql);
+            if($row=mysqli_fetch_array($result)){
+               $password2=mysqli_real_escape_string($conn,$_POST['Epassword2']);
+                $password2 = md5($password2);
+                echo $password2;
+               $sql2= "UPDATE users SET `password`='".$password2."' WHERE userid =".$ID2;
+               $result2=mysqli_query($conn,$sql2) or die($conn->error);
+               if($result2){
+                  ?>
+                  <div class="text-center fixed-top"  style="margin-top:30px;">  
+                <button class="btn btn-success" id="Db" style="width:30%;height:70px"><i class="fa fa-smile-o" aria-hidden="true"></i>
+                 The password is successfuly changed</button>
+              </div>
+               <?php
+           }
+             
+              
+             
+            }
+            else
+            {
+              ?>
+            
+              <div class="text-center fixed-top"  style="margin-top:30px;">  
+                <button class="btn btn-danger" id="Db" style="width:30%;height:70px"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> You entered incorrect password</button>
+              </div>
+        
+             
+              <?php
+            }
+  }
+
+?>
+<script type="text/javascript">
+    
+    var myTimeout = setTimeout(timeout, 5000);
+  function timeout(){ $("#Db").fadeOut("slow");}; 
+  $(document).ready(function(){
+  $("button").click(function (){
+    // $("#Db").fadeOut();
+    $("#Db").fadeOut("slow");
+    // $("#Db").fadeOut(3000);
+  });
+ });
+</script>
 
 </body>
 </html>
