@@ -4,10 +4,17 @@
         include_once "DBConnection.php";
         $outgoing_id = $_SESSION['unique_id'];
         $incoming_id = mysqli_real_escape_string($conn, $_POST['incoming_id']);
+        $msg_id = mysqli_real_escape_string($conn, $_POST['msg_id']);
         $message = mysqli_real_escape_string($conn, $_POST['message']);
         if(!empty($message)){
-            $sql = mysqli_query($conn, "INSERT INTO messages (incoming_msg_id, outgoing_msg_id, msg)
-                                        VALUES ({$incoming_id}, {$outgoing_id}, '{$message}')") or die();
+            if($_SESSION['Type'] == "Auditor") {
+                $sql = mysqli_query($conn, "UPDATE `messages` SET `comments`='{$message}' WHERE msg_id =".$msg_id) or die();
+            }
+            else {
+                $sql = mysqli_query($conn, "INSERT INTO messages (incoming_msg_id, outgoing_msg_id, msg)
+                VALUES ({$incoming_id}, {$outgoing_id}, '{$message}')") or die();
+            }
+           
         }
     }else{
         echo "??";

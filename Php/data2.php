@@ -4,7 +4,7 @@
     <?php 
 
     
-       
+    session_start();
     
     $output = "";
               include"DBConnection.php";
@@ -19,6 +19,32 @@
          $sql3 = "UPDATE `messages` SET `seen`='1' WHERE  `outgoing_msg_id` = ".$userid ;
         $query3 = mysqli_query($conn, $sql3);
         
+        if($_SESSION['Type'] != "Auditor") {
+          $output .= '<header>
+       
+          <!-- back iconaaaaa -->
+          <a  class="back-icon" onclick= "back_icon('.$_GET['userid'].')" ><i class="fas fa-arrow-left"></i></a>
+          <img src="'. $row2['image'] .'" alt="">
+          <div class="details">
+            <span>'. $row2['username'] .'</span>
+            <p>'. $row2['status'] .'</p>
+          </div>
+        </header>
+        <div class="chat-box">
+  
+        </div>
+        <form action="#" class="typing-area">
+          <input type="text" class="incoming_id" name="incoming_id" value="'. $row2['unique_id'] .'" hidden>
+          <input type="text" name="message" class="input-field" placeholder="Type a message here..." autocomplete="off">
+          <button><i class="fab fa-telegram-plane"></i></button>
+        </form>
+        ';
+  
+        }
+
+        else {
+
+     
         $output .= '<header>
        
         <!-- back iconaaaaa -->
@@ -32,12 +58,14 @@
       <div class="chat-box">
 
       </div>
-      <form action="#" class="typing-area">
-        <input type="text" class="incoming_id" name="incoming_id" value="'. $row2['unique_id'] .'" hidden>
-        <input type="text" name="message" class="input-field" placeholder="Type a message here..." autocomplete="off">
-        <button><i class="fab fa-telegram-plane"></i></button>
-      </form>
+      <form action="#" class="typing-area" style="visibility:hidden;">
+          <input  type="text" class="incoming_id" name="incoming_id" value="'. $row2['unique_id'] .'" hidden>
+          <input  type="text" class="msg_id" name="msg_id" value="" hidden>
+          <input type="text" name="message" class="input-field" placeholder="Type a message here..." autocomplete="off">
+          <button><i class="fab fa-telegram-plane"></i></button>
+        </form>
       ';
+    }
 
     echo $output;
     

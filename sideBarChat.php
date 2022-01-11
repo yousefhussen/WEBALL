@@ -1,6 +1,8 @@
 <?php 
   include_once "php/DBConnection.php";
-  
+  if($_SESSION['Type'] == "Auditor") {
+    $_SESSION['unique_id'] = 1;
+  }
 ?>
 <!DOCTYPE html>
 <html>
@@ -13,20 +15,22 @@
 <div id="mySidenav" class="sidenav">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <div >
+    
   <div class="wrapper" id="UL">
-      
+      <div id ="backAuditor"></div>
     <section class="users">
       <header>
         <div class="content">
           <?php 
             include_once "php/DBConnection.php";
-            $sql = mysqli_query($conn, "SELECT * FROM users WHERE `unique_id` =" . $_SESSION['unique_id']);
+            $sql = mysqli_query($conn, "SELECT * FROM users WHERE `userid` =" . $_SESSION['userid']);
             if(mysqli_num_rows($sql) > 0){
               $row = mysqli_fetch_assoc($sql);
             }
            
           ?>
-        
+          
+
           <img src="<?php echo $row['image']; ?>" alt="">
           <div class="details">
             <span><?php echo $row['username'] ?></span>
@@ -54,8 +58,6 @@
 </div>
 
 
-
-
 <script>
 
 
@@ -72,12 +74,31 @@ function closeNav() {
   document.getElementById("mySidenav").style.width = "0";
 }
 
-function msgChat( incomingid) {
-                     
-         //making seen
-                  
-                     
+var auditorState = 0;
+var incoming_id;
+function msgChat(incomingid) {
+  
+    if(<?php echo "'".$_SESSION['Type']."'"; ?> == "Auditor" && auditorState == 0) {
+      let xhr2 = new XMLHttpRequest();
+      xhr2.open("GET", "changeAuditorUniqueId.php?userid="+incomingid, true);
+      xhr2.onload = ()=>{
+        if(xhr2.readyState === XMLHttpRequest.DONE){
+            if(xhr2.status === 200){
+               console.log("Et8yyrrr");
+               let data2 = xhr2.response;
+               auditorState = data2;
+            }
+        }
+      }
+    
+    xhr2.send();
+    }
 
+    
+    else  {
+
+   
+    
  // console.log("out");
     document.getElementById("UL").style.width = "0";
     document.getElementById("UL").style.visibility = "hidden";
@@ -86,28 +107,36 @@ function msgChat( incomingid) {
     document.getElementById("chatting2").style.visibility = "visible";
     document.getElementById("chatting2").style.width = "auto";
 
-     let xhr = new XMLHttpRequest();
-    xhr.open("GET", "php/data2.php?userid="+incomingid, true);
-    xhr.onload = ()=>{
-      if(xhr.readyState === XMLHttpRequest.DONE){
-          if(xhr.status === 200){
+     let xhr2 = new XMLHttpRequest();
+    xhr2.open("GET", "php/data2.php?userid="+incomingid, true);
+    xhr2.onload = ()=>{
+      if(xhr2.readyState === XMLHttpRequest.DONE){
+          if(xhr2.status === 200){
 
-            let data = xhr.response;
+            let data = xhr2.response;
              
              document.getElementById("chatting2").innerHTML = data;
-             form = document.querySelector(".typing-area"),
-incoming_id = form.querySelector(".incoming_id").value,
-inputField = form.querySelector(".input-field"),
-sendBtn = form.querySelector("button"),
-chatBox = document.querySelector(".chat-box");
-const chatIcon = document.getElementById("chatIcon");
+             if(auditorState == 0) {
+                form = document.querySelector(".typing-area"),
+                incoming_id = form.querySelector(".incoming_id").value,
+                inputField = form.querySelector(".input-field"),
+                sendBtn = form.querySelector("button");
+              }
+              else {
+                incoming_id = incomingid;
+              }
+           
+              chatBox = document.querySelector(".chat-box");
+              const chatIcon = document.getElementById("chatIcon");
 
 
- 
+
    
 //console.log("outtttttttttttttttttttttttttttt");
-form.onsubmit = (e)=>{
+if(auditorState == 0) {
+  form.onsubmit = (e)=>{
     e.preventDefault();
+
 }
 
 inputField.focus();
@@ -121,18 +150,18 @@ inputField.onkeyup = ()=>{
 
 sendBtn.onclick = ()=>{
     // console.log("out2");
-    let xhr = new XMLHttpRequest();
-    xhr.open("POST", "php/insert-chat.php", true);
-    xhr.onload = ()=>{
-      if(xhr.readyState === XMLHttpRequest.DONE){
-          if(xhr.status === 200){
+    let xhr2 = new XMLHttpRequest();
+    xhr2.open("POST", "php/insert-chat.php", true);
+    xhr2.onload = ()=>{
+      if(xhr2.readyState === XMLHttpRequest.DONE){
+          if(xhr2.status === 200){
               inputField.value = "";
               scrollToBottom();
           }
       }
     }
     let formData = new FormData(form);
-    xhr.send(formData);
+    xhr2.send(formData);
 }
 chatBox.onmouseenter = ()=>{
     chatBox.classList.add("active");
@@ -142,23 +171,42 @@ chatBox.onmouseleave = ()=>{
     chatBox.classList.remove("active");
 }
 
-setInterval(() =>{
-    let xhr = new XMLHttpRequest();
-    xhr.open("POST", "php/get-chat.php", true);
-    xhr.onload = ()=>{
-      if(xhr.readyState === XMLHttpRequest.DONE){
-          if(xhr.status === 200){
-            let data = xhr.response;
-            chatBox.innerHTML = data;
-            if(!chatBox.classList.contains("active")){
-                scrollToBottom();
+
+    setInterval(() =>{
+        let xhr2 = new XMLHttpRequest();
+        xhr2.open("POST", "php/get-chat.php", true);
+        xhr2.onload = ()=>{
+          if(xhr2.readyState === XMLHttpRequest.DONE){
+              if(xhr2.status === 200){
+                let data = xhr2.response;
+                chatBox.innerHTML = data;
+                if(!chatBox.classList.contains("active")){
+                    scrollToBottom();
+                  }
               }
           }
-      }
-    }
-    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhr.send("incoming_id="+incoming_id);
-}, 500);
+        }
+        xhr2.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhr2.send("incoming_id="+incoming_id);
+    }, 500);
+}
+
+setInterval(() =>{
+        let xhr2 = new XMLHttpRequest();
+        xhr2.open("POST", "php/get-chat.php", true);
+        xhr2.onload = ()=>{
+          if(xhr2.readyState === XMLHttpRequest.DONE){
+              if(xhr2.status === 200){
+                let data = xhr2.response;
+                chatBox.innerHTML = data;
+              }
+          }
+        }
+        xhr2.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhr2.send("incoming_id="+incoming_id);
+    }, 500);
+
+
  
 function scrollToBottom(){
     chatBox.scrollTop = chatBox.scrollHeight;
@@ -170,22 +218,24 @@ function scrollToBottom(){
           }
       }
     }
-    xhr.send();
+    xhr2.send();
 
 
 
-
+  }
   
 }
 
 function back_icon(incomingid) {
  // console.log("out");
-    
-    let xhr = new XMLHttpRequest();
-    xhr.open("GET", "Php/SeenInside.php?userid="+incomingid, true);
-    xhr.onload = ()=>{
-      if(xhr.readyState === XMLHttpRequest.DONE){
-          if(xhr.status === 200){
+ if(<?php echo "'".$_SESSION['Type']."'"; ?> == "Auditor") {
+   auditorState = 1;
+ }
+    let xhr2 = new XMLHttpRequest();
+    xhr2.open("GET", "Php/SeenInside.php?userid="+incomingid, true);
+    xhr2.onload = ()=>{
+      if(xhr2.readyState === XMLHttpRequest.DONE){
+          if(xhr2.status === 200){
             console.log(incomingid);
             
             
@@ -193,7 +243,7 @@ function back_icon(incomingid) {
       }
     }
    
-    xhr.send();
+    xhr2.send();
 
     document.getElementById("UL").style.width = "450px";
     document.getElementById("UL").style.visibility = "visible";
@@ -207,11 +257,85 @@ function back_icon(incomingid) {
   
 }
 
+function back_icon2() {
+ console.log("edaas 3laaaaaak");
+    
+    let xhr2 = new XMLHttpRequest();
+    xhr2.open("GET", "changeAuditorBack.php", true);
+    xhr2.onload = ()=>{
+      if(xhr2.readyState === XMLHttpRequest.DONE){
+          if(xhr2.status === 200){
+            let data = xhr2.response;
+
+            auditorState = data;
+            
+          }
+      }
+    }
+   
+    xhr2.send();
+
+    
+  
+}
+
+//const typingArea = document.querySelector(".typing-area");
+function commented(msg_id) {
+  
+  
+           
+  console.log(msg_id);
+  document.querySelector(".typing-area").style.visibility = "visible";
+  document.querySelector(".msg_id").value = msg_id;
+  form = document.querySelector(".typing-area"),
+  inputField = form.querySelector(".input-field"),
+  sendBtn = form.querySelector("button");
+  
+
+  form.onsubmit = (e)=>{
+    e.preventDefault();
+
+}
+
+inputField.focus();
+inputField.onkeyup = ()=>{
+    if(inputField.value != ""){
+        sendBtn.classList.add("active");
+    }else{
+        sendBtn.classList.remove("active");
+    }
+}
+
+sendBtn.onclick = ()=>{
+    // console.log("out2");
+    let xhr2 = new XMLHttpRequest();
+    xhr2.open("POST", "php/insert-chat.php", true);
+    xhr2.onload = ()=>{
+      if(xhr2.readyState === XMLHttpRequest.DONE){
+          if(xhr2.status === 200){
+              inputField.value = "";
+              document.querySelector(".typing-area").style.visibility = "hidden";
+          }
+      }
+    }
+    let formData = new FormData(form);
+    xhr2.send(formData);
+}
+chatBox.onmouseenter = ()=>{
+    chatBox.classList.add("active");
+}
+
+chatBox.onmouseleave = ()=>{
+    chatBox.classList.remove("active");
+}
+
+}
+
 
 
 </script>
 
-<script src = "users-list.js"></script>
+<script src = "JS/users-list.js"></script>
 <!-- <script src = "chat.js"></script>
  -->
 

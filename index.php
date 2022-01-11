@@ -65,6 +65,12 @@ else{
 							<?php
 						}
 
+						if($_SESSION['Type']=="Auditor"){
+							?>
+							 <li><a id="chatIcon" class = "chatIcon" href =index.php><i class='fas fa-comment' onclick="openNav()"></i></li></a>
+							<?php
+						}
+
                         ?>
 						<?php
 						 if($_SESSION['Type']=="Student"){
@@ -215,13 +221,20 @@ else{
   	<i class="fa fa-linkedin"></i>
   	
   </div>
-   <p>Made by <i class="fa fa-heart-o"></i> Salah and Yonus </p>
+   <p>Made by <i class="fa fa-heart-o"></i> Joe and Speedo </p>
 </section>
-<?php if (!empty($_SESSION['username'])) {
-  
-        include_once "sideBarChat.php";
-    
-} ?>
+<?php 
+
+
+if (!empty($_SESSION['username'])) {
+
+	include_once "sideBarChat.php";
+} 
+
+?>
+
+
+
 </body>
 
 </html>
