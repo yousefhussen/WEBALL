@@ -3,7 +3,7 @@
 <?php session_start();
 require_once "Php/DBConnection.php";
 ?>
-
+ <link rel="stylesheet" href="CSS/button.css">
 <head>
     <style>
 button {
@@ -72,49 +72,53 @@ button:hover {
     $target_file="";
     // $image=$_SESSION["image"];
   if (isset($_POST['Ename'])) {
-
-
-  if(!empty($_FILES['fileToUpload']['name'])){
-    $target_dir = "uploads/";
-    $target_file = $target_dir.basename($_FILES['fileToUpload']['name']);
-
-    // echo $target_dir;
-
-        // if($_FILES['fileToUpload']['size']>1000000)
-            // echo "the file is too large";
-
-    // echo "<br> the file type ".$_FILES['fileToUpload']['type']."<br>";
-
-    // if($_FILES['fileToUpload']['type']== "image/jpeg")
-    //     // echo "the file is accepted";
-    // else
-        // echo "File has to be a jpeg image";
-
-
-    $tmp_name = $_FILES['fileToUpload']['tmp_name'];
-    $name = basename($_FILES['fileToUpload']['name']);
-    move_uploaded_file($tmp_name, "$target_dir/$name");
-    // $_SESSION["image"]=$target_file;
-    $_SESSION["image"] = $target_file;
-    
-
-}
-
-
-    $servername = "localhost";
+     $servername = "localhost";
         $username ="root";
         $password = "";
         $DB = "webdatabase";
         
         $conn = mysqli_connect($servername,$username,$password,$DB);
-
-            
+//////////////////////////////////////////////////////////////////////////
+if(!empty($_FILES['fileToUpload']['name'])){
+      $errors= array();
+      $file_name = $_FILES['fileToUpload']['name'];
+      $file_size = $_FILES['fileToUpload']['size'];
+      $file_tmp = $_FILES['fileToUpload']['tmp_name'];
+      $file_type = $_FILES['fileToUpload']['type'];
+       // $file_ext=strtolower(end(explode('.',$_FILES['fileToUpload']['name'])));
+       $file_ext = pathinfo($file_name, PATHINFO_EXTENSION);
+      // $text = end(explode('.',$_FILES['fileToUpload']['name']));
+      // $file_ext=strtolower($text);
+      
+      $expensions= array("jpeg","jpg","png");
+      
+      if(in_array($file_ext,$expensions)===false){
+        ?>
+          <div class="text-center fixed-top" style="margin-top:30px;">  
+                <button class="btn btn-danger" id="Db" style="width:50%"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> extension not allowed,please choose a JPEG or PNG file </button>
+              </div>
+              <?php
+              $errors[]="extension not allowed, please choose a JPEG or PNG file.";
+      }
+      
+      if($file_size > 2097152) {
+        ?>
+        <div class="text-center fixed-top" style="margin-top:30px;">  
+                <button class="btn btn-info" id="Db" style="width:50%"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> File size must be excately 2 MB or less</button>
+              </div>
+              <?php
+         $errors[]='File size must be excately 2 MB';
+      }
+      
+      if(empty($errors)==true) {
+      $target_dir = "uploads/";
+      $target_file = $target_dir.basename($_FILES['fileToUpload']['name']);
+      $tmp_name = $_FILES['fileToUpload']['tmp_name'];
+      $name = basename($_FILES['fileToUpload']['name']);
+      move_uploaded_file($tmp_name, "$target_dir/$name");
             $name=$_POST['Ename'];
             $email=$_POST['Eemail'];
-            // $image=$target_file;
-           // $gender=$_POST['gender'];
-
-            
+            $_SESSION["image"] = $target_file;
             $sql= "UPDATE users SET email='$email',username='$name',image='".$_SESSION["image"]."' WHERE userid =".$ID1;
             $result=mysqli_query($conn,$sql);
             if($result){
@@ -123,28 +127,21 @@ button:hover {
             $_SESSION["username"]=$_POST['Ename'];
             // $_SESSION["image"]=$target_file;
             
-        }
+            }
         $src=$_SESSION['image'];
+        }
+
+       }     
+          
     }
 
   
-  //    if($_SESSION['image']=="uploads/"){
-  //       if($_SESSION["gender"]=="male")
-  //       {$GLOBALS['src'] = "https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg";}
-  //      else{
-  //       $GLOBALS['src'] ="Images/femaleAvatar.png";
-  //      }
-       
-  //    }
-  //    else{
-  //      $GLOBALS['src'] =$_SESSION["image"];
-  //    }
-     //echo"$src";
+  
   ?>
 
    
           
-          
+      <div id="speed2"></div>    
     <meta charset="UTF-8">
     <title>Title</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -153,7 +150,7 @@ button:hover {
 </head>
 <body background="background1.jpg">
 
-<form action="" method="post" enctype="multipart/form-data">
+<form name="f1" action="" method="post" enctype="multipart/form-data">
 <div class="container rounded bg-white mt-5 mb-5">
  <!-- dont take a copy from the img name -->
     <div class="row">
@@ -191,7 +188,9 @@ button:hover {
         
     </div>
 </div>
+
 </div>
+
 </div>
 
 </form>
@@ -218,6 +217,8 @@ button:hover {
     </div>
 
 </form>
+<div class="text-center fixed-top" style="width:70%; align-items:center; justify-content:center; margin-left: 15%;"> 
+  <a href="index.php"><button class="button-17" role="button">Home</button></a>
 <?php 
  if(isset($_POST['Epassword1'])){
 
@@ -272,6 +273,7 @@ $password = md5($password);
     // $("#Db").fadeOut(3000);
   });
  });
+
 </script>
 
 </body>

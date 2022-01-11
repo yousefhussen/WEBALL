@@ -8,11 +8,6 @@
     <link rel="stylesheet" href="CSS/search.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-   <!--  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> -->
 
      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
@@ -252,16 +247,16 @@ else{
                             <a class="close" href="#">&times;</a>
                             <div class="content">
                                 <div  >    
-                                    <form action="php/editCourse.php" method="post" id="changing" enctype="multipart/form-data">
+                                    <form action="php/editCourse.php" method="post" id="changing" enctype="multipart/form-data" novalidate>
 
                                       <h2>Edit Options</h2> 
 
                                       <br>
                                        <input  type="hidden" name = "courseId" value= "<?php echo $row1['courseId']; ?>">
-                                      Course Name: <input type="text" id= "cn"name = "courseName" value= "<?php echo $row1['courseName']; ?>"  required onkeyup="letters(this)"><br><br>
-                                      Instructor Name: <input type="text" name = "instructorName" value= "<?php echo $row1['instructorName'];  ?>" required onkeyup="letters(this)"><br><br>
-                                      Course Price: <input type="text" name = "coursePrice" value= "<?php echo $row1['coursePrice']; ?>" required onkeyup="numbers(this)"><br><br>
-                                      Description:<br><textarea rows="4" cols="50" name="description" form="changing" required onkeyup="lettersandnumbers(this)"></textarea><br><br>
+                                      Course Name: <input type="text" id= "cn"name = "courseName" value= "<?php echo $row1['courseName']; ?>"   onkeyup="letters(this)" required><br><br>
+                                      Instructor Name: <input type="text" name = "instructorName" value= "<?php echo $row1['instructorName'];  ?>"  onkeyup="letters(this)" required><br><br>
+                                      Course Price: <input type="text" name = "coursePrice" value= "<?php echo $row1['coursePrice']; ?>" onkeyup="numbers(this)" required ><br><br>
+                                      Description:<br><input type="text" rows="4" cols="50" name="description" value= "<?php echo $row1['description']; ?>" form="changing"  onkeyup="lettersandnumbers(this)" required></textarea><br><br>
                                        <div class="center">
                                           <div class="form-input">
                                             <div class="preview">

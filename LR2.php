@@ -59,8 +59,9 @@
       <!-- <input id="image" type="file" name="profile_photo" placeholder="Photo"  capture> -->
       <!-- <form action = "upload.php" method = "post" > -->
         Select an image to upload: 
-        <input type="file" name="fileToUpload" id="fileToUpload" onchange="return fileValidation()">
+        <input type="file" name="fileToUpload" id="fileToUpload">
         <!-- <input type="submit" value="Upload Image" name="submit"> -->
+        
     
     </div>   
       <button class="submitt-btnn" type="submit">Register</button>
@@ -137,25 +138,6 @@ if(isset($_GET['cart'])){
      function sql1($Data1,$Data2,$Data3,$Data5,$Data6)
       {
        
-  
-
-  $sora="images.png";
-  $target_file="";
- if(!empty($_FILES['fileToUpload']['name'])){
-    $target_dir = "uploads/";
-    $target_file = $target_dir.basename($_FILES['fileToUpload']['name']);
-    $tmp_name = $_FILES['fileToUpload']['tmp_name'];
-    $name = basename($_FILES['fileToUpload']['name']);
-    move_uploaded_file($tmp_name, "$target_dir/$name");
-  
-}else{
-
-     $target_dir = "uploads/";
-     $target_file = $target_dir.$sora;
- }
-
-
-
         if(!filter_var($Data3 , FILTER_VALIDATE_EMAIL)=== false)
         {
         $servername = "localhost";
@@ -184,20 +166,65 @@ if(isset($_GET['cart'])){
         }
         else
         {
-          $Data1 = filter_var($Data1, FILTER_SANITIZE_STRING);  
+          /////////////////////////////////////////////////////////////////////
+ $sora="images.png";
+  $target_file="";
+   if(!empty($_FILES['fileToUpload']['name'])){
+      $errors= array();
+      $file_name = $_FILES['fileToUpload']['name'];
+      $file_size = $_FILES['fileToUpload']['size'];
+      $file_tmp = $_FILES['fileToUpload']['tmp_name'];
+      $file_type = $_FILES['fileToUpload']['type'];
+      $file_ext=strtolower(end(explode('.',$_FILES['fileToUpload']['name'])));
+      
+      $expensions= array("jpeg","jpg","png");
+      
+      if(in_array($file_ext,$expensions)===false){
+        ?>
+          <div class="text-center fixed-top" style="margin-top:30px;">  
+                <button class="btn btn-danger" id="Db" style="width:50%"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> extension not allowed,please choose a JPEG or PNG file </button>
+              </div>
+              <?php
+              $errors[]="extension not allowed, please choose a JPEG or PNG file.";
+      }
+      
+      if($file_size > 2097152) {
+        ?>
+        <div class="text-center fixed-top" style="margin-top:30px;">  
+                <button class="btn btn-info" id="Db" style="width:50%"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> File size must be excately 2 MB or less</button>
+              </div>
+              <?php
+         $errors[]='File size must be excately 2 MB';
+      }
+      
+      if(empty($errors)==true) {
+          $target_dir = "uploads/";
+      $target_file = $target_dir.basename($_FILES['fileToUpload']['name']);
+      $tmp_name = $_FILES['fileToUpload']['tmp_name'];
+      $name = basename($_FILES['fileToUpload']['name']);
+      move_uploaded_file($tmp_name, "$target_dir/$name");
+        $Data1 = filter_var($Data1, FILTER_SANITIZE_STRING);  
            $sql= "INSERT INTO users (username, password, email,image,type,gender,unique_id) VALUES ('$Data1', '$Data2', '$Data3','$target_file','$Data5','$Data6','$ran_id')";
 
-        if($conn->query($sql)=== TRUE){
-         echo "Yeaaaah";
-        }
-        else
-        {
-            echo "Error: ".sql."<br>".$conn->error;
-        }
-        $conn->close();
+       $result4=mysqli_query($conn,$sql);
         }
 
        }
+       else{
+
+      $target_dir = "uploads/";
+      $target_file = $target_dir.$sora;
+        $Data1 = filter_var($Data1, FILTER_SANITIZE_STRING);  
+           $sql= "INSERT INTO users (username, password, email,image,type,gender,unique_id) VALUES ('$Data1', '$Data2', '$Data3','$target_file','$Data5','$Data6','$ran_id')";
+
+        $result5=mysqli_query($conn,$sql);
+        }
+      
+      }
+     }
+
+   
+        
        else{
         ?>
         <div class="text-center fixed-top" style="margin-top:30px;">  
@@ -205,7 +232,8 @@ if(isset($_GET['cart'])){
               </div>
               <?php
        }
-      }
+}
+
       function Sql2($Data1,$Data2){
         $servername = "localhost";
         $username ="root";
@@ -237,8 +265,7 @@ if(isset($_GET['cart'])){
       }
  
 
-// $name=$_POST['unameR'];
-// $password=$_POST['pswR'];
+
 $name=mysqli_real_escape_string($conn,$_POST['unameR']);
 $password=mysqli_real_escape_string($conn,$_POST['pswR']);
 $password = md5($password);
@@ -251,7 +278,7 @@ $type="Student";
 sql1($name,$password,$Email,$type,$gender);
 Sql2($name,$password);
 
-  }
+}
 
       ?>
  <script type="text/javascript">
@@ -294,42 +321,43 @@ return false;
  }  
 }  
 
-function fileValidation() {
-            var fileInput = 
-                document.getElementById('fileToUpload');
+// function fileValidation() {
+//             var fileInput = 
+//                 document.getElementById('fileToUpload');
               
-            var filePath = fileInput.value;
+//             var filePath = fileInput.value;
           
-            // Allowing file type
-            var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+//             // Allowing file type
+//             var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
               
-            if (!allowedExtensions.exec(filePath)) {
-              var data="<div class='text-center fixed-top' style='margin-top:30px;'>  <button class='btn btn-warning' id='Db' style='width:30%'><i class='fa fa-exclamation-circle' aria-hidden='true'></i> Invalid file type!</button></div>"
-  document.getElementById("speed2").innerHTML=data;
-                fileInput.value = '';
-                return false;
-            }
+//             if (!allowedExtensions.exec(filePath)) {
+//               var data="<div class='text-center fixed-top' style='margin-top:30px;'>  <button class='btn btn-warning' id='Db' style='width:30%'><i class='fa fa-exclamation-circle' aria-hidden='true'></i> Invalid file type!</button></div>"
+//   document.getElementById("speed2").innerHTML=data;
+//                 fileInput.value = '';
+//                 return false;
+//             }
 
-             const fi = document.getElementById('fileToUpload');
-        // Check if any file is selected.
-        if (fi.files.length > 0) {
-            for (const i = 0; i <= fi.files.length - 1; i++) {
+//              const fi = document.getElementById('fileToUpload');
+//         // Check if any file is selected.
+//         if (fi.files.length > 0) {
+//             for (const i = 0; i <= fi.files.length - 1; i++) {
   
-                const fsize = fi.files.item(i).size;
-                const file = Math.round((fsize / 1024));
-                // The size of the file.
-                if (file >= 4096) {
+//                 const fsize = fi.files.item(i).size;
+//                 const file = Math.round((fsize / 1024));
+//                 // The size of the file.
+//                 if (file >= 4096) {
 
-                   var data="<div class='text-center fixed-top' style='margin-top:30px;'>  <button class='btn btn-warning' id='Db' style='width:30%'><i class='fa fa-exclamation-circle' aria-hidden='true'></i> File too Big, please select a file less than 4mb!</button></div>"
-                  document.getElementById("speed2").innerHTML=data;    
-                } 
-                // else if (file < 2048) {
-                //     alert(
-                //       "File too small, please select a file greater than 2mb");
-                // }
-            }
-         }
-      } 
+//                    var data="<div class='text-center fixed-top' style='margin-top:30px;'>  <button class='btn btn-warning' id='Db' style='width:30%'><i class='fa fa-exclamation-circle' aria-hidden='true'></i> File too Big, please select a file less than 4mb!</button></div>"
+//                   document.getElementById("speed2").innerHTML=data;
+//                    return false;    
+//                 } 
+//                 // else if (file < 2048) {
+//                 //     alert(
+//                 //       "File too small, please select a file greater than 2mb");
+//                 // }
+//             }
+//          }
+//       } 
  
  </script>
 

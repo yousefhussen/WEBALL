@@ -43,10 +43,10 @@
             $Description = filter_var($Description, FILTER_SANITIZE_STRING);  
             $CoursePrice = filter_var($CoursePrice, FILTER_SANITIZE_STRING);   
             
+            $approve=$_POST['approved'];
 
 
-
-            $sql= "INSERT INTO `course`(`courseId`, `courseName`, `coursePrice`, `enrolledSid`, `description`, `instructorName`, `image`) VALUES ('','".$CourseName."','".$CoursePrice."','".$EnrolledStudent."','".$Description."','".$InsName."','".$target_file."')";
+            $sql= "INSERT INTO `course`(`courseId`, `courseName`, `coursePrice`, `enrolledSid`, `description`, `instructorName`, `image`,`Approved`) VALUES ('','".$CourseName."','".$CoursePrice."','".$EnrolledStudent."','".$Description."','".$InsName."','".$target_file."','".$approve."')";
             $result=mysqli_query($conn,$sql);
            // $row = $result-> fetch_array(MYSQLI_ASSOC);
             //mysqli_num_rows($result)==1
