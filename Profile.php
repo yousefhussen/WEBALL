@@ -1,3 +1,9 @@
+<?php
+if(empty($_SESSION['username'])){
+   include_once "Php/ErrorHandler2.php";
+  set_error_handler("customError",E_WARNING);
+  }
+  ?>
 <!DOCTYPE html>
 <html lang="en">
 <?php session_start();

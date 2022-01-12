@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <?php session_start();?>
+    <?php session_start();
+      
+       
+
+    ?>
     <meta charset="utf-8">
     <title>courses</title>
     <link rel="stylesheet" href="CSS/courseStyle.css">
@@ -140,14 +144,16 @@ else{
     
         
             while($row=mysqli_fetch_array($result)){
-                 
-                ?>
-               <?php if($_SESSION['Type'] != "Adminstrator" && $row['Approved'] == 0){
+                 if(!empty($_SESSION['username'])){
+                     if($_SESSION['Type'] != "Adminstrator" && $row['Approved'] == 0){
                             continue;
                 }
+            }
+               
                 ?>
+                
                 <div class="Course-col">
-                    
+                  <a href="index2.php?id=<?php echo $row['courseId'];?>">  
 
                   <img src="<?php echo $row['image']; ?>" height="250px" width="400px">
                   <?php //echo $row['courseId'] ?>
@@ -223,7 +229,7 @@ else{
 
                 }
                    ?>
-                 <a href="index2.php?id=<?php echo $row['courseId'];?>"> <div class="star">
+                  <div class="star">
                   <?php 
 
                   $sql3= "SELECT * FROM ratings Where courseid = '".$row['courseId']."'";
@@ -248,8 +254,10 @@ else{
                    }
                   ?>
                  
-                 </div></a>
+                 </div>
+                 </a>
                 </div>
+
 
                  
                     <?php 
@@ -262,6 +270,7 @@ else{
 
              
                    <!--  delete popup -->
+                 
                     <div id="popup2" class="overlay">
                         <div class="popup">
                             <a class="close" href="#">&times;</a>
@@ -272,15 +281,30 @@ else{
                                       <h2>DELETE CONFIRM?</h2> 
 
                                       <br>
+                                        <?php
+                  
+                   if(isset($_SESSION['Type'])){
+                
+
+                    ?>
                                        <input  type="hidden" name = "courseId" value= "<?php echo $row1['courseId']; ?>">
                                       
                                       <input type="submit" name = "subdelete" value="CONFIRM" >
-                                     
+                                       <?php 
+                    }
+                    else{
+                          ?>
+
+            <script>window.location.replace("index.php");</script>
+             <?php
+                    }
+                    ?>
                                     </form>
                                 </div>
                             </div>
                         </div>
                     </div>
+                  
 
                     <!-- popup approve -->
                     <div id="popup4" class="overlay">

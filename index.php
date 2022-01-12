@@ -55,7 +55,7 @@ else{
                        
                         if($_SESSION['Type']=="Adminstrator"){
                              ?>
-                            <li><a href="adminPanel.php">ADMINPANEL</a></li>
+                            <li><a href="adminpanel.php">ADMINPANEL</a></li>
 							<li><a id="chatIcon" class = "chatIcon" href =index.php><i class='fas fa-comment' onclick="openNav()"></i></li></a>
                         
                      <?php }

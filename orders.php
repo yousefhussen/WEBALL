@@ -12,6 +12,13 @@
 </html>
 <body>
 <?php
+include_once "Php/ErrorHandler.php";
+  
+
+set_error_handler("customError",E_ALL);
+       // echo $test1;
+
+
 if($_SESSION['Type']=="Adminstrator"){
 
 
@@ -66,9 +73,8 @@ if($_SESSION['Type']=="Adminstrator"){
 
  
  </script>
- <?php 
-   }else{
-    echo "<h1>You are NOT AUTHORIZED</h1>";
+ <?php
    }
   ?>
+ 
 </body>
