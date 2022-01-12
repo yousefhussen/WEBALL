@@ -76,7 +76,7 @@ else{
 						 if($_SESSION['Type']=="Student"){
                         ?>
 							
-								<li><a id="chatIcon" class = "chatIcon" href =index.php><i class='fas fa-comment' onclick="openNav()"></i></li></a>
+							<li><a id="chatIcon" class = "chatIcon" href =index.php><i class='fas fa-comment' onclick="openNav()"></i></li></a>
                         	
                      <?php }
 						

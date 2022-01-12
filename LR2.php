@@ -321,43 +321,7 @@ return false;
  }  
 }  
 
-// function fileValidation() {
-//             var fileInput = 
-//                 document.getElementById('fileToUpload');
-              
-//             var filePath = fileInput.value;
-          
-//             // Allowing file type
-//             var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
-              
-//             if (!allowedExtensions.exec(filePath)) {
-//               var data="<div class='text-center fixed-top' style='margin-top:30px;'>  <button class='btn btn-warning' id='Db' style='width:30%'><i class='fa fa-exclamation-circle' aria-hidden='true'></i> Invalid file type!</button></div>"
-//   document.getElementById("speed2").innerHTML=data;
-//                 fileInput.value = '';
-//                 return false;
-//             }
 
-//              const fi = document.getElementById('fileToUpload');
-//         // Check if any file is selected.
-//         if (fi.files.length > 0) {
-//             for (const i = 0; i <= fi.files.length - 1; i++) {
-  
-//                 const fsize = fi.files.item(i).size;
-//                 const file = Math.round((fsize / 1024));
-//                 // The size of the file.
-//                 if (file >= 4096) {
-
-//                    var data="<div class='text-center fixed-top' style='margin-top:30px;'>  <button class='btn btn-warning' id='Db' style='width:30%'><i class='fa fa-exclamation-circle' aria-hidden='true'></i> File too Big, please select a file less than 4mb!</button></div>"
-//                   document.getElementById("speed2").innerHTML=data;
-//                    return false;    
-//                 } 
-//                 // else if (file < 2048) {
-//                 //     alert(
-//                 //       "File too small, please select a file greater than 2mb");
-//                 // }
-//             }
-//          }
-//       } 
  
  </script>
 

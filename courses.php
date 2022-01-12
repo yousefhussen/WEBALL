@@ -6,6 +6,7 @@
     <title>courses</title>
     <link rel="stylesheet" href="CSS/courseStyle.css">
     <link rel="stylesheet" href="CSS/search.css">
+   <!--  <link rel="stylesheet" href="CSS/popup2.css"> -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
@@ -19,6 +20,20 @@
 <body>
 
     <?php
+    if(isset($_GET['msg'])){
+  ?>
+  <div class="text-center fixed-top" style="margin-top:30px;">  
+                <button class="btn btn-info" id="Db" style="width:50%;height:70px"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> extension not allowed,please choose a JPEG or PNG file </button>
+              </div>
+              <?php
+}
+if(isset($_GET['msg2'])){
+  ?>
+  <div class="text-center fixed-top" style="margin-top:30px;">  
+                <button class="btn btn-info" id="Db" style="width:50%;height:70px"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> File size must be excately 2 MB or less </button>
+              </div>
+              <?php
+}
     $counter=0;
 if (empty($_SESSION['username'])) {
     ?>
@@ -125,9 +140,15 @@ else{
     
         
             while($row=mysqli_fetch_array($result)){
+                 
                 ?>
-
+               <?php if($_SESSION['Type'] != "Adminstrator" && $row['Approved'] == 0){
+                            continue;
+                }
+                ?>
                 <div class="Course-col">
+                    
+
                   <img src="<?php echo $row['image']; ?>" height="250px" width="400px">
                   <?php //echo $row['courseId'] ?>
                   <span class="coursename"><?php echo $row['courseName']; ?></span><br>
@@ -137,7 +158,7 @@ else{
                         if($_SESSION['Type']=="Adminstrator"){
                              ?>
                              <div class="box">
-                            <a class="bEd" href=courses.php?id=<?php echo $row['courseId'];?>#popup1>Edit</a>
+                            <a class="bEd" href=AddEditDelete.php?id=<?php echo $row['courseId'];?>>Edit</a>
                         </div>
                         <div class="box">
                             <a class="bEd" href=courses.php?id=<?php echo $row['courseId'];?>#popup2>Delete</a>
@@ -153,7 +174,7 @@ else{
                      <?php
                     } 
                  }
-                     } 
+             } 
 
                         ?>
 
@@ -239,50 +260,14 @@ else{
                     while ($row1 = mysqli_fetch_array($result1)) {
                 ?>
 
-
-                                   <!--  edit popup -->
-
-            <div id="popup1" class="overlay">
-                        <div class="popup">
-                            <a class="close" href="#">&times;</a>
-                            <div class="content">
-                                <div  >    
-                                    <form action="php/editCourse.php" method="post" id="changing" enctype="multipart/form-data" novalidate>
-
-                                      <h2>Edit Options</h2> 
-
-                                      <br>
-                                       <input  type="hidden" name = "courseId" value= "<?php echo $row1['courseId']; ?>">
-                                      Course Name: <input type="text" id= "cn"name = "courseName" value= "<?php echo $row1['courseName']; ?>"   onkeyup="letters(this)" required><br><br>
-                                      Instructor Name: <input type="text" name = "instructorName" value= "<?php echo $row1['instructorName'];  ?>"  onkeyup="letters(this)" required><br><br>
-                                      Course Price: <input type="text" name = "coursePrice" value= "<?php echo $row1['coursePrice']; ?>" onkeyup="numbers(this)" required ><br><br>
-                                      Description:<br><input type="text" rows="4" cols="50" name="description" value= "<?php echo $row1['description']; ?>" form="changing"  onkeyup="lettersandnumbers(this)" required></textarea><br><br>
-                                       <div class="center">
-                                          <div class="form-input">
-                                            <div class="preview">
-                                              <img id="file-ip-1-preview">
-                                            </div>
-                                            <label for="file-ip-1">Upload Image</label>
-                                            <input type="file" id="file-ip-1"  name="fileup" onchange="return fileValidation()">
-                                            
-                                          </div>
-                                        </div> 
-                                      <input type="submit" name = "subedit" >
-                                     
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>       
-
-
+             
                    <!--  delete popup -->
                     <div id="popup2" class="overlay">
                         <div class="popup">
                             <a class="close" href="#">&times;</a>
                             <div class="content">
                                 <div  >    
-                                    <form action="php/deleteCourse.php" method="post" id="changing" enctype="multipart/form-data">
+                                    <form action="Php/deleteCourse.php" method="post" id="changing" enctype="multipart/form-data">
 
                                       <h2>DELETE CONFIRM?</h2> 
 
@@ -303,7 +288,7 @@ else{
                             <a class="close" href="#">&times;</a>
                             <div class="content">
                                 <div  >    
-                                    <form action="php/approving.php" method="post" id="changing" enctype="multipart/form-data">
+                                    <form action="Php/approving.php" method="post" id="changing" enctype="multipart/form-data">
 
                                       <h2>Do you approve this course !?</h2> 
 
@@ -337,12 +322,13 @@ else{
                         if($_SESSION['Type']=="Adminstrator" ||$_SESSION['Type']=="Tutor"){
                              ?>
                             
-                         <a href=courses.php?#popup3>
+                         <a href=AddEditDelete.php?AE=Add>
                     
                       <img src="uploads/add.png" alt="add" height="400px" width="400px">
                      </a>
                       <br>
-                     <?php }
+                     <?php 
+                 }
                      } 
 
                         ?>
@@ -350,56 +336,10 @@ else{
        
 
 
-                        <!--  add popup -->
-                    <div id="popup3" class="overlay">
-                        <div class="popup">
-                            <a class="close" href="#">&times;</a>
-                            <div class="content">
-                                <div  >    
-                                    <form action="php/addCourse.php" method="post" id="changing" enctype="multipart/form-data">
-
-                                      <h2>Add Course</h2> 
-
-                                      <br>
-                                       <input  type="hidden" name = "courseId" >
-                                        <?php
-                                       $approve = 0; 
-                                       if($_SESSION['Type']=="Adminstrator"){
-                                            $approve = 1;
-                                       }
-                                       else if($_SESSION['Type']=="Tutor"){
-                                            $approve = 0;
-                                       }
-                                        ?>
-                                       <input  type="hidden" name = "approved" value = "<?php echo $approve;?>">
-
-                                      Course Name: <input type="text" id= "cn"name = "courseName"  required onkeyup="letters(this)"><br><br>
-                                      Instructor Name: <input type="text" name = "instructorName" required onkeyup="letters(this)"><br><br>
-                                      Course Price: <input type="text" name = "coursePrice" required onkeyup="numbers(this)" ><br><br>
-                                      Description: <br><textarea rows="4" cols="50" name="description" form="changing" required onkeyup="lettersandnumbers(this)"></textarea><br><br>
-                                       <div class="center">
-                                          <div class="form-input">
-                                            <div class="preview">
-                                              <img id="file-ip-1-preview">
-                                            </div>
-                                            <label for="file-ip-1">Upload Image</label>
-                                            <input type="file" id="file-ip-1"  name="fileup" onchange="return fileValidation()">
-                                            
-                                          </div>
-                                        </div> 
-                                      <input type="submit" name = "subedit" >
-                                     
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div> 
-
-                 </div> 
                  <?php  
            
        }
-            /////////////////////////////////////////////////
+           
        
 
 
@@ -504,8 +444,6 @@ $conn = new mysqli("localhost" , "root" , "" , "webdatabase");
 echo $message;
 
   ?>
-
-
   <script>
  function numbers(input){
   var regex=/[^0-9.]/gi;
@@ -528,51 +466,6 @@ function lettersandnumbers(input){
     // $("#Db").fadeOut(3000);
   });
  });
- // onchange="showPreview(event);"
-// function showPreview(event){
-//   if(event.target.files.length > 0){
-//     var src = URL.createObjectURL(event.target.files[0]);
-//     var preview = document.getElementById("file-ip-1-preview");
-//     preview.src = src;
-//     preview.style.display = "block";
-//   }
-// }
-  function fileValidation() {
-            var fileInput = 
-                document.getElementById('file-ip-1');
-              
-            var filePath = fileInput.value;
-          
-            // Allowing file type
-            var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
-              
-            if (!allowedExtensions.exec(filePath)) {
-              var data="<div class='text-center fixed-top' style='margin-top:30px;'>  <button class='btn btn-warning' id='Db' style='width:30%'><i class='fa fa-exclamation-circle' aria-hidden='true'></i> Invalid file type!</button></div>"
-  document.getElementById("speed2").innerHTML=data;
-                fileInput.value = '';
-                return false;
-            }
-
-             const fi = document.getElementById('fileToUpload');
-        // Check if any file is selected.
-        if (fi.files.length > 0) {
-            for (const i = 0; i <= fi.files.length - 1; i++) {
-  
-                const fsize = fi.files.item(i).size;
-                const file = Math.round((fsize / 1024));
-                // The size of the file.
-                if (file >= 4096) {
-
-                   var data="<div class='text-center fixed-top' style='margin-top:30px;'>  <button class='btn btn-warning' id='Db' style='width:30%'><i class='fa fa-exclamation-circle' aria-hidden='true'></i> File too Big, please select a file less than 4mb!</button></div>"
-                  document.getElementById("speed2").innerHTML=data;    
-                } 
-                // else if (file < 2048) {
-                //     alert(
-                //       "File too small, please select a file greater than 2mb");
-                // }
-            }
-         }
-      } 
  
   </script>
 </body>
