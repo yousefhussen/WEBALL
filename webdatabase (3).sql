@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 12, 2022 at 09:35 PM
+-- Generation Time: Jan 11, 2022 at 10:38 PM
 -- Server version: 10.4.19-MariaDB
 -- PHP Version: 8.0.6
 
@@ -64,33 +64,33 @@ CREATE TABLE `messages` (
   `outgoing_msg_id` int(255) NOT NULL,
   `msg` varchar(1000) NOT NULL,
   `seen` int(16) NOT NULL DEFAULT 0,
-  `comments` varchar(255) DEFAULT NULL,
-  `image?` int(255) NOT NULL DEFAULT 0
+  `comments` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `messages`
 --
 
-INSERT INTO `messages` (`msg_id`, `incoming_msg_id`, `outgoing_msg_id`, `msg`, `seen`, `comments`, `image?`) VALUES
-(174, 234920460, 1366213838, 'asda', 1, NULL, 0),
-(175, 1366213838, 234920460, 'uploads/Screenshot_24.png', 1, NULL, 1),
-(176, 1366213838, 234920460, 'hello', 1, NULL, 0),
-(177, 1366213838, 234920460, 'This is the course i suggest mother fucker', 1, NULL, 0),
-(178, 234920460, 1366213838, 'uploads/Screenshot_37.png', 0, NULL, 1),
-(179, 234920460, 1366213838, 'uploads/126126592_3020492128050804_1703443695247337615_n.jpg', 0, NULL, 1),
-(180, 234920460, 1366213838, 'el sh5s da tezo 7amra', 0, NULL, 0),
-(181, 1366213838, 234920460, 'true', 1, NULL, 0),
-(182, 1366213838, 234920460, 'uploads/Screenshot_23.png', 1, NULL, 1),
-(183, 234920460, 1366213838, 'uploads/Screenshot_11.png', 0, NULL, 1),
-(184, 234920460, 1366213838, 'Helloooo', 0, NULL, 0),
-(185, 234920460, 1366213838, 'asdasd', 0, NULL, 0),
-(186, 234920460, 1366213838, 'sadsa', 0, NULL, 0),
-(187, 234920460, 1366213838, 'ddsads', 0, NULL, 0),
-(188, 234920460, 1366213838, 'uploads/femaleAvatar.png', 0, NULL, 1),
-(189, 234920460, 1366213838, 'uploads/126126592_3020492128050804_1703443695247337615_n.jpg', 0, NULL, 1),
-(190, 234920460, 1366213838, 'fuck u', 0, NULL, 0),
-(191, 234920460, 1366213838, 'uploads/ex.jpg', 0, NULL, 1);
+INSERT INTO `messages` (`msg_id`, `incoming_msg_id`, `outgoing_msg_id`, `msg`, `seen`, `comments`) VALUES
+(80, 234920460, 1366213838, 'Hi admin', 1, 'heeel'),
+(81, 1366213838, 234920460, 'Hi gika', 1, 'laala'),
+(82, 1366213838, 234920460, 'How can I help you ?', 1, 'sdddddddddddddddddddddddddddddddddddddd'),
+(83, 234920460, 1366213838, 'I would like some technical help with buying a new course', 1, 'asdasd'),
+(84, 1366213838, 234920460, 'Sure, let me help you.', 1, NULL),
+(85, 234920460, 1366213838, 'ok, fuck you', 1, 'asdasdasd'),
+(86, 1366213838, 234920460, 'shikakakaakak', 1, 'asddddddd'),
+(87, 234920460, 1366213838, 'hey joe', 1, 'sssssssssssssssssssss'),
+(88, 234920460, 1366213838, 'ahlaaan', 1, 'asdasdasdasd'),
+(89, 1366213838, 234920460, 'tezk', 1, 'china was here'),
+(90, 1366213838, 234920460, 'jasdasd', 1, 'hey my name is kaza kaza kaza'),
+(91, 234920460, 1366213838, 'asdasdasd', 1, 'sssssssssssssss'),
+(92, 234920460, 1366213838, 'asdasdad', 1, 'asdasdasdasdasd'),
+(93, 1366213838, 234920460, 'asdasdasd', 1, 'dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd'),
+(94, 234920460, 1366213838, 'omk w abook', 1, 'salah was here'),
+(95, 1366213838, 234920460, '7abby teslak', 1, 'salah teezo 7amra'),
+(96, 1366213838, 234920460, 'asdasd', 0, 'ddddddddddddddd'),
+(97, 1366213838, 234920460, 'asdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd', 0, 'asdasdasd'),
+(98, 1366213838, 234920460, '5od', 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -258,7 +258,7 @@ INSERT INTO `users` (`type`, `userid`, `email`, `password`, `username`, `gender`
 ('Adminstrator', 115, 'youssef@gmail.com', '717d00efcdb16bf8ffbe530c4bab0f2e', 'youssef', 'male', 'uploads/images.png', 'Offline now', 234920460),
 ('Auditor', 116, 'speed@gmail.com', 'b04a44aead88cfdbd44325ec2cf7a33a', 'speed', 'male', 'uploads/images.png', 'Active now', 1341090892),
 ('Tutor', 117, 'salah@gmail.com', 'c51b54c550c4fe6f507f65bc23cdf64a', 'salah', 'male', 'uploads/126126592_3020492128050804_1703443695247337615_n.jpg', 'Offline now', 122940276),
-('Student', 118, 'gika@gmail.com', '359e712fb4290125e4e1fd9ff8e44cde', 'gika', 'male', 'uploads/images.png', 'Active now', 1366213838),
+('Student', 118, 'gika@gmail.com', '359e712fb4290125e4e1fd9ff8e44cde', 'gika', 'male', 'uploads/images.png', 'Offline now', 1366213838),
 ('Student', 119, 'student@gmail.com', '50d9482e20934ce6df0bf28941f885bc', 'student', 'male', 'uploads/images.png', 'Offline now', 482502929);
 
 --
@@ -321,7 +321,7 @@ ALTER TABLE `course`
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `msg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=192;
+  MODIFY `msg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=99;
 
 --
 -- AUTO_INCREMENT for table `ratings`
