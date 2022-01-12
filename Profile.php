@@ -66,8 +66,6 @@ button:hover {
 
     <?php
    
-   // echo $_SESSION["Type"];
-   // $ID1 = $_GET["userid"];
     $ID1 = $_SESSION["userid"];
     $target_file="";
     // $image=$_SESSION["image"];
@@ -76,7 +74,6 @@ button:hover {
         $username ="root";
         $password = "";
         $DB = "webdatabase";
-        
         $conn = mysqli_connect($servername,$username,$password,$DB);
 //////////////////////////////////////////////////////////////////////////
 if(!empty($_FILES['fileToUpload']['name'])){

@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 03, 2022 at 07:34 PM
--- Server version: 10.4.18-MariaDB
--- PHP Version: 7.3.28
+-- Generation Time: Jan 11, 2022 at 10:38 PM
+-- Server version: 10.4.19-MariaDB
+-- PHP Version: 8.0.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -44,7 +44,7 @@ CREATE TABLE `course` (
 
 INSERT INTO `course` (`courseId`, `courseName`, `coursePrice`, `enrolledSid`, `description`, `instructorName`, `image`, `Approved`) VALUES
 (1, 'Swift', '14.55', '640001', 'Salah is in this course', 'Dalia', 'uploads/mariam-soliman-Ht5XmeuLyDg-unsplash.jpg', 1),
-(2, 'Web Development', '20.00', '12001', 'yasser and china and joex feeh', 'Mohamed Elgazaar', 'uploads/mariam-soliman-Ht5XmeuLyDg-unsplash.jpg', 1),
+(2, 'Web Development', '20.00', '', '', 'asdasdasd', 'uploads/', 1),
 (3, 'Android', '16.55', '10000', 'yonos feeh', 'jone', 'uploads/mariam-soliman-Ht5XmeuLyDg-unsplash.jpg', 1),
 (4, 'Machine Learning', '18.14', '56457', 'very hard ', 'Mr.Robot', 'uploads/mariam-soliman-Ht5XmeuLyDg-unsplash.jpg', 1),
 (5, 'Deep Learning', '56.00', '65465', 'very hard fsh5', 'Dolphine', 'uploads/mariam-soliman-Ht5XmeuLyDg-unsplash.jpg', 1),
@@ -63,63 +63,34 @@ CREATE TABLE `messages` (
   `incoming_msg_id` int(255) NOT NULL,
   `outgoing_msg_id` int(255) NOT NULL,
   `msg` varchar(1000) NOT NULL,
-  `seen` int(16) NOT NULL DEFAULT 0
+  `seen` int(16) NOT NULL DEFAULT 0,
+  `comments` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `messages`
 --
 
-INSERT INTO `messages` (`msg_id`, `incoming_msg_id`, `outgoing_msg_id`, `msg`, `seen`) VALUES
-(2, 344391712, 511301026, 'hi', 1),
-(3, 344391712, 511301026, 'i love you', 1),
-(4, 511301026, 344391712, 'i love you too', 1),
-(5, 344391712, 511301026, 'Fukc speed ?', 1),
-(6, 511301026, 344391712, 'Fuck speed', 1),
-(7, 273594041, 344391712, 'sss', 1),
-(8, 511301026, 344391712, 'dsaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 1),
-(9, 344391712, 511301026, 's', 1),
-(10, 344391712, 511301026, 'dssd', 1),
-(11, 511301026, 344391712, 'dssdsd', 1),
-(12, 511301026, 344391712, 'oilo', 1),
-(13, 344391712, 511301026, 'sdsd', 1),
-(14, 511301026, 344391712, 'sdsdsd', 1),
-(15, 511301026, 344391712, 'sdsdsd', 1),
-(16, 511301026, 344391712, 'dssdsdsd', 1),
-(17, 511301026, 344391712, 'dssdsdds', 1),
-(18, 511301026, 344391712, 'dssdawdddddddddddddddddd', 1),
-(19, 344391712, 511301026, 'dssssssssss', 1),
-(20, 511301026, 344391712, 'aaaaaaaaaaaaaaaaaaaaaa', 1),
-(21, 511301026, 344391712, 'wdaawdawd', 1),
-(22, 511301026, 344391712, 'dwwddaw', 1),
-(23, 344391712, 511301026, 'sdsdsd', 1),
-(24, 511301026, 344391712, 'sdssd', 1),
-(25, 511301026, 344391712, 'salah', 1),
-(26, 511301026, 344391712, 'sdsdsdd', 1),
-(27, 511301026, 344391712, 'sdsdsdds', 1),
-(28, 511301026, 344391712, 'feesfesf', 1),
-(29, 511301026, 344391712, 'dwaawddwa', 1),
-(30, 511301026, 344391712, 'sdsdsd', 1),
-(31, 511301026, 344391712, 'dwawdadw', 1),
-(32, 511301026, 344391712, 'dwawda', 1),
-(33, 511301026, 344391712, '322222222', 1),
-(34, 511301026, 344391712, 'kjjk', 1),
-(35, 511301026, 344391712, 'gffgfg', 1),
-(36, 344391712, 511301026, 'fesefsefs', 1),
-(37, 511301026, 344391712, 'efsfesef', 1),
-(38, 511301026, 344391712, 'dssdsdsdds', 1),
-(39, 511301026, 344391712, 'yla b2a', 1),
-(40, 344391712, 511301026, 'dwwdadwawad', 1),
-(41, 511301026, 344391712, 'sdsdsd', 1),
-(42, 344391712, 511301026, 'dssdsd', 1),
-(43, 511301026, 344391712, 'koko', 1),
-(44, 511301026, 344391712, 's', 1),
-(45, 511301026, 344391712, 's', 1),
-(46, 344391712, 511301026, 'dssdsd', 1),
-(47, 511301026, 344391712, 'sdsdsd', 1),
-(48, 511301026, 344391712, 'sss', 1),
-(49, 344391712, 511301026, 'wawa', 1),
-(50, 511301026, 344391712, 'sddssd', 1);
+INSERT INTO `messages` (`msg_id`, `incoming_msg_id`, `outgoing_msg_id`, `msg`, `seen`, `comments`) VALUES
+(80, 234920460, 1366213838, 'Hi admin', 1, 'heeel'),
+(81, 1366213838, 234920460, 'Hi gika', 1, 'laala'),
+(82, 1366213838, 234920460, 'How can I help you ?', 1, 'sdddddddddddddddddddddddddddddddddddddd'),
+(83, 234920460, 1366213838, 'I would like some technical help with buying a new course', 1, 'asdasd'),
+(84, 1366213838, 234920460, 'Sure, let me help you.', 1, NULL),
+(85, 234920460, 1366213838, 'ok, fuck you', 1, 'asdasdasd'),
+(86, 1366213838, 234920460, 'shikakakaakak', 1, 'asddddddd'),
+(87, 234920460, 1366213838, 'hey joe', 1, 'sssssssssssssssssssss'),
+(88, 234920460, 1366213838, 'ahlaaan', 1, 'asdasdasdasd'),
+(89, 1366213838, 234920460, 'tezk', 1, 'china was here'),
+(90, 1366213838, 234920460, 'jasdasd', 1, 'hey my name is kaza kaza kaza'),
+(91, 234920460, 1366213838, 'asdasdasd', 1, 'sssssssssssssss'),
+(92, 234920460, 1366213838, 'asdasdad', 1, 'asdasdasdasdasd'),
+(93, 1366213838, 234920460, 'asdasdasd', 1, 'dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd'),
+(94, 234920460, 1366213838, 'omk w abook', 1, 'salah was here'),
+(95, 1366213838, 234920460, '7abby teslak', 1, 'salah teezo 7amra'),
+(96, 1366213838, 234920460, 'asdasd', 0, 'ddddddddddddddd'),
+(97, 1366213838, 234920460, 'asdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd', 0, 'asdasdasd'),
+(98, 1366213838, 234920460, '5od', 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -209,10 +180,8 @@ CREATE TABLE `surveys` (
   `courseid` int(11) NOT NULL,
   `userid` int(100) NOT NULL,
   `name` varchar(100) NOT NULL,
-  `enjoyed?` varchar(100) NOT NULL,
   `suggestion` varchar(100) NOT NULL,
-  `instructorRate` int(100) NOT NULL,
-  `courseRate` int(100) NOT NULL
+  `instructorRate` int(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -286,39 +255,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`type`, `userid`, `email`, `password`, `username`, `gender`, `image`, `status`, `unique_id`) VALUES
-('Adminstrator', 1, 'Salah@gmail.com', 'Salah', 'Salah', 'male', 'uploads/salah.jpg', 'Active now', 344391712),
-('Student', 6, 'Joex@gmail.com', 'Joex', 'Joex', '', 'uploads/salah.jpg', 'Offline now', 273594041),
-('Student', 7, 'hady@gmail.com', 'hady', 'hady', '', 'uploads/salah.jpg', 'Offline now', 1122595347),
-('Student', 8, 'Bassem@gmail.com', 'Bassem', 'Bassem', 'male', 'uploads/salah.jpg', 'Offline now', 425433210),
-('Student', 21, 'Gika@gmail.com', 'Gika', 'Gika', '', 'uploads/salah.jpg', 'Offline now', 511301026),
-('Student', 22, 'Speed@gmail.com', 'Speed', 'Speed', '', 'uploads/salah.jpg', 'Offline now', 1346297550),
-('Student', 24, 'Mohaned@gmail.com', 'Mohaned', 'Mohaned', '', 'uploads/salah.jpg', 'Offline now', 899381761),
-('Student', 25, 'honda@gmail.com', 'honda', 'honda', 'male', 'uploads/salah.jpg', 'Offline now', 153302835),
-('Student', 26, 'Yasser', 'Yasser', 'Yasser', 'male', 'uploads/salah.jpg', 'Offline now', 778174218),
-('Student', 27, 'Speedoo@gmail.com', 'Speedoo', 'Speedoo', 'male', 'uploads/salah.jpg', 'Offline now', 258233424),
-('Student', 28, 'Nezoko@gmail.com', 'Nezoko', 'Nezoko', 'male', 'uploads/artworks-000557600433-dvmtmy-t500x500.jpg', 'Offline now', 648450671),
-('Student', 29, 'BlackClover@gmail.com', 'Black', 'Black Clover', '', 'uploads/salah.jpg', 'Offline now', 1215052934),
-('Student', 31, 'Samira@gmail.com', 'Samira', 'Samira', 'female', 'uploads/salah.jpg', 'Offline now', 1381678639),
-('Student', 36, 'Lara@gmail.com', 'Lara', 'Lara', 'female', 'uploads/salah.jpg', 'Offline now', 463245856),
-('Student', 40, 'Zeina@gmail.com', 'Zeina', 'Zeina', 'female', 'uploads/salah.jpg', 'Offline now', 1074598512),
-('Student', 42, 'Farah@gmail.com', 'Farah', 'Farah', 'female', 'uploads/salah.jpg', 'Offline now', 1550603867),
-('Student', 44, 'Mostafa@gmail.com', 'Mostafa', 'Mostafa', 'male', 'uploads/salah.jpg', 'Offline now', 1054642346),
-('Student', 45, 'Reem@gmail.com', 'Reem', 'Reem', 'female', 'uploads/salah.jpg', 'Offline now', 430900660),
-('Student', 47, 'YoussefAlaa@gmail.com', 'YoussefAlaa', 'YoussefAlaa', 'male', 'uploads/salah.jpg', 'Offline now', 565758173),
-('Student', 49, 'Lara', 'Lara', 'Lara', 'female', 'uploads/salah.jpg', 'Offline now', 1004111546),
-('Student', 50, 'Salah', 'Salah', 'Salah', 'male', 'uploads/salah.jpg', 'Offline now', 1618363169),
-('Student', 51, 'Kareem@gmail.com', 'Kareem', 'Kareem', 'male', 'uploads/salah.jpg', 'Offline now', 1599647410),
-('Student', 52, 'hhhhh@gmail.com', 'hhhhh', 'hhhhh', 'male', 'uploads/salah.jpg', 'Offline now', 534455385),
-('Student', 53, 'hhhhh@gmail.com', 'hhhhh', 'hhhh', 'male', 'uploads/salah.jpg', 'Offline now', 731751848),
-('Student', 54, 'gggggggggggggggggggg@gmail.com', 'gggggggggggggggggggg', 'gggggggggggggggggggg', 'male', 'uploads/salah.jpg', 'Offline now', 987679646),
-('Student', 55, 'Salah11@gmail.com', 'fghfghfghfghfghfghfg', 'fghfghhfghfghfg', 'male', 'uploads/salah.jpg', 'Offline now', 1537396983),
-('Student', 91, 'newnewnew1@gmail.com', 'newnewnew1', 'newnewnew1', 'male', 'uploads/wallpaperflare.com_wallpaper.jpg', 'Offline now', 1435852276),
-('Student', 92, 'rrrrrrrrrrrrrrrr@gmail.com', 'rrrrrrrrrrrrrrrr', 'rrrrrrrrrrrrrrrr', 'female', 'uploads/salah.jpg', 'Offline now', 547758321),
-('Student', 93, 'rrrrrrrrrrrrrrrr1@gmail.com', 'rrrrrrrrrrrrrrrr1', 'rrrrrrrrrrrrrrrr1', 'male', 'uploads/salah.jpg', 'Offline now', 1535322994),
-('Student', 94, 'rrrrrrrrrrrrrrrr2@gmail.com', 'rrrrrrrrrrrrrrrr2', 'rrrrrrrrrrrrrrrr2', 'male', 'uploads/salah.jpg', 'Offline now', 389986935),
-('Student', 96, 'speedooooo@gmail.com', 'speedooooo', 'speedooooo', 'male', 'uploads/salah.jpg', 'Offline now', 675489348),
-('Student', 97, 'LaraLaraLara@gmail.com', 'LaraLaraLara', 'LaraLaraLara', 'female', 'uploads/salah.jpg', 'Offline now', 521610090),
-('Student', 113, 'chattttchattttchatttt@gmail.com', 'chattttchatttt', 'chatttt', 'male', 'uploads/sal.jpg', 'Active now', 1616693879);
+('Adminstrator', 115, 'youssef@gmail.com', '717d00efcdb16bf8ffbe530c4bab0f2e', 'youssef', 'male', 'uploads/images.png', 'Offline now', 234920460),
+('Auditor', 116, 'speed@gmail.com', 'b04a44aead88cfdbd44325ec2cf7a33a', 'speed', 'male', 'uploads/images.png', 'Active now', 1341090892),
+('Tutor', 117, 'salah@gmail.com', 'c51b54c550c4fe6f507f65bc23cdf64a', 'salah', 'male', 'uploads/126126592_3020492128050804_1703443695247337615_n.jpg', 'Offline now', 122940276),
+('Student', 118, 'gika@gmail.com', '359e712fb4290125e4e1fd9ff8e44cde', 'gika', 'male', 'uploads/images.png', 'Offline now', 1366213838),
+('Student', 119, 'student@gmail.com', '50d9482e20934ce6df0bf28941f885bc', 'student', 'male', 'uploads/images.png', 'Offline now', 482502929);
 
 --
 -- Indexes for dumped tables
@@ -380,7 +321,7 @@ ALTER TABLE `course`
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `msg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
+  MODIFY `msg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=99;
 
 --
 -- AUTO_INCREMENT for table `ratings`
@@ -392,7 +333,7 @@ ALTER TABLE `ratings`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `userid` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=114;
+  MODIFY `userid` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=120;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -1,0 +1,63 @@
+
+body .kart {
+  --background:#FFFFFF;
+  --text:black;
+  position: relative;
+  height: 40rem;
+  box-shadow: 0 0 2rem -1rem rgba(0, 0, 0, 0.05);
+
+}
+
+body .kart .con {
+  position: absolute;
+  width: 98%;
+  height: 100%;
+   border-radius: 3rem;
+  background: var(--background);
+  color: var(--text);
+  margin-left: 20px;
+}
+body .kart .con img{
+  border-radius: 1rem;
+  margin-top: 0.5rem;
+  margin-left: 3rem;
+}
+body .kart .con h1{
+  font-family:'Times New Roman', serif;
+  margin-top: 0rem;
+  margin-left: 4rem;
+}
+body .kart .con h2{
+  font-family:'Times New Roman', serif;
+  margin-top: 2rem;
+  margin-left: 55rem;
+
+}
+.kart2 {
+  --background:#FFFFFF;
+  --text:black;
+  position: relative;
+  height: 40rem;
+  box-shadow: 0 0 2rem -1rem rgba(0, 0, 0, 0.05);
+
+}
+
+ .kart2 .con2 {
+  position: absolute;
+  width:45%;
+  height: 70%;
+   border-radius: 3rem;
+  background: var(--background);
+  color: var(--text);
+  margin-left: 55rem;
+  margin-top: 7rem;
+}
+.kart2 .con2 h4{
+  padding: 1rem 2rem;
+  font-family:'Times New Roman', serif;
+  margin-top: 2rem;
+  margin-left: 0rem;
+  color: black;
+}
+
+

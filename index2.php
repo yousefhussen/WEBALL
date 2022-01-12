@@ -10,8 +10,133 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="CSS/style2.css">
+    <link rel="stylesheet" href="CSS/ay7aga.css">
+    <link rel="stylesheet" href="CSS/card.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <style>
+
+    body{
+        background-image: url('https://assets.codepen.io/1462889/back-page.svg');
+    }
+    </style>
+    <section class="header">
+    <?php
+    setcookie('counter', 0, time() + (86400 * 30));
+if (empty($_SESSION['username'])) {
+    ?>
+    <nav>
+        <a href="index.php"><img src="images2/logo.png"></a>
+        
+        <div class="nav-links">
+
+            <ul>
+                <li><a href="index.php">Home</a></li>
+                <li><a href="">About</a></li>
+                <li><a href="courses.php">COURSES</a></li>
+                <!-- <li><a href="myCourses.php">My Courses</a></li> -->
+                <li><a href="">CONTACT</a></li>
+                <li><a href="LR2.php"><i class="fa fa-user-circle"> Login</i></a></li>
+            </ul>
+            
+        </div>
+    </nav>
+<?php
+}
+else{
+    ?>
+    <nav>
+        <a href="index.php"><img src="images2/logo.png"></a>
+        
+        <div class="nav-links">
+
+            <ul>
+                <li><a href="index.php">Home</a></li>
+                <li><a href="">About</a></li>
+                <li><a href="courses.php">COURSES</a></li>
+                <li><a href="myCourses.php">My Courses</a></li>
+                <li><a href="">CONTACT</a></li>
+                 <?php
+                       
+                        if($_SESSION['Type']=="Adminstrator"){
+                             ?>
+                            <li><a href="adminPanel.php">ADMINPANEL</a></li>
+                            <li><a id="chatIcon" class = "chatIcon" href =index.php><i class='fas fa-comment' onclick="openNav()"></i></li></a>
+                        
+                     <?php }
+                        if($_SESSION['Type']=="Adminstrator"){
+                            ?>
+                             <li><a href="orders.php">Orders</a></li>
+                            <?php
+                        }
+
+                        if($_SESSION['Type']=="Auditor"){
+                            ?>
+                             <li><a id="chatIcon" class = "chatIcon" href =index.php><i class='fas fa-comment' onclick="openNav()"></i></li></a>
+                            <?php
+                        }
+
+                        ?>
+                        <?php
+                         if($_SESSION['Type']=="Student"){
+                        ?>
+                            
+                            <li><a id="chatIcon" class = "chatIcon" href =index.php><i class='fas fa-comment' onclick="openNav()"></i></li></a>
+                            
+                     <?php }
+                        
+
+                        ?>
+                <li><a href="profile.php"><i class="fa fa-user-circle"><?php echo $_SESSION['username'];?></i></a></li>
+                <li><a href="php/signOut.php">signOut</a></li>
+            </ul>
+            
+        </div>
+    </nav>
+    <?php 
+    }
+    ?>
+</section>
+ <?php 
+        require_once "Php/DBConnection.php";
+     $sql= "SELECT * FROM course WHERE courseId = '".$_GET['id']."'";
+             $result=mysqli_query($conn,$sql);
+             if($row=mysqli_fetch_array($result)){
+   
+        ?>
+      <!--   3C3B3D -->
+<div class="kart" style="--background:#404040; --text:white;">
+  
+  <div class="con"> 
+     <div class="description">
+        <h2>InstructorName: <?php echo $row['instructorName'];?></h2>
+      <!--   <h4><?php echo $row['description'];?></h4> -->
+    </div>
+
+     <h1><?php echo $row['courseName'];?></h1>
+    <img width="700px" height="400px" src="<?php echo $row['image'];?>">
+  </div>
+  <div class="kart2" style="--background:#F5DEDE; --text:white;">
+  
+  <div class="con2"> 
+     
+       <h4><?php echo $row['description'];?></h4> 
+   
+  </div>
+  
+</div>
+</div>
+
+<?php 
+}
+?>
+      
+
+    </section>
     <input  type="hidden" id="get" value="<?php echo $_GET['id']; ?>">
     <div class="container" >
     	<h1 class="mt-5 mb-5">Review</h1>
