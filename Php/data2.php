@@ -33,9 +33,19 @@
         <div class="chat-box">
   
         </div>
-        <form action="#" class="typing-area">
+        <form action="#" class="typing-area" id = "uploadImage"  enctype="multipart/form-data">
+          <div class="image-upload">
+            
+              <label for="uploadFile">
+                <i class="fa fa-upload" aria-hidden="true"></i>
+              </label>
+
+              <input name="uploadFile" id="uploadFile" type="file" onchange="showPreview(event)">
+              <input type="text" class="hiddenImageName" name="hiddenImageName" hidden>
+          </div>
+            
           <input type="text" class="incoming_id" name="incoming_id" value="'. $row2['unique_id'] .'" hidden>
-          <input type="text" name="message" class="input-field" placeholder="Type a message here..." autocomplete="off">
+          <input type="text" id = "input-field" name="message" class="input-field" placeholder="Type a message here..." autocomplete="off">
           <button><i class="fab fa-telegram-plane"></i></button>
         </form>
         ';
@@ -70,3 +80,29 @@
     echo $output;
     
 ?>
+
+
+<style>
+.image-upload > input
+{
+    display: none;
+}
+.image-upload {
+  margin-top:8px;
+  margin-right:5px;
+  
+}
+
+
+</style>
+
+<script>
+  // $('#uploadFile').on('change', function() {
+  //     $('#uploadImage').ajaxSubmit({
+  //         target: '#input-field',
+  //         resetForm:true;
+  //     });
+  // });
+
+
+</script>

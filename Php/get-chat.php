@@ -9,61 +9,91 @@
                 WHERE (outgoing_msg_id = {$outgoing_id} AND incoming_msg_id = {$incoming_id})
                 OR (outgoing_msg_id = {$incoming_id} AND incoming_msg_id = {$outgoing_id}) ORDER BY msg_id";
         $query = mysqli_query($conn, $sql);
+        
         if(mysqli_num_rows($query) > 0){
             while($row = mysqli_fetch_assoc($query)){
                 if($row['outgoing_msg_id'] === $outgoing_id){
+                   
                     if($_SESSION['Type'] == "Auditor" ) {
-                        if($row['comments'] > 0) {
+                        ($row['comments'] > 0) ? $comment = $row['comments']: $comment = "Comment";
+                        if($row['image?'] == 1)  {
                             $output .= '<div class="chat outgoing">
                                 <div class="details">
-                                    <p>'. $row['msg'] .'</p><button class="button-2" role="button" onclick = "commented('.$row['msg_id'].')">'. $row['comments'].'</button>
+                                    <img src ="Php/'. $row['msg'] .'"  style="width: 250px; height:250px;"></img></p><button class="button-2" role="button" onclick = "commented('.$row['msg_id'].')">'.$comment.'</button>
                                 </div>
                                 </div>';
                         }
-                        else {
+                        else if($row['image?'] == 0) {
                             $output .= '<div class="chat outgoing">
                                 <div class="details">
-                                    <p>'. $row['msg'] .'</p><button class="button-2" role="button" onclick = "commented('.$row['msg_id'].')">Comment</button>
+                                <p>'. $row['msg'] .'</p><button class="button-2" role="button" onclick = "commented('.$row['msg_id'].')">'.$comment.'</button>
                                 </div>
                                 </div>';
                         }
+                            
+                        
                         
                     }
                     else {
-                        $output .= '<div class="chat outgoing">
-                                <div class="details">
-                                    <p>'. $row['msg'] .'</p>
-                                </div>
-                                </div>';
+                         if($row['image?'] == 1)  {
+                            $output .= '<div class="chat outgoing">
+                            <div class="details">
+                                <img src ="Php/'. $row['msg'] .'"  style="width: 250px; height:250px;"></img>
+                            </div>
+                            </div>';
+                         }
+                         else if($row['image?'] == 0) {
+                            $output .= '<div class="chat outgoing">
+                            <div class="details">
+                                <p>'. $row['msg'] .'</p>
+                            </div>
+                            </div>';
+                         }
+                        
                     }
                     
                 }else{
                     if($_SESSION['Type'] == "Auditor" ) {
-                        if($row['comments'] > 0) {
+                       
+                        ($row['comments'] > 0) ? $comment = $row['comments']: $comment = "Comment";
+                        if($row['image?'] == 1) {
                             $output .= '<div class="chat incoming">
                             <img src="'.$row['image'].'" alt="">
                             <div class="details">
-                                <p>'. $row['msg'] .'</p><button class="button-2" role="button" onclick = "commented('.$row['msg_id'].')">'. $row['comments'].'</button>
+                            <img src ="Php/'. $row['msg'] .'"  style="width: 250px; height:250px;"></img><button class="button-2" role="button" onclick = "commented('.$row['msg_id'].')">'.$comment.'</button>
                             </div>
                             </div>';
                         }
-                        else {
+                        else if($row['image?'] == 0) {
                             $output .= '<div class="chat incoming">
                             <img src="'.$row['image'].'" alt="">
                             <div class="details">
-                                <p>'. $row['msg'] .'</p><button class="button-2" role="button" onclick = "commented('.$row['msg_id'].')">Comment</button>
+                            <p>'. $row['msg'] .'</p></img><button class="button-2" role="button" onclick = "commented('.$row['msg_id'].')">'.$comment.'</button>
                             </div>
                             </div>';
                         }
+                            
+                        
                    
                     }
                     else {
-                        $output .= '<div class="chat incoming">
-                        <img src="'.$row['image'].'" alt="">
-                        <div class="details">
+                        if($row['image?'] == 1) {
+                            $output .= '<div class="chat incoming">
+                            <img src="'.$row['image'].'" alt="">
+                            <div class="details">
+                            <img src ="Php/'. $row['msg'] .'" style="width: 250px; height:250px;"></img>
+                            </div>
+                            </div>';
+                        }
+                        else if($row['image?'] == 0) {
+                            $output .= '<div class="chat incoming">
+                            <img src="'.$row['image'].'" alt="">
+                            <div class="details">
                             <p>'. $row['msg'] .'</p>
-                        </div>
-                        </div>';
+                            </div>
+                            </div>';
+                        }
+                        
                     }
                 }
             }
