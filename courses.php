@@ -253,10 +253,17 @@ else{
 
                                       <br>
                                        <input  type="hidden" name = "courseId" value= "<?php echo $row1['courseId']; ?>">
+<<<<<<< Updated upstream
                                       Course Name: <input type="text" id= "cn"name = "courseName" value= "<?php echo $row1['courseName']; ?>"   onkeyup="letters(this)" required><br><br>
                                       Instructor Name: <input type="text" name = "instructorName" value= "<?php echo $row1['instructorName'];  ?>"  onkeyup="letters(this)" required><br><br>
                                       Course Price: <input type="text" name = "coursePrice" value= "<?php echo $row1['coursePrice']; ?>" onkeyup="numbers(this)" required ><br><br>
                                       Description:<br><input type="text" rows="4" cols="50" name="description" value= "<?php echo $row1['description']; ?>" form="changing"  onkeyup="lettersandnumbers(this)" required></textarea><br><br>
+=======
+                                      Course Name: <input type="text" id= "cn"name = "courseName" value= "<?php echo $row1['courseName']; ?>"  required onkeyup="letters(this)"><br><br>
+                                      Instructor Name: <input type="text" name = "instructorName" value= "<?php echo $row1['instructorName'];  ?>" required onkeyup="letters(this)"><br><br>
+                                      Course Price: <input type="text" name = "coursePrice" value= "<?php echo $row1['coursePrice']; ?>" required onkeyup="numbers(this)"><br><br>
+                                      Description:<br><textarea rows="4" cols="50" name="description"  required onkeyup="lettersandnumbers(this)"></textarea><br><br>
+>>>>>>> Stashed changes
                                        <div class="center">
                                           <div class="form-input">
                                             <div class="preview">

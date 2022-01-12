@@ -9,9 +9,15 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="CSS/styleUsers.css">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="https://malsup.github.io/jquery.form.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script></head>
+
+
 </head>
 <body>
-
+<div id="errorMsg"></div>
 <div id="mySidenav" class="sidenav">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <div >
@@ -155,12 +161,18 @@ sendBtn.onclick = ()=>{
     xhr2.onload = ()=>{
       if(xhr2.readyState === XMLHttpRequest.DONE){
           if(xhr2.status === 200){
+            let data = xhr2.response;
+              console.log(data);
               inputField.value = "";
+              document.getElementById("uploadFile").value = "";
+              document.getElementById("errorMsg").innerHTML = data;
+              var myTimeout = setTimeout(timeout, 5000);
               scrollToBottom();
           }
       }
     }
     let formData = new FormData(form);
+    
     xhr2.send(formData);
 }
 chatBox.onmouseenter = ()=>{
@@ -198,6 +210,7 @@ setInterval(() =>{
           if(xhr2.readyState === XMLHttpRequest.DONE){
               if(xhr2.status === 200){
                 let data = xhr2.response;
+               
                 chatBox.innerHTML = data;
               }
           }
@@ -314,6 +327,7 @@ sendBtn.onclick = ()=>{
       if(xhr2.readyState === XMLHttpRequest.DONE){
           if(xhr2.status === 200){
               inputField.value = "";
+              let data = xhr2.response;
               document.querySelector(".typing-area").style.visibility = "hidden";
           }
       }
@@ -331,6 +345,31 @@ chatBox.onmouseleave = ()=>{
 
 }
 
+function showPreview(event){
+  if(event.target.files.length > 0){
+    var src = URL.createObjectURL(event.target.files[0]);
+    var preview = document.getElementById("uploadFile");
+    var inputField = document.getElementById("input-field");
+    inputField.value = preview.value;
+    sendBtn.classList.add("active");
+   
+    $('#uploadImage').ajaxSubmit({
+         
+     });
+    
+    //preview.src = src;
+    // preview.style.display = "block";
+    console.log("ah");
+  }
+}
+
+
+
+
+  function timeout(){ 
+    document.getElementById("errorMsg").innerHTML = "";
+  }
+  
 
 
 </script>
