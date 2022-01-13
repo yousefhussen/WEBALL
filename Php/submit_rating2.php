@@ -1,5 +1,7 @@
 
 <?php 
+include_once "ErrorHandler4.php";
+set_error_handler("customError",E_ALL);
 $servername = "localhost";
 $username ="root";
 $password = "";

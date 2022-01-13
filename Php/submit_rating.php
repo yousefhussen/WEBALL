@@ -1,7 +1,8 @@
 <?php
 session_start();
 //submit_rating.php
-
+include_once "ErrorHandler.php";
+set_error_handler("customError",E_ALL);
 $connect = new PDO("mysql:host=localhost;dbname=webdatabase", "root", "");
 if(isset($_POST["rating_data"]))
 {

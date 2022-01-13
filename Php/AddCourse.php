@@ -57,7 +57,6 @@ if(!empty($_FILES['fileToUpload']['name'])){
             $result=mysqli_query($conn,$sql);
            $sql2= "INSERT INTO `ratings`(`courseid`, `star1`, `star2`, `star3`, `star4`, `star5`, `TNOR`, `Total`) VALUES ('','0','0','0','0','1','0','0')";
             $result2=mysqli_query($conn,$sql2);
-            echo "Your Review & Rating Successfully Submitted";
             ?>
             <script>window.location.replace("../courses.php");</script> 
             <?php

@@ -283,7 +283,7 @@ else{
                                       <br>
                                         <?php
                   
-                   if(isset($_SESSION['Type'])){
+                   if(isset($_SESSION['Type'])&&$_SESSION['Type']=="Adminstrator"){
                 
 
                     ?>
@@ -317,10 +317,24 @@ else{
                                       <h2>Do you approve this course !?</h2> 
 
                                       <br>
+                                       <?php
+                  
+                   if(isset($_SESSION['Type'])&&$_SESSION['Type']=="Adminstrator"){
+                
+
+                    ?>
                                        <input  type="hidden" name = "courseId" value= "<?php echo $row1['courseId']; ?>">
                                       
                                       <input type="submit" name = "subapprove" value="approve" >
-                                     
+                    <?php 
+                    }
+                    else{
+                          ?>
+
+            <script>window.location.replace("index.php");</script>
+             <?php
+                    }
+                    ?>
                                     </form>
                                 </div>
                             </div>
