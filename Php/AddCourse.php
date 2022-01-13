@@ -41,7 +41,7 @@ if(!empty($_FILES['fileToUpload']['name'])){
       $target_file = $target_dir.basename($_FILES['fileToUpload']['name']);
       $tmp_name = $_FILES['fileToUpload']['tmp_name'];
       $name = basename($_FILES['fileToUpload']['name']);
-      move_uploaded_file($tmp_name, "E:/xamp/htdocs/WEBALL/uploads/$name");
+      move_uploaded_file($tmp_name, " $target_dir/$name");
         $approve=$_POST['approved'];
         $CourseName=$_POST['courseName'];
         $InsName=$_POST['instructorName'];
@@ -57,7 +57,7 @@ if(!empty($_FILES['fileToUpload']['name'])){
             $result=mysqli_query($conn,$sql);
            $sql2= "INSERT INTO `ratings`(`courseid`, `star1`, `star2`, `star3`, `star4`, `star5`, `TNOR`, `Total`) VALUES ('','0','0','0','0','1','0','0')";
             $result2=mysqli_query($conn,$sql2);
-            echo "Your Review & Rating Successfully Submitted";
+           
             ?>
             <script>window.location.replace("../courses.php");</script> 
             <?php

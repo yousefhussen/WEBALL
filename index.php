@@ -29,6 +29,7 @@ if (empty($_SESSION['username'])) {
         		<li><a href="">Home</a></li>
         		<li><a href="">About</a></li>
         		<li><a href="courses.php">COURSES</a></li>
+        		<li><a href="tutorCourses.php">COURSES</a></li>
         		<!-- <li><a href="myCourses.php">My Courses</a></li> -->
         		<li><a href="">CONTACT</a></li>
         		<li><a href="LR2.php"><i class="fa fa-user-circle"> Login</i></a></li>
@@ -49,6 +50,13 @@ else{
         		<li><a href="">Home</a></li>
         		<li><a href="">About</a></li>
         		<li><a href="courses.php">COURSES</a></li>
+        		<?php
+        		if ($_SESSION['Type']=="Tutor") { ?>
+        			<li><a href="tutorCourses.php">TutorCourses</a></li>
+        		<?php
+        		}
+        		?>
+        		
         		<li><a href="myCourses.php">My Courses</a></li>
         		<li><a href="">CONTACT</a></li>
         		 <?php
@@ -64,6 +72,7 @@ else{
 							 <li><a href="orders.php">Orders</a></li>
 							<?php
 						}
+
 
 						if($_SESSION['Type']=="Auditor"){
 							?>
@@ -82,6 +91,7 @@ else{
 						
 
                         ?>
+
         		<li><a href="profile.php"><i class="fa fa-user-circle"><?php echo $_SESSION['username'];?></i></a></li>
         		<li><a href="php/signOut.php">signOut</a></li>
         	</ul>
