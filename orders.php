@@ -38,7 +38,7 @@ if($_SESSION['Type']=="Adminstrator"){
 
            
 </div>
-<script>
+<script type="text/javascript">
  view();
  function view(){
    let xhr2 = new XMLHttpRequest();
@@ -54,6 +54,7 @@ if($_SESSION['Type']=="Adminstrator"){
     xhr2.send();
  }
   function myFunction() {
+
   var x = document.getElementById("fname");
   // x.value = x.value.toUpperCase();
     let xhr2 = new XMLHttpRequest();
@@ -69,9 +70,6 @@ if($_SESSION['Type']=="Adminstrator"){
     xhr2.send();
 
    }
-
-
- 
  </script>
  <?php
    }
