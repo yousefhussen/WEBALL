@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 31, 2021 at 02:15 PM
--- Server version: 10.4.21-MariaDB
--- PHP Version: 8.0.11
+-- Generation Time: Jan 20, 2022 at 10:58 PM
+-- Server version: 10.4.19-MariaDB
+-- PHP Version: 8.0.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `weball`
+-- Database: `webdatabase`
 --
 
 -- --------------------------------------------------------
@@ -29,13 +29,22 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `surveys` (
   `courseid` int(11) NOT NULL,
+  `courseName` varchar(255) NOT NULL,
   `userid` int(100) NOT NULL,
   `name` varchar(100) NOT NULL,
-  `enjoyed?` varchar(100) NOT NULL,
   `suggestion` varchar(100) NOT NULL,
-  `instructorRate` int(100) NOT NULL,
-  `courseRate` int(100) NOT NULL
+  `enjoyed?` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `surveys`
+--
+
+INSERT INTO `surveys` (`courseid`, `courseName`, `userid`, `name`, `suggestion`, `enjoyed?`) VALUES
+(4, 'Machine Learning', 119, 'student', 'Youssef is my name', 'No'),
+(4, 'Machine Learning', 122, 'YasserMohamed', 'asdasdasd', 'Yes'),
+(40, 'youssef', 119, 'student', 'HGello my name is joe', 'Yes'),
+(40, 'youssef', 122, 'YasserMohamed', 'Yasser is my name', 'No');
 
 --
 -- Indexes for dumped tables

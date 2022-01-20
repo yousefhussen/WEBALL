@@ -36,10 +36,8 @@ if (empty($_SESSION['username'])) {
 
             <ul>
                 <li><a href="index.php">Home</a></li>
-                <li><a href="">About</a></li>
-                <li><a href="courses.php">COURSES</a></li>
-                <!-- <li><a href="myCourses.php">My Courses</a></li> -->
-                <li><a href="">CONTACT</a></li>
+                <li><a href="aboutUs.php">About Us</a></li>
+                <li><a href="courses.php">Courses</a></li>
                 <li><a href="LR2.php"><i class="fa fa-user-circle"> Login</i></a></li>
             </ul>
             
@@ -56,16 +54,16 @@ else{
 
             <ul>
                 <li><a href="index.php">Home</a></li>
-                <li><a href="">About</a></li>
-                <li><a href="courses.php">COURSES</a></li>
+                <li><a href="aboutUs.php">About Us</a></li>
+                <li><a href="courses.php">Courses</a></li>
                 <li><a href="myCourses.php">My Courses</a></li>
-                <li><a href="">CONTACT</a></li>
+              
                  <?php
                        
                         if($_SESSION['Type']=="Adminstrator"){
                              ?>
                             <li><a href="adminPanel.php">ADMINPANEL</a></li>
-                            <li><a id="chatIcon" class = "chatIcon" href =index.php><i class='fas fa-comment' onclick="openNav()"></i></li></a>
+                           
                         
                      <?php }
                         if($_SESSION['Type']=="Adminstrator"){
@@ -76,7 +74,7 @@ else{
 
                         if($_SESSION['Type']=="Auditor"){
                             ?>
-                             <li><a id="chatIcon" class = "chatIcon" href =index.php><i class='fas fa-comment' onclick="openNav()"></i></li></a>
+                           
                             <?php
                         }
 
@@ -85,14 +83,14 @@ else{
                          if($_SESSION['Type']=="Student"){
                         ?>
                             
-                            <li><a id="chatIcon" class = "chatIcon" href =index.php><i class='fas fa-comment' onclick="openNav()"></i></li></a>
+                           
                             
                      <?php }
                         
 
                         ?>
                 <li><a href="profile.php"><i class="fa fa-user-circle"><?php echo $_SESSION['username'];?></i></a></li>
-                <li><a href="php/signOut.php">signOut</a></li>
+                <li><a href="php/signOut.php">SignOut</a></li>
             </ul>
             
         </div>
@@ -110,24 +108,25 @@ else{
         ?>
       <!--   3C3B3D -->
 <div class="kart" style="--background:#404040; --text:white;">
-  
-  <div class="con"> 
-     <div class="description">
-        <h2>InstructorName: <?php echo $row['instructorName'];?></h2>
-      <!--   <h4><?php echo $row['description'];?></h4> -->
-    </div>
 
-     <h1><?php echo $row['courseName'];?></h1>
+  <div class="con"> 
+
+
+
+
+
     <img width="700px" height="400px" src="<?php echo $row['image'];?>">
+      <h1>Course Name: <?php echo $row['courseName'];?></h1>
   </div>
-  <div class="kart2" style="--background:#F5DEDE; --text:white;">
-  
+  <div class="kart2" style="--background:#404040; --text:white;">
+
   <div class="con2"> 
-     
-       <h4><?php echo $row['description'];?></h4> 
-   
+         <h2>InstructorName: <?php echo $row['instructorName'];?></h2>
+
+       <h4>Description: <?php echo $row['description'];?></h4>
+
   </div>
-  
+
 </div>
 </div>
 

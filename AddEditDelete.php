@@ -15,28 +15,30 @@ session_start();
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<!-- <div class="login-box">
-  <h2>Login</h2>
-  <form>
-    <div class="user-box">
-      <input type="text" name="" required="">
-      <label>Username</label>
-    </div>
-    <div class="user-box">
-      <input type="password" name="" required="">
-      <label>Password</label>
-    </div>
-    <a href="#">
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      Submit
-    </a>
-  </form>
-</div> -->
+  <link rel="stylesheet" href="CSS/button.css">
+
+<a href="courses.php" style="display: flex;  position: relative; justify-content: center; text-decoration: none;"><button class="button-17" role="button" >Back to Courses</button></a>
 <?php
  require_once "Php/DBConnection.php";
+
+ function customError2($error_level, $error_message, $error_file, $error_line) {
+  $servername = "localhost";
+  $username ="root";
+  $password = "";
+  $DB = "webdatabase";
+  
+  $conn = mysqli_connect($servername,$username,$password,$DB);
+  $err_data = "INSERT INTO `errors`(`level`, `message`, `fileLoc`, `lineNum`) VALUES ('".$error_level."','".$error_message."','".$error_file."','".$error_line."')";
+  
+  $query1=mysqli_query($conn,$err_data) or die($conn->error);
+ ?>
+  <script>window.location.replace("courses.php?msg4=error");</script>
+  <?php
+  die();
+}
+
+
+set_error_handler("customError2");
 if(isset($_GET['AE'])=="Add"){
   ?>
   <div class="login-box">
@@ -62,8 +64,19 @@ if(isset($_GET['AE'])=="Add"){
                                       <label>Course Name</label>
                                        </div>
                                     <div class="user-box">
-                                    <input type="text" name = "instructorName" id="instructorName" required onkeyup="letters(this)"><br><br>
+                                  <?php
+                                        if($_SESSION['Type']=="Adminstrator"){
+                                          ?>
+                                            <input type="text" name = "instructorName" id="instructorName" required onkeyup="letters(this)"><br><br>
                                        <label>Instructor Name</label>
+                                            <?php
+                                       }
+                                       else if($_SESSION['Type']=="Tutor"){
+                                        ?>
+                                            <input type="text" name = "instructorName" id="instructorName" value="<?php echo $_SESSION['username'];?>" disabled="disabled"><br><br>
+                                            <?php
+                                       }
+                                       ?>
                                     </div>
                                     <div class="user-box">
                                       <input type="text" name = "coursePrice" id="coursePrice" required onkeyup="numbers(this)" ><br><br>
@@ -94,8 +107,10 @@ if(isset($_GET['AE'])=="Add"){
                                   <?php
 }
 else{
-  $sql= "SELECT * FROM course WHERE courseId = '".$_GET['id']."'";
+  $sql= "SELECT * FROM courses WHERE courseId = '".$_GET['id']."'";
             $result=mysqli_query($conn,$sql);
+            if(!$result)
+                trigger_error("Wrong SQL Statement");
             if($row=mysqli_fetch_array($result)){
   ?>
   <div class="login-box">
@@ -104,7 +119,7 @@ else{
                                       <h2>Edit Course</h2> 
 
                                       <div class="user-box">
-                                      <input type="text" id= "cn"name = "courseName" id="courseName" value = "<?php echo $row['courseName'];;?>"  required onkeyup="letters(this)"><br><br>
+                                      <input type="text" id= "cn"name = "courseName" id="courseName" value = "<?php echo $row['courseName'];?>"  required onkeyup="letters(this)"><br><br>
                                       <label>Course Name</label>
                                        </div>
                                     <div class="user-box">
@@ -124,13 +139,7 @@ else{
                                       <input type="file" id="file-ip-1"  name="fileToUpload" >
                                       
                                     </div>   
-                                         
-                                          
-                                          <!-- <a href="" id="save_review"> -->
-                                        <span></span>
-                                        <span></span>
-                                        <span></span>
-                                        <span></span>
+                          
                                         <input type="submit" name="submit" class="yasser">
                                      <!--  </a> -->
                                     
@@ -138,7 +147,7 @@ else{
                                     </form>
                                   </div>
                                   <?php
-                                  }
+           }
 }
 ?>
 

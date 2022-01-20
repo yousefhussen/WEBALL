@@ -4,7 +4,8 @@
    font-family: 'Poppins', sans-serif;
  }
 .header{
- 	background: linear-gradient(to right, #7f53ac 0, #657ced 100%);
+ 	background: linear-gradient(to right, #7f53ac 0, #657ced 100%),url("../images2/1.jpg");
+
  	background-position: center;
  	background-size: cover;
  	position: relative;

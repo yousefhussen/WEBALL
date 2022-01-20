@@ -86,7 +86,7 @@ function msgChat(incomingid) {
   
     if(<?php echo "'".$_SESSION['Type']."'"; ?> == "Auditor" && auditorState == 0) {
       let xhr2 = new XMLHttpRequest();
-      xhr2.open("GET", "changeAuditorUniqueId.php?userid="+incomingid, true);
+      xhr2.open("GET", "Php/changeAuditorUniqueId.php?userid="+incomingid, true);
       xhr2.onload = ()=>{
         if(xhr2.readyState === XMLHttpRequest.DONE){
             if(xhr2.status === 200){
@@ -274,12 +274,12 @@ function back_icon2() {
  console.log("edaas 3laaaaaak");
     
     let xhr2 = new XMLHttpRequest();
-    xhr2.open("GET", "changeAuditorBack.php", true);
+    xhr2.open("GET", "Php/changeAuditorBack.php", true);
     xhr2.onload = ()=>{
       if(xhr2.readyState === XMLHttpRequest.DONE){
           if(xhr2.status === 200){
             let data = xhr2.response;
-
+             console.log(data);
             auditorState = data;
             
           }

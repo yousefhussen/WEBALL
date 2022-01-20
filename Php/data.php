@@ -14,8 +14,13 @@
            }
            else {
             $result = $row2['msg'];
+            if ($row2['image?']==1) {
+                 $result =  substr($result, 8 , strlen($result)-1);
+             }  
+
+
            }    
-       
+        
 
        }
        else {
@@ -25,8 +30,8 @@
            else 
             $result ="No message available";
        }  
-       
         (strlen($result) > 28) ? $msg =  substr($result, 0, 28) . '...' : $msg = $result;
+
         if(isset($row2['outgoing_msg_id'])){
 
             if($outgoing_id == $row2['outgoing_msg_id']) {
@@ -43,9 +48,10 @@
             }   
         }else{
             $you = "";
-        }
+        } 
         ($row['status'] == "Offline now") ? $offline = "offline" : $offline = "";
         ($outgoing_id == $row['unique_id']) ? $hid_me = "hide" : $hid_me = "";
+
             if(mysqli_num_rows($query2) == 0)
                 {
                           $output .= '<a onclick="msgChat( '.$row['unique_id'].' )"  >
@@ -61,6 +67,7 @@
                 } 
 
         else if ($row2['seen']==0) {
+
             if ($outgoing_id == $row2['outgoing_msg_id']) {
 
                    $output .= '<a onclick="msgChat( '.$row['unique_id'].' )"  >

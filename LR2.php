@@ -22,13 +22,13 @@
  		<form action="LR2.php" method="post">
          
         <!-- <label for="Lname">Username</label> -->
-        <input type="text" class="input-box" placeholder="Username" name="Lname" required>
+        <input type="text" class="input-box" placeholder="Username" name="Lname" required onkeyup="lettersandnumbers(this)">
 
         <!-- <label for="Lpsw">Password</label> -->
         <input type="password" class="input-box" placeholder="Password" name="Lpsw" required>
           
         <button type="submit" class="submitt-btnn mt-5 mb-5">Log In</button>
-        <input type="checkbox" name="checkbox"><span>Rememeber Me</span>
+        <!-- <input type="checkbox" name="checkbox"><span>Rememeber Me</span> -->
         
         
      </form>
@@ -39,15 +39,16 @@
 
       <h2>Register</h2> 
 
-      <!-- <label for="uname"><b>Username</b></label> -->
+   
       <input type="text" class="input-box" placeholder="Enter Username" name="unameR" minlength="7"
        maxlength="20" size="20" required onkeyup="lettersandnumbers(this)">
-      <!-- <label for="psw"><b>Password</b></label> -->
+     
       <input type="password" class="input-box" placeholder="Enter Password" name="pswR" minlength="10"
        maxlength="20" size="20" required>
+
        <input type="password" class="input-box" placeholder="ReEnter Password" name="pswR2" minlength="10"
        maxlength="20" size="20" required>
-      <!-- <label for="EM"><b>Email</b></label> -->
+     
       <input type="email" class="input-box" placeholder="Enter Your Email" name="EM" required>
       <div class="gender">
           <input type="radio" name="gender" value="male" required> Male
@@ -55,14 +56,10 @@
      </div>
     <div class="photo">
 
-      <!-- <label class="header">Profile Photo:</label> -->
-      <!-- <input id="image" type="file" name="profile_photo" placeholder="Photo"  capture> -->
-      <!-- <form action = "upload.php" method = "post" > -->
+    
         Select an image to upload: 
         <input type="file" name="fileToUpload" id="fileToUpload">
-        <!-- <input type="submit" value="Upload Image" name="submit"> -->
-        
-    
+      
     </div>   
       <button class="submitt-btnn" type="submit">Register</button>
      
@@ -82,7 +79,6 @@ if(isset($_GET['cart'])){
               <?php
 }
 
- $x=true;
   if (isset($_POST['Lname'])) {
         $servername = "localhost";
         $username ="root";
@@ -96,11 +92,9 @@ if(isset($_GET['cart'])){
             $name=mysqli_real_escape_string($conn,$_POST['Lname']);
             $password=mysqli_real_escape_string($conn,$_POST['Lpsw']);
             $password = md5($password);
-
+            $_POST['Lname'] = filter_var($_POST['Lname'], FILTER_SANITIZE_STRING);
             $sql= "SELECT * FROM users WHERE username='".$name."' AND password='$password'";
             $result=mysqli_query($conn,$sql);
-           // $row = $result-> fetch_array(MYSQLI_ASSOC);
-            //mysqli_num_rows($result)==1
             if($row=mysqli_fetch_array($result)){
                $status = "Active now";
                 $sql2 = mysqli_query($conn, "UPDATE users SET status = '{$status}' WHERE unique_id = {$row['unique_id']}");
@@ -117,7 +111,6 @@ if(isset($_GET['cart'])){
 
             <script>window.location.replace("index.php");</script>
              <?php
-             //remeber to tsheel id mn elink 3lsah nelzft speeddddd
 
             exit();
             }
@@ -204,6 +197,7 @@ if(isset($_GET['cart'])){
       $name = basename($_FILES['fileToUpload']['name']);
       move_uploaded_file($tmp_name, "$target_dir/$name");
         $Data1 = filter_var($Data1, FILTER_SANITIZE_STRING);  
+        $Data3 = filter_var($Data3, FILTER_SANITIZE_EMAIL);  
            $sql= "INSERT INTO users (username, password, email,image,type,gender,unique_id) VALUES ('$Data1', '$Data2', '$Data3','$target_file','$Data5','$Data6','$ran_id')";
 
        $result4=mysqli_query($conn,$sql);
@@ -214,7 +208,8 @@ if(isset($_GET['cart'])){
 
       $target_dir = "uploads/";
       $target_file = $target_dir.$sora;
-        $Data1 = filter_var($Data1, FILTER_SANITIZE_STRING);  
+        $Data1 = filter_var($Data1, FILTER_SANITIZE_STRING); 
+        $Data3 = filter_var($Data3, FILTER_SANITIZE_EMAIL);  
            $sql= "INSERT INTO users (username, password, email,image,type,gender,unique_id) VALUES ('$Data1', '$Data2', '$Data3','$target_file','$Data5','$Data6','$ran_id')";
 
         $result5=mysqli_query($conn,$sql);
@@ -243,8 +238,7 @@ if(isset($_GET['cart'])){
         $sql= "SELECT * FROM users WHERE username='".$Data1."' AND password='".$Data2."'";
 
          $result=mysqli_query($conn,$sql);
-           // $row = $result-> fetch_array(MYSQLI_ASSOC);
-          //  mysqli_num_rows($result)==1
+          
             if($row=mysqli_fetch_array($result)){
               $status = "Active now";
                 $sql2 = mysqli_query($conn, "UPDATE users SET status = '{$status}' WHERE unique_id = {$row['unique_id']}");
@@ -271,7 +265,6 @@ $password=mysqli_real_escape_string($conn,$_POST['pswR']);
 $password = md5($password);
 
 $Email=$_POST['EM'];
-// $image=$target_file;
 $gender=$_POST['gender'];
 $type="Student";
  
@@ -287,9 +280,7 @@ Sql2($name,$password);
   function timeout(){ $("#Db").fadeOut("slow");}; 
   $(document).ready(function(){
   $("button").click(function (){
-    // $("#Db").fadeOut();
     $("#Db").fadeOut("slow");
-    // $("#Db").fadeOut(3000);
   });
  });
   
@@ -316,16 +307,10 @@ else{
 var data="<div class='text-center fixed-top' style='margin-top:30px;'>  <button class='btn btn-info' id='Db' style='width:30%'><i class='fa fa-exclamation-circle' aria-hidden='true'></i> password must be same!</button></div>"
   document.getElementById("speed2").innerHTML=data
   
- // alert("password must be same!");  
 return false;  
  }  
 }  
 
-
- 
  </script>
-
-
-
 </body>
 </html>

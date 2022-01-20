@@ -23,7 +23,7 @@ if($_SESSION['Type']=="Adminstrator"){
 
 
 ?>
-<div class="text-center fixed-top" style="width:70%; align-items:center; justify-content:center; margin-left: 15%;"> 
+<div class="text-center fixed-top" style="width:70%; align-items:center; justify-content:center; margin-left: 15%;text-decoration: none;"> 
   <a href="index.php"><button class="button-17" role="button">Home</button></a>
  <div class="search__container">
     <p class="search__title">
@@ -39,20 +39,21 @@ if($_SESSION['Type']=="Adminstrator"){
            
 </div>
 <script type="text/javascript">
- view();
- function view(){
-   let xhr2 = new XMLHttpRequest();
-       xhr2.open("GET", "php/orderSearch2.php", true);
-       xhr2.onload = ()=>{
-      if(xhr2.readyState === XMLHttpRequest.DONE){
-          if(xhr2.status === 200){
-          let data2 = xhr2.response;
-            document.getElementById("order").innerHTML = data2;
-         }
-      }
-    }
-    xhr2.send();
- }
+ // view();
+ // function view(){
+ //   let xhr2 = new XMLHttpRequest();
+ //       xhr2.open("GET", "php/orderSearch2.php", true);
+ //       xhr2.onload = ()=>{
+ //      if(xhr2.readyState === XMLHttpRequest.DONE){
+ //          if(xhr2.status === 200){
+ //          let data2 = xhr2.response;
+ //            document.getElementById("order").innerHTML = data2;
+ //         }
+ //      }
+ //    }
+ //    xhr2.send();
+ // }
+ myFunction();
   function myFunction() {
 
   var x = document.getElementById("fname");

@@ -1,14 +1,13 @@
  <?php
 
-            require_once "DBConnection.php";
+ require_once "DBConnection.php";
 
 
-            $courseId=$_POST['courseId']; 
+ $courseId=$_POST['courseId']; 
 
-            $sql = "UPDATE `course` SET `Approved` = 1 WHERE `courseId` = '".$courseId."'";
-            $result=mysqli_query($conn,$sql);
+ $sql = "UPDATE `course` SET `Approved` = 1 WHERE `courseId` = '".$courseId."'";
+ $result=mysqli_query($conn,$sql);
            	
-          
-              ?>
+?>
 
-            <script>window.location.replace("../courses.php");</script>
+<script>window.location.replace("../courses.php");</script>

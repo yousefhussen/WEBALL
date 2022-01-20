@@ -25,12 +25,11 @@
     <div class="topnav">
  <ul>
                 <li><a href="index.php">Home</a></li>
-                <li><a href="">About</a></li>
-                <li><a href="courses.php">COURSES</a></li>
+                <li><a href="aboutUs.php">About Us</a></li>
+                <li><a href="courses.php">Courses</a></li>
                 <li><a href="myCourses.php">My Courses</a></li>
-                <li><a href="">CONTACT</a></li>
                 <li><a href="profile.php"><i class="fa fa-user-circle"><?php echo $_SESSION['username'];?></i></a></li>
-                <li><a href="php/signOut.php">signOut</a></li>
+                <li><a href="php/signOut.php">SignOut</a></li>
             </ul>
 </div>
 
@@ -44,6 +43,7 @@
 
     <div class="row">
           <?php
+          if($_SESSION['Type']=="Tutor"){
         $servername = "localhost";
         $username ="root";
         $password = "";
@@ -83,6 +83,7 @@
                  }
              
 
+             }
                         ?>
         
     </div>

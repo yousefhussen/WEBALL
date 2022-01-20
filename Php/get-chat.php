@@ -1,5 +1,7 @@
 <?php 
     session_start();
+//      include_once "ErrorHandler4.php";
+// set_error_handler("customError",E_ALL);
     if(isset($_SESSION['unique_id'])){
         include_once "DBConnection.php";
         $outgoing_id = $_SESSION['unique_id'];
@@ -19,14 +21,14 @@
                         if($row['image?'] == 1)  {
                             $output .= '<div class="chat outgoing">
                                 <div class="details">
-                                    <img src ="Php/'. $row['msg'] .'"  style="width: 250px; height:250px;"></img></p><button class="button-2" role="button" onclick = "commented('.$row['msg_id'].')">'.$comment.'</button>
+                                    <img src ="Php/'. $row['msg'] .'"  style="width: 250px; height:250px;"></img></p><button class="button-2" role="button" onclick = "commented('.$row['msg_id'].')">'.$comment.'</button>'.$row['datetime'].'
                                 </div>
                                 </div>';
                         }
                         else if($row['image?'] == 0) {
                             $output .= '<div class="chat outgoing">
                                 <div class="details">
-                                <p>'. $row['msg'] .'</p><button class="button-2" role="button" onclick = "commented('.$row['msg_id'].')">'.$comment.'</button>
+                                <p>'. $row['msg'] .'</p><button class="button-2" role="button" onclick = "commented('.$row['msg_id'].')">'.$comment.'</button>'.$row['datetime'].'
                                 </div>
                                 </div>';
                         }
@@ -37,7 +39,7 @@
                     else {
                          if($row['image?'] == 1)  {
                             $output .= '<div class="chat outgoing">
-                            <div class="details">
+                            <div class="details">'.$row['datetime'].'
                                 <img src ="Php/'. $row['msg'] .'"  style="width: 250px; height:250px;"></img>
                             </div>
                             </div>';
@@ -45,7 +47,7 @@
                          else if($row['image?'] == 0) {
                             $output .= '<div class="chat outgoing">
                             <div class="details">
-                                <p>'. $row['msg'] .'</p>
+                                <p>'. $row['msg'] .'</p>'.$row['datetime'].'
                             </div>
                             </div>';
                          }
@@ -59,7 +61,7 @@
                         if($row['image?'] == 1) {
                             $output .= '<div class="chat incoming">
                             <img src="'.$row['image'].'" alt="">
-                            <div class="details">
+                            <div class="details">'.$row['datetime'].'
                             <img src ="Php/'. $row['msg'] .'"  style="width: 250px; height:250px;"></img><button class="button-2" role="button" onclick = "commented('.$row['msg_id'].')">'.$comment.'</button>
                             </div>
                             </div>';
@@ -68,7 +70,7 @@
                             $output .= '<div class="chat incoming">
                             <img src="'.$row['image'].'" alt="">
                             <div class="details">
-                            <p>'. $row['msg'] .'</p></img><button class="button-2" role="button" onclick = "commented('.$row['msg_id'].')">'.$comment.'</button>
+                            <p>'. $row['msg'] .'</p></img><button class="button-2" role="button" onclick = "commented('.$row['msg_id'].')">'.$comment.'</button>'.$row['datetime'].'
                             </div>
                             </div>';
                         }
@@ -81,7 +83,7 @@
                             $output .= '<div class="chat incoming">
                             <img src="'.$row['image'].'" alt="">
                             <div class="details">
-                            <img src ="Php/'. $row['msg'] .'" style="width: 250px; height:250px;"></img>
+                            <img src ="Php/'. $row['msg'] .'" style="width: 250px; height:250px;"></img>'.$row['datetime'].'
                             </div>
                             </div>';
                         }
@@ -89,7 +91,7 @@
                             $output .= '<div class="chat incoming">
                             <img src="'.$row['image'].'" alt="">
                             <div class="details">
-                            <p>'. $row['msg'] .'</p>
+                            <p>'. $row['msg'] .'</p>'.$row['datetime'].'
                             </div>
                             </div>';
                         }

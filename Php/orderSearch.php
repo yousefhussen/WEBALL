@@ -1,4 +1,12 @@
 <?php 
+include_once "ErrorHandler.php";
+  
+
+set_error_handler("customError",E_ALL);
+
+if(isset($_GET['id'])){
+ 
+
 // $str=$_GET['order'];
 $servername = "localhost";
 $username ="root";
@@ -7,6 +15,7 @@ $DB = "webdatabase";
 $conn = mysqli_connect($servername,$username,$password,$DB);
 
 // echo $_REQUEST['id'];
+ $_GET['id'] = filter_var($_GET['id'], FILTER_SANITIZE_STRING);
   $query = "SELECT * FROM `usercourse` WHERE (userid LIKE '%".$_GET['id']."%'
    OR username LIKE '%".$_GET['id']."%'
    OR courseName LIKE '%".$_GET['id']."%'
@@ -36,36 +45,16 @@ $html .="<div class='card text-center'>
 </div>";
 
 
-//  $html .= "<div class='row mb-3'>
 
-                    
-
-//                         <div class='col-sm-11'>
-
-//                         <div class='card'>
-
-//                         <div class='card-header'><b>".$row["username"]."</b></div>
-
-//                         <div class='card-body'>
-//                         <br />
-
-//                         ".$row["courseName"]."
-
-//                         </div>
-
-//                         <div class='card-footer text-right'>On ".$row["Date"]."</div>
-//                         ".$row["Price"]."
-
-//                         </div>
-
-//                         </div>
-
-//                         </div>
-
-//                         ";
-
-// }
 
 }
   echo $html;
-?>
+}else{
+  
+      ?>
+            <script>window.location.replace("index.php");</script>
+             <?php
+ 
+  
+}
+

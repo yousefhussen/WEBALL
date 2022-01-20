@@ -1,6 +1,25 @@
 
             <?php 
     require_once "DBConnection.php";
+
+    function customError($error_level, $error_message, $error_file, $error_line) {
+      $servername = "localhost";
+      $username ="root";
+      $password = "";
+      $DB = "webdatabase";
+      
+      $conn = mysqli_connect($servername,$username,$password,$DB);
+      $err_data = "INSERT INTO `errors`(`level`, `message`, `fileLoc`, `lineNum`) VALUES ('".$error_level."','".$error_message."','".$error_file."','".$error_line."')";
+      
+      $query1=mysqli_query($conn,$err_data) or die($conn->error);
+     ?>
+      <script>window.location.replace("../courses.php?msg4=error");</script>
+      <?php
+      die();
+    }
+    
+    
+    set_error_handler("customError", E_ALL);
 if(!empty($_FILES['fileToUpload']['name'])){
       $errors= array();
       $file_name = $_FILES['fileToUpload']['name'];
@@ -34,7 +53,7 @@ if(!empty($_FILES['fileToUpload']['name'])){
       $target_file = $target_dir.basename($_FILES['fileToUpload']['name']);
       $tmp_name = $_FILES['fileToUpload']['tmp_name'];
       $name = basename($_FILES['fileToUpload']['name']);
-      move_uploaded_file($tmp_name, "E:/xamp/htdocs/WEBALL/uploads/$name");
+      move_uploaded_file($tmp_name, "../uploads/$name");
             $courseId=$_GET['id']; 
             $CourseName=$_POST['courseName'];
             $InsName=$_POST['instructorName'];

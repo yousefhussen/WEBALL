@@ -4,8 +4,9 @@
             include "DBConnection.php";
            
             $courseId=$_POST['courseId']; 
+            $courseName=$_POST['courseName']; 
             $userName=$_SESSION['username'];
-            $Insrate=$_POST['type'];
+            $enjoyed=$_POST['type'];
             $Description=$_POST['description'];
             $sessid = $_SESSION['userid'];
 
@@ -16,8 +17,8 @@
            
              $result2=mysqli_query($conn,$sql2) ;
 
-            $sql= " INSERT INTO `surveys`(`courseid`, `userid`, `name`, `suggestion`, `instructorRate`) VALUES 
-            ('$courseId','$sessid','$userName' ,'$Description','$Insrate')";
+            $sql= " INSERT INTO `surveys`(`courseid`, `courseName`, `userid`, `name`, `suggestion`, `enjoyed?`) VALUES 
+            ('$courseId', '$courseName', '$sessid','$userName' ,'$Description','$enjoyed')";
            
              $result=mysqli_query($conn,$sql) ;
                 if (!$result) {
@@ -25,15 +26,9 @@
                 <button class="btn btn-danger" id="Db" style="width:30%"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Already survied this course</button>
               </div>'; 
                 }
-            
-           
-           
-            
-        
-    
 
-     ?>
+?>
           
               
 
-            <script>window.location.replace("../myCourses.php");</script>
+ <script>window.location.replace("../myCourses.php?msg3=thankyou");</script>

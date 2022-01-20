@@ -4,6 +4,7 @@ body .kart {
   --text:black;
   position: relative;
   height: 40rem;
+    margin: 10px;
   box-shadow: 0 0 2rem -1rem rgba(0, 0, 0, 0.05);
 
 }
@@ -19,26 +20,31 @@ body .kart .con {
 }
 body .kart .con img{
   border-radius: 1rem;
-  margin-top: 0.5rem;
+  margin-top: 3rem;
   margin-left: 3rem;
 }
 body .kart .con h1{
   font-family:'Times New Roman', serif;
-  margin-top: 0rem;
+  margin-top: 2rem;
   margin-left: 4rem;
 }
-body .kart .con h2{
+body .kart .con2 h2{
+
   font-family:'Times New Roman', serif;
-  margin-top: 2rem;
-  margin-left: 55rem;
+
+    margin: 20px;
+    color: white;
 
 }
 .kart2 {
-  --background:#FFFFFF;
+
+
+  --background:#00FFFF;
   --text:black;
   position: relative;
   height: 40rem;
-  box-shadow: 0 0 2rem -1rem rgba(0, 0, 0, 0.05);
+
+  box-shadow: 0 0 2rem -1rem rgba(0, 0, 0, 1);
 
 }
 
@@ -47,17 +53,17 @@ body .kart .con h2{
   width:45%;
   height: 70%;
    border-radius: 3rem;
-  background: var(--background);
+  background: #404040;
   color: var(--text);
   margin-left: 55rem;
-  margin-top: 7rem;
+  margin-top: 3rem;
 }
 .kart2 .con2 h4{
   padding: 1rem 2rem;
   font-family:'Times New Roman', serif;
   margin-top: 2rem;
   margin-left: 0rem;
-  color: black;
+  color: white;
 }
 
 

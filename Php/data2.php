@@ -5,7 +5,8 @@
 
     
     session_start();
-    
+//     include_once "ErrorHandler4.php";
+// set_error_handler("customError",E_ALL);
     $output = "";
               include"DBConnection.php";
           $userid = mysqli_real_escape_string($conn, $_GET['userid']);
