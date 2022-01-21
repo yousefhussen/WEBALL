@@ -18,10 +18,9 @@ session_start();
 </style>
 
 <link rel="stylesheet" href="CSS/AddEditDelete.css">
-<<<<<<< HEAD
+
 <link rel="stylesheet" href="CSS/radio.css">
-=======
->>>>>>> af38652d990fa79a2c7e44a6cac6e6c14af7b034
+
  
 
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
@@ -47,7 +46,7 @@ session_start();
   <div class="login-box">
  <form action="Php/replySrv.php" method="post">
 
-<<<<<<< HEAD
+
                 <h2>Send Survey</h2> 
 
                 <br>
@@ -98,59 +97,7 @@ session_start();
               </form>
             </div>
             <?php
-=======
-                                      <h2>Send Survey</h2> 
 
-                                      <br>
-                                      <input  type="hidden" name = "courseId" value= "<?php echo $row4['courseId']; ?>">
-
-                                      <div class="user-box">
-                                      <input type="text" id= "cn" name = "courseName" id="courseName" value= "<?php echo $row4['courseName']; ?>"><br><br>
-                                      
-                                       </div>
-                                    
-                                    <div class="user-box">
-                                    <input type="text" name = "userName" value= "<?php echo $_SESSION['username'];  ?>" disabled="disabled"><br><br>
-                                   
-                                        
-                                    </div>
-                                    <div class="user-box">
-                                    
-                                    <!-- Yes<input type="radio" id="e1" name="type" value="Yes" checked='checked'>
-                                   
-                                    No<input type="radio" id="e2" name="type" value="No" >
-                                   
-                                    <label>Do You like This course?</label> -->
-                                    
-                                    <div id="wrapper">
-                                    <label for="yes_no_radio">Do You like this course?</label>
-                                    <p>
-                                    <input  type="radio" id="e1" name="type" value="Yes" checked>Yes</input>
-                                    </p>
-                                    <p>
-                                    <input type="radio" id="e2" name="type" value="No">No</input>
-                                    </p>
-                                    </div>
-
-
-
-
-
-                                    </div>
-                                     <div class="user-box">
-                                     <br><input type="text" name="description" id="description" required onkeyup="lettersandnumbers(this)"><br><br>
-                                      <label>Description</label>
-                                    </div>
-                    
-                                      
-                                        <input type="submit" name="submit" class="yasser">
-                                     <!--  </a> -->
-                                    
-                                     
-                                    </form>
-                                  </div>
-                                  <?php
->>>>>>> af38652d990fa79a2c7e44a6cac6e6c14af7b034
     }
  }
 ?>

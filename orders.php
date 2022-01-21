@@ -39,24 +39,7 @@ if($_SESSION['Type']=="Adminstrator"){
            
 </div>
 <script type="text/javascript">
-<<<<<<< HEAD
- 
-=======
- // view();
- // function view(){
- //   let xhr2 = new XMLHttpRequest();
- //       xhr2.open("GET", "php/orderSearch2.php", true);
- //       xhr2.onload = ()=>{
- //      if(xhr2.readyState === XMLHttpRequest.DONE){
- //          if(xhr2.status === 200){
- //          let data2 = xhr2.response;
- //            document.getElementById("order").innerHTML = data2;
- //         }
- //      }
- //    }
- //    xhr2.send();
- // }
->>>>>>> af38652d990fa79a2c7e44a6cac6e6c14af7b034
+
  myFunction();
   function myFunction() {
 

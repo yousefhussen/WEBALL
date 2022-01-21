@@ -1,15 +1,11 @@
 <?php 
 // $str=$_GET['order'];
 require_once "DBConnection.php";
-<<<<<<< HEAD
+
  session_start();
 // echo $_REQUEST['id'];
   $query = "SELECT * FROM `surveys` WHERE `instructorId` = '".$_SESSION['userid']."' ORDER BY `courseName`";
-=======
 
-// echo $_REQUEST['id'];
-  $query = "SELECT * FROM `surveys`ORDER BY `courseName`";
->>>>>>> af38652d990fa79a2c7e44a6cac6e6c14af7b034
   
 
   

@@ -191,20 +191,13 @@ else{
    
 
 
-<<<<<<< HEAD
-=======
 
-<div class="fasl" style="margin-bottom:5px;">Discover New Courses</div>
->>>>>>> af38652d990fa79a2c7e44a6cac6e6c14af7b034
 
 <div class="fasl" style="margin-bottom:5px;">Discover New Courses</div>
 
 
 
-<<<<<<< HEAD
 
-=======
->>>>>>> af38652d990fa79a2c7e44a6cac6e6c14af7b034
   <?php
                         if (!empty($_SESSION['username'])) {
                         if($_SESSION['Type']=="Adminstrator" ||$_SESSION['Type']=="Tutor"){
