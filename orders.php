@@ -39,6 +39,9 @@ if($_SESSION['Type']=="Adminstrator"){
            
 </div>
 <script type="text/javascript">
+<<<<<<< HEAD
+ 
+=======
  // view();
  // function view(){
  //   let xhr2 = new XMLHttpRequest();
@@ -53,6 +56,7 @@ if($_SESSION['Type']=="Adminstrator"){
  //    }
  //    xhr2.send();
  // }
+>>>>>>> af38652d990fa79a2c7e44a6cac6e6c14af7b034
  myFunction();
   function myFunction() {
 

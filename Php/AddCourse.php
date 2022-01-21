@@ -88,7 +88,11 @@ if(!empty($_FILES['fileToUpload']['name'])){
      
      
         
+<<<<<<< HEAD
+            $sql= "INSERT INTO `course`(`courseId`, `courseName`, `coursePrice`, `description`, `instructorName`, `image`,`Approved`, `instructorId`) VALUES ('','".$CourseName."','".$CoursePrice."','".$Description."','".$InsName."','".$target_file."','".$approve."',".$_SESSION['userid']. ")";
+=======
             $sql= "INSERT INTO `course`(`courseId`, `courseName`, `coursePrice`, `description`, `instructorName`, `image`,`Approved`) VALUES ('','".$CourseName."','".$CoursePrice."','".$Description."','".$InsName."','".$target_file."','".$approve."')";
+>>>>>>> af38652d990fa79a2c7e44a6cac6e6c14af7b034
             $result=mysqli_query($conn,$sql);
             if(!$result)
                 trigger_error("Wrong SQL Statement");

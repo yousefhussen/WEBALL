@@ -1,8 +1,8 @@
 <?php
 session_start();
 //submit_rating.php
-include_once "ErrorHandler.php";
-set_error_handler("customError",E_ALL);
+// include_once "ErrorHandler.php";
+// set_error_handler("customError",E_ALL);
 $connect = new PDO("mysql:host=localhost;dbname=webdatabase", "root", "");
 if(isset($_POST["rating_data"]))
 {
@@ -51,7 +51,9 @@ if(isset($_POST["rating_data"]))
  try { 
  	$statement = $connect->prepare($query);
 	$statement->execute($data);
-    $results = $connect-> query($query1);
+    if($statement){
+         $results = $connect-> query($query1);
+    }
 	echo "Your Review & Rating Successfully Submitted";
     }
     catch(Exception $e){

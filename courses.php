@@ -191,12 +191,20 @@ else{
    
 
 
+<<<<<<< HEAD
+=======
+
+<div class="fasl" style="margin-bottom:5px;">Discover New Courses</div>
+>>>>>>> af38652d990fa79a2c7e44a6cac6e6c14af7b034
 
 <div class="fasl" style="margin-bottom:5px;">Discover New Courses</div>
 
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> af38652d990fa79a2c7e44a6cac6e6c14af7b034
   <?php
                         if (!empty($_SESSION['username'])) {
                         if($_SESSION['Type']=="Adminstrator" ||$_SESSION['Type']=="Tutor"){
@@ -261,7 +269,7 @@ else{
 
                         ?>
                         <div class="box">
-                            <a class="bEd" href=courses.php?id=<?php echo $row['courseId'];?>#popup4>Approve</a>
+                            <a class="bEd" style="width:auto;" href=courses.php?id=<?php echo $row['courseId'];?>#popup4>Approve</a>
                         </div>
                         
                      <?php
@@ -505,6 +513,7 @@ $conn = new mysqli("localhost" , "root" , "" , "webdatabase");
                         </div>
 
                         <?php if($row['Approved'] == 0){
+<<<<<<< HEAD
 
                         ?>
                         <div class="box">
@@ -516,6 +525,19 @@ $conn = new mysqli("localhost" , "root" , "" , "webdatabase");
                  }
              } 
 
+=======
+
+                        ?>
+                        <div class="box">
+                            <a class="bEd" href=courses.php?id=<?php echo $row['courseId'];?>#popup4>Approve</a>
+                        </div>
+                        
+                     <?php
+                    } 
+                 }
+             } 
+
+>>>>>>> af38652d990fa79a2c7e44a6cac6e6c14af7b034
      
                 if($row['enrolledSid']==""){
                    echo "No students in this Course yet!<br>"; 
