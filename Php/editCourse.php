@@ -56,15 +56,15 @@ if(!empty($_FILES['fileToUpload']['name'])){
       move_uploaded_file($tmp_name, "../uploads/$name");
             $courseId=$_GET['id']; 
             $CourseName=$_POST['courseName'];
-            $InsName=$_POST['instructorName'];
+            // $InsName=$_POST['instructorName'];
             $CoursePrice=$_POST['coursePrice'];
             $Description=$_POST['description'];
             $CourseName = filter_var($CourseName, FILTER_SANITIZE_STRING);  
-            $InsName = filter_var($InsName, FILTER_SANITIZE_STRING);
+            // $InsName = filter_var($InsName, FILTER_SANITIZE_STRING);
             $Description = filter_var($Description, FILTER_SANITIZE_STRING);  
             $CoursePrice = filter_var($CoursePrice, FILTER_SANITIZE_STRING);   
             
-            $sql= "UPDATE `course` SET `courseName`='".$CourseName."',`coursePrice`='".$CoursePrice."',`description`='".$Description."',`instructorName`='".$InsName."',`image`='".$target_file."' WHERE courseId ='".$courseId."'";
+            $sql= "UPDATE `course` SET `courseName`='".$CourseName."',`coursePrice`='".$CoursePrice."',`description`='".$Description."',`image`='".$target_file."' WHERE courseId ='".$courseId."'";
             $result=mysqli_query($conn,$sql);
             ?>
             <script>window.location.replace("../courses.php");</script> 
@@ -74,15 +74,15 @@ if(!empty($_FILES['fileToUpload']['name'])){
         }else{
             $courseId=$_GET['id']; 
             $CourseName=$_POST['courseName'];
-            $InsName=$_POST['instructorName'];
+            // $InsName=$_POST['instructorName'];
             $CoursePrice=$_POST['coursePrice'];
             $Description=$_POST['description'];
             $CourseName = filter_var($CourseName, FILTER_SANITIZE_STRING);  
-            $InsName = filter_var($InsName, FILTER_SANITIZE_STRING);
+            // $InsName = filter_var($InsName, FILTER_SANITIZE_STRING);
             $Description = filter_var($Description, FILTER_SANITIZE_STRING);  
             $CoursePrice = filter_var($CoursePrice, FILTER_SANITIZE_STRING);  
             
-            $sql= "UPDATE `course` SET `courseName`='".$CourseName."',`coursePrice`='".$CoursePrice."',`description`='".$Description."',`instructorName`='".$InsName."'WHERE courseId ='".$courseId."'";
+            $sql= "UPDATE `course` SET `courseName`='".$CourseName."',`coursePrice`='".$CoursePrice."',`description`='".$Description."'WHERE courseId ='".$courseId."'";
             $result=mysqli_query($conn,$sql);
             ?>
             <script>window.location.replace("../courses.php");</script> 

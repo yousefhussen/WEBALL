@@ -64,11 +64,26 @@ if(isset($_GET['AE'])=="Add"){
                                       <label>Course Name</label>
                                        </div>
                                     <div class="user-box">
+
                                   <?php
                                         if($_SESSION['Type']=="Adminstrator"){
+
+                                          $sequel = "SELECT * FROM `users` Where `type`='Tutor'";
+                                          $result10= mysqli_query($conn,$sequel) or die($conn->error);
                                           ?>
-                                            <input type="text" name = "instructorName" id="instructorName" required onkeyup="letters(this)"><br><br>
-                                       <label>Instructor Name</label>
+                                          <h3 style="color:white;">Instructor Name</h3>
+
+
+                                          <select name="tutor">
+                                           <?php 
+                                           while($row10=mysqli_fetch_array($result10)){
+                                   echo "<option value='".$row10['userid']."|".$row10['username']."'>".$row10['username']."</option>";
+                                           }
+                                           ?>
+                                          </select><br><br>
+                                         
+                                           <!--  <input type="text" name = "instructorName" id="instructorName" required onkeyup="letters(this)"><br><br> -->
+                                       
                                             <?php
                                        }
                                        else if($_SESSION['Type']=="Tutor"){
@@ -107,7 +122,7 @@ if(isset($_GET['AE'])=="Add"){
                                   <?php
 }
 else{
-  $sql= "SELECT * FROM courses WHERE courseId = '".$_GET['id']."'";
+  $sql= "SELECT * FROM course WHERE courseId = '".$_GET['id']."'";
             $result=mysqli_query($conn,$sql);
             if(!$result)
                 trigger_error("Wrong SQL Statement");
@@ -123,8 +138,10 @@ else{
                                       <label>Course Name</label>
                                        </div>
                                     <div class="user-box">
-                                  <input type="text" name = "instructorName" id="instructorName" value= "<?php echo $row['instructorName'];  ?>" required onkeyup="letters(this)"><br><br>
-                                       <label>Instructor Name</label>
+                                   <h3 style="color:white;">Instructor Name</h3>
+
+                                   <input type="text" value = "<?php echo $row['instructorName'];?>" disabled><br><br>
+                                       
                                     </div>
                                     <div class="user-box">
                                       <input type="text" name = "coursePrice" id="coursePrice" value= "<?php echo $row['coursePrice']; ?>" required onkeyup="numbers(this)" ><br><br>

@@ -67,7 +67,12 @@ if(!empty($_FILES['fileToUpload']['name'])){
         $InsName=$_SESSION['username'];
  
           if($_SESSION['Type']=="Adminstrator"){
-            $InsName=$_POST['instructorName'];
+           
+
+            $InsName = $_POST['tutor'];
+            $Insta_explode = explode('|', $InsName);
+            $instaID = $Insta_explode[0];
+            $instaName  =$Insta_explode[1];
          }
          else if($_SESSION['Type']=="Tutor"){
            $InsName=$_SESSION['username'];
@@ -85,10 +90,8 @@ if(!empty($_FILES['fileToUpload']['name'])){
         
       
         
-     
-     
         
-            $sql= "INSERT INTO `course`(`courseId`, `courseName`, `coursePrice`, `description`, `instructorName`, `image`,`Approved`, `instructorId`) VALUES ('','".$CourseName."','".$CoursePrice."','".$Description."','".$InsName."','".$target_file."','".$approve."',".$_SESSION['userid']. ")";
+            $sql= "INSERT INTO `course`(`courseId`, `courseName`, `coursePrice`, `description`, `instructorName`, `image`,`Approved`, `instructorId`) VALUES ('','".$CourseName."','".$CoursePrice."','".$Description."','".$instaName."','".$target_file."','".$approve."',".$instaID. ")";
 
             $result=mysqli_query($conn,$sql);
             if(!$result)
