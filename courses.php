@@ -506,7 +506,7 @@ $conn = new mysqli("localhost" , "root" , "" , "webdatabase");
                         </div>
 
                         <?php if($row['Approved'] == 0){
-<<<<<<< HEAD
+
 
                         ?>
                         <div class="box">
@@ -518,19 +518,7 @@ $conn = new mysqli("localhost" , "root" , "" , "webdatabase");
                  }
              } 
 
-=======
 
-                        ?>
-                        <div class="box">
-                            <a class="bEd" href=courses.php?id=<?php echo $row['courseId'];?>#popup4>Approve</a>
-                        </div>
-                        
-                     <?php
-                    } 
-                 }
-             } 
-
->>>>>>> af38652d990fa79a2c7e44a6cac6e6c14af7b034
      
                 if($row['enrolledSid']==""){
                    echo "No students in this Course yet!<br>"; 
